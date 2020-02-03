@@ -41,13 +41,13 @@ router.post('/', async (req, res) => {
                     const transporter = nodemailer.createTransport({
                         service: 'gmail',
                         auth: {
-                            user: 'ucekhoster@gmail.com',
-                            pass: 'ucekcse@44'
+                            user: 'infomatte.com@gmail.com',
+                            pass: 'domainTohost@error'
                         }
                     });
 
                     const mailOptions = {
-                        from: 'ucekhoster@gmail.com',
+                        from: 'infomatte.com@gmail.com',
                         to: mail,
                         subject: `UCEK- Kancheepuram.`,
                         html: `<div style="text-align: center">
