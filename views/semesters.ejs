@@ -1,0 +1,2463 @@
+<%- include('partials/header.ejs'); -%>
+<div class='preloader'>
+    <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect id='rotator' x="50.4609" y="13" width="43.0782" height="43.0782" rx="2" transform="rotate(45 50.4609 13)"
+            fill="#200B76" />
+    </svg>
+</div>
+<div class="table-align">
+    <form action="/students_semesters" method="post" style="width: 100%">
+        <!------------------------------- Semesters - I----------------------------------->
+        <div class="main_holder">
+            <div data-aos="fade-down">
+                <img src="img/AU.png" class='home-logo' alt='img'>
+                <h4 class='form-head'>Univeristy college of Engineering - Kancheepuram</h4>
+                <h5 class="form-sub">Department of Computer Science and Engineering</h5><br>
+                <p class="form-sub">Leave blank for Upcoming Semesters</p><br>
+                <h3 class="heading"><b>SEMESTER SCORES</b></h3>
+                <% if((exist.Semester_1.later_entry === null && exist.Semester_1.attended === null) || (exist.Semester_1.later_entry === 'No' && exist.Semester_1.attended === 'No')) { %>
+                <div class="card center-align">
+                    <h4><b>FIRST SEMESTER</b></h4><br>
+                    <div class="row">
+                        <div class="row">
+                            <div class="col m6 l6 s12">
+                                <h4>Later Entry</h4>
+                                <label>
+                                    <input type="radio" name="group1" class="with-gap yes1-check" value="Yes" />
+                                    <span>Yes</span>
+                                </label>
+                                <label>
+                                    <input type="radio" name="group1" class="with-gap no1-check" value="No" />
+                                    <span>No</span>
+                                </label>
+                            </div>
+                            <div class="col m6 l6 s12">
+                                <h4>Attended</h4>
+                                <label>
+                                    <input type="radio" name="group2" class="with-gap yes2-check" value="Yes" />
+                                    <span>Yes</span>
+                                </label>
+                                <label>
+                                    <input type="radio" name="group2" class="with-gap no2-check" value="No" />
+                                    <span>No</span>
+                                </label>
+                            </div>
+                        </div><br>
+                        <div class="sem1">
+                            <div class="input-field col m6 s12 l6">
+                                <select name='s1_sub1' id="select">
+                                    <option value="" disabled selected>Grade</option>
+                                    <option value="O">O</option>
+                                    <option value="A+">A+</option>
+                                    <option value="A">A</option>
+                                    <option value="B+">B+</option>
+                                    <option value="B">B</option>
+                                    <option value="RA">RA</option>
+                                    <option value="SA">SA</option>
+                                    <option value="W">W</option>
+                                </select>
+                                <label>Communicative English</label>
+                            </div>
+                            <div class="input-field col m6 s12 l6">
+                                <select name='s1_sub2'>
+                                    <option value="" disabled selected>Grade</option>
+                                    <option value="O">O</option>
+                                    <option value="A+">A+</option>
+                                    <option value="A">A</option>
+                                    <option value="B+">B+</option>
+                                    <option value="B">B</option>
+                                    <option value="RA">RA</option>
+                                    <option value="SA">SA</option>
+                                    <option value="W">W</option>
+                                </select>
+                                <label>Engineering Mathematics - I</label>
+                            </div>
+                            <div class="input-field col m6 s12 l6">
+                                <select name='s1_sub3'>
+                                    <option value="" disabled selected>Grade</option>
+                                    <option value="O">O</option>
+                                    <option value="A+">A+</option>
+                                    <option value="A">A</option>
+                                    <option value="B+">B+</option>
+                                    <option value="B">B</option>
+                                    <option value="RA">RA</option>
+                                    <option value="SA">SA</option>
+                                    <option value="W">W</option>
+                                </select>
+                                <label>Engineering Graphics</label>
+                            </div>
+                            <div class="input-field col m6 s12 l6">
+                                <select name='s1_sub4'>
+                                    <option value="" disabled selected>Grade</option>
+                                    <option value="O">O</option>
+                                    <option value="A+">A+</option>
+                                    <option value="A">A</option>
+                                    <option value="B+">B+</option>
+                                    <option value="B">B</option>
+                                    <option value="RA">RA</option>
+                                    <option value="SA">SA</option>
+                                    <option value="W">W</option>
+                                </select>
+                                <label>Engineering Physics</label>
+                            </div>
+                            <div class="input-field col m6 s12 l6">
+                                <select name='s1_sub5'>
+                                    <option value="" disabled selected>Grade</option>
+                                    <option value="O">O</option>
+                                    <option value="A+">A+</option>
+                                    <option value="A">A</option>
+                                    <option value="B+">B+</option>
+                                    <option value="B">B</option>
+                                    <option value="RA">RA</option>
+                                    <option value="SA">SA</option>
+                                    <option value="W">W</option>
+                                </select>
+                                <label>Engineering Chemistry</label>
+                            </div>
+                            <div class="input-field col m6 s12 l6">
+                                <select name='s1_sub6'>
+                                    <option value="" disabled selected>Grade</option>
+                                    <option value="O">O</option>
+                                    <option value="A+">A+</option>
+                                    <option value="A">A</option>
+                                    <option value="B+">B+</option>
+                                    <option value="B">B</option>
+                                    <option value="RA">RA</option>
+                                    <option value="SA">SA</option>
+                                    <option value="W">W</option>
+                                </select>
+                                <label>Problem Solving and Python Programming</label>
+                            </div><br>
+                            <div class="row">
+                                <h4>Laboratory</h4><br>
+                                <div class="input-field col m6 s12 l6">
+                                    <select name='s1_lab1'>
+                                        <option value="" disabled selected>Grade</option>
+                                        <option value="O">O</option>
+                                        <option value="A+">A+</option>
+                                        <option value="A">A</option>
+                                        <option value="B+">B+</option>
+                                        <option value="B">B</option>
+                                        <option value="RA">RA</option>
+                                        <option value="SA">SA</option>
+                                    </select>
+                                    <label>Problem Solving and Python Programming Laboratory</label>
+                                </div>
+                                <div class="input-field col m6 s12 l6">
+                                    <select name='s1_lab2'>
+                                        <option value="" disabled selected>Grade</option>
+                                        <option value="O">O</option>
+                                        <option value="A+">A+</option>
+                                        <option value="A">A</option>
+                                        <option value="B+">B+</option>
+                                        <option value="B">B</option>
+                                        <option value="RA">RA</option>
+                                        <option value="SA">SA</option>
+                                        <option value="W">W</option>
+                                    </select>
+                                    <label>Physics and Chemistry Laboratory</label>
+                                </div>
+                            </div>
+                            <div class="row">
+
+                                <div class="input-field col m6 s12 l6">
+                                    <input type="text" name="sem1" id='mysem1'>
+                                    <input type="text" name="semester_1" value="semester_1" hidden />
+                                    <label for="mysem1">CGPA</label>
+                                </div>
+                                <div class="input-field col m6 s12 l6">
+                                    <input type="text" name="arrear1" id='myar1'>
+                                    <label for="myar1">Arrear</label>
+                                </div>
+                                <div class="input-field file-field col m12 s12 l12">
+                                    <div class="btn-large">
+                                        <span style="color:white">Mark Sheet</span>
+                                        <input type="file" name="s1_file" onchange="S1Size(this)">
+                                    </div>
+                                    <div class="file-path-wrapper">
+                                        <input class="file-path validate" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <% } else if(((exist.Semester_1.later_entry === 'Yes' && exist.Semester_1.attended === 'No'))) { %>
+                <div class="card center-align">
+                    <h4><b>FIRST SEMESTER</b></h4><br>
+                    <div class="row">
+                        <div class="row">
+                            <div class="col m6 l6 s12">
+                                <input type="text" name="group1" id='later_sem1' class="validate"
+                                    value=<%= exist.Semester_1.later_entry %>>
+                                <label for="later_sem1">Later Entry</label>
+                            </div>
+                            <div class="col m6 l6 s12">
+                                <input type="text" name="group2" id='attended_sem1' class="validate"
+                                    value=<%= exist.Semester_1.attended %>>
+                                <label for="attended_sem1">Attended</label>
+                            </div>
+                        </div><br>
+                    </div>
+                </div>
+                <% } else { %>
+                <div class="card center-align">
+                    <h4><b>FIRST SEMESTER</b></h4><br>
+                    <div class="row">
+                        <div class="input-field col m6 s12 l6">
+                            <input type="text" name="s1_sub1" id='sem1_sub1' class="validate"
+                                value=<%= exist.Semester_1.sub1 %>>
+                            <label for="sem1_sub1">Communicative English</label>
+                        </div>
+                        <div class="input-field col m6 s12 l6">
+                            <input type="text" name="s1_sub2" id='sem1_sub2' class="validate"
+                                value=<%= exist.Semester_1.sub2 %>>
+                            <label for="sem1_sub2">Engineering Mathematics - I</label>
+                        </div>
+                        <div class="input-field col m6 s12 l6">
+                            <input type="text" name="s1_sub3" id='sem1_sub3' class="validate"
+                                value=<%= exist.Semester_1.sub3 %>>
+                            <label for="sem1_sub3">Engineering Graphics</label>
+                        </div>
+                        <div class="input-field col m6 s12 l6">
+                            <input type="text" name="s1_sub4" id='sem1_sub4' class="validate"
+                                value=<%= exist.Semester_1.sub4 %>>
+                            <label for="sem1_sub4">Engineering Physics</label>
+                        </div>
+                        <div class="input-field col m6 s12 l6">
+                            <input type="text" name="s1_sub5" id='sem1_sub5' class="validate"
+                                value=<%= exist.Semester_1.sub5 %>>
+                            <label for="sem1_sub5">Engineering Chemistry</label>
+                        </div>
+                        <div class="input-field col m6 s12 l6">
+                            <input type="text" name="s1_sub6" id='sem1_sub6' class="validate"
+                                value=<%= exist.Semester_1.sub6 %>>
+                            <label for="sem1_sub6">Problem Solving and Python Programming</label>
+                        </div><br>
+                        <div class="row">
+                            <h4>Practical</h4><br>
+                            <div class="input-field col m6 s12 l6">
+                                <input type="text" name="s1_lab1" id='sem1_lab1' class="validate"
+                                    value=<%= exist.Semester_1.lab1 %>>
+                                <label for="sem1_lab1">Problem Solving and Python Programming Laboratory</label>
+                            </div>
+                            <div class="input-field col m6 s12 l6">
+                                <input type="text" name="s1_lab2" id='sem1_lab2' class="validate"
+                                    value=<%= exist.Semester_1.lab2 %>>
+                                <label for="sem1_lab2">Physics and Chemistry Laboratory</label>
+
+                            </div>
+                        </div>
+                        <div class="row">
+
+                            <div class="input-field col m6 s12 l6">
+                                <input type="text" name="sem1" id='mysem1' value=<%= exist.Semester_1.gpa %>>
+                                <label for="mysem1">CGPA</label>
+                            </div>
+                            <div class="input-field col m6 s12 l6">
+                                <input type="text" name="arrear1" id='myar1' value=<%= exist.Semester_1.arrear %>>
+                                <label for="myar1">Arrear</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col m6 l6 s12">
+                                <input type="text" name="group1" id='later_sem1' class="validate"
+                                    value=<%= exist.Semester_1.later_entry %>>
+                                <label for="later_sem1">Later Entry</label>
+                            </div>
+                            <div class="col m6 l6 s12">
+                                <input type="text" name="group2" id='attended_sem1' class="validate"
+                                    value=<%= exist.Semester_1.attended %>>
+                                <label for="attended_sem1">Attended</label>
+                            </div>
+                            <div class="col m12 l12 s12">
+                                <input type="text" name="s1_file" id='sem1_file' hidden
+                                    value=<%= exist.Semester_1.s1_file %>>
+                            </div>
+                        </div><br>
+                    </div>
+                </div>
+                <% } %>
+                <!------------------------------- Semesters - II----------------------------------->
+                <% if((exist.Semester_2.later_entry === null && exist.Semester_2.attended === null) || (exist.Semester_2.later_entry === 'No' && exist.Semester_2.attended === 'No')) { %>
+                <div class="card center-align">
+                    <h4><b>SECOND SEMESTER</b></h4><br>
+                    <div class="row">
+                        <div class="row">
+                            <div class="col m6 l6 s12">
+                                <h4>Later Entry</h4>
+                                <label>
+                                    <input type="radio" name="group3" class="with-gap yes3-check" value="Yes" />
+                                    <span>Yes</span>
+                                </label>
+                                <label>
+                                    <input type="radio" name="group3" class="with-gap no3-check" value="No" />
+                                    <span>No</span>
+                                </label>
+                            </div>
+                            <div class="col m6 l6 s12">
+                                <h4>Attended</h4>
+                                <label>
+                                    <input type="radio" name="group4" class="with-gap yes4-check" value="Yes" />
+                                    <span>Yes</span>
+                                </label>
+                                <label>
+                                    <input type="radio" name="group4" class="with-gap no4-check" value="No" />
+                                    <span>No</span>
+                                </label>
+                            </div>
+                        </div><br>
+                        <div class="sem2">
+                            <div class="input-field col m6 s12 l6">
+                                <select name='s2_sub1'>
+                                    <option value="" disabled selected>Grade</option>
+                                    <option value="O">O</option>
+                                    <option value="A+">A+</option>
+                                    <option value="A">A</option>
+                                    <option value="B+">B+</option>
+                                    <option value="B">B</option>
+                                    <option value="RA">RA</option>
+                                    <option value="SA">SA</option>
+                                    <option value="W">W</option>
+                                </select>
+                                <label>Technical English</label>
+                            </div>
+                            <div class="input-field col m6 s12 l6">
+                                <select name='s2_sub2'>
+                                    <option value="" disabled selected>Grade</option>
+                                    <option value="O">O</option>
+                                    <option value="A+">A+</option>
+                                    <option value="A">A</option>
+                                    <option value="B+">B+</option>
+                                    <option value="B">B</option>
+                                    <option value="RA">RA</option>
+                                    <option value="SA">SA</option>
+                                    <option value="W">W</option>
+                                </select>
+                                <label>Engineering Mathematics - II</label>
+                            </div>
+                            <div class="input-field col m6 s12 l6">
+                                <select name='s2_sub3'>
+                                    <option value="" disabled selected>Grade</option>
+                                    <option value="O">O</option>
+                                    <option value="A+">A+</option>
+                                    <option value="A">A</option>
+                                    <option value="B+">B+</option>
+                                    <option value="B">B</option>
+                                    <option value="RA">RA</option>
+                                    <option value="SA">SA</option>
+                                    <option value="W">W</option>
+                                </select>
+                                <label>Physics for Information Science</label>
+                            </div>
+                            <div class="input-field col m6 s12 l6">
+                                <select name='s2_sub4'>
+                                    <option value="" disabled selected>Grade</option>
+                                    <option value="O">O</option>
+                                    <option value="A+">A+</option>
+                                    <option value="A">A</option>
+                                    <option value="B+">B+</option>
+                                    <option value="B">B</option>
+                                    <option value="RA">RA</option>
+                                    <option value="SA">SA</option>
+                                    <option value="W">W</option>
+                                </select>
+                                <label>Basic Electrical, Electronics and Measurement Engineering</label>
+                            </div>
+                            <div class="input-field col m6 s12 l6">
+                                <select name='s2_sub5'>
+                                    <option value="" disabled selected>Grade</option>
+                                    <option value="O">O</option>
+                                    <option value="A+">A+</option>
+                                    <option value="A">A</option>
+                                    <option value="B+">B+</option>
+                                    <option value="B">B</option>
+                                    <option value="RA">RA</option>
+                                    <option value="SA">SA</option>
+                                    <option value="W">W</option>
+                                </select>
+                                <label>Environmental Science and Engineering</label>
+                            </div>
+                            <div class="input-field col m6 s12 l6">
+                                <select name='s2_sub6'>
+                                    <option value="" disabled selected>Grade</option>
+                                    <option value="O">O</option>
+                                    <option value="A+">A+</option>
+                                    <option value="A">A</option>
+                                    <option value="B+">B+</option>
+                                    <option value="B">B</option>
+                                    <option value="RA">RA</option>
+                                    <option value="SA">SA</option>
+                                    <option value="W">W</option>
+                                </select>
+                                <label>Programming in C</label>
+                            </div><br>
+                            <div class="row">
+                                <h4>Laboratory</h4><br>
+                                <div class="input-field col m6 s12 l6">
+                                    <select name='s2_lab1'>
+                                        <option value="" disabled selected>Grade</option>
+                                        <option value="O">O</option>
+                                        <option value="A+">A+</option>
+                                        <option value="A">A</option>
+                                        <option value="B+">B+</option>
+                                        <option value="B">B</option>
+                                        <option value="RA">RA</option>
+                                        <option value="SA">SA</option>
+                                        <option value="W">W</option>
+                                    </select>
+                                    <label>Engineering Practices Laboratory</label>
+                                </div>
+                                <div class="input-field col m6 s12 l6">
+                                    <select name='s2_lab2'>
+                                        <option value="" disabled selected>Grade</option>
+                                        <option value="O">O</option>
+                                        <option value="A+">A+</option>
+                                        <option value="A">A</option>
+                                        <option value="B+">B+</option>
+                                        <option value="B">B</option>
+                                        <option value="RA">RA</option>
+                                        <option value="SA">SA</option>
+                                        <option value="W">W</option>
+                                    </select>
+                                    <label>C Programming Laboratory</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col m6 s12 l6">
+                                    <input type="text" name="sem2" id='mysem2'>
+                                    <label for="mysem2">CGPA</label>
+                                </div>
+                                <div class="input-field col m6 s12 l6">
+                                    <input type="text" name="arrear2" id='myar2'>
+                                    <label for="myar2">Arrear</label>
+                                </div>
+                                <div class="input-field file-field col m12 s12 l12">
+                                    <div class="btn-large">
+                                        <span style="color:white">Mark Sheet</span>
+                                        <input type="file" name="s2_file" onchange="S2Size(this)">
+                                    </div>
+                                    <div class="file-path-wrapper">
+                                        <input class="file-path validate" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <% } else if((exist.Semester_2.later_entry === 'Yes' && exist.Semester_2.attended === 'No')){%>
+                <div class="card center-align">
+                    <h4><b>SECOND SEMESTER</b></h4><br>
+                    <div class="row">
+                        <div class="col m6 l6 s12">
+                            <input type="text" name="group3" id='later_sem2' class="validate"
+                                value=<%= exist.Semester_2.later_entry %>>
+                            <label for="later_sem2">Later Entry</label>
+                        </div>
+                        <div class="col m6 l6 s12">
+                            <input type="text" name="group4" id='attended_sem2' class="validate"
+                                value=<%= exist.Semester_2.attended %>>
+                            <label for="attended_sem2">Attended</label>
+                        </div>
+                    </div><br>
+                </div>
+                <% } else { %>
+                <div class="card center-align">
+                    <h4><b>SECOND SEMESTER</b></h4><br>
+                    <div class="row">
+                        <div class="input-field col m6 s12 l6">
+                            <input type="text" name="s2_sub1" id='sem2_sub1' class="validate"
+                                value=<%= exist.Semester_2.sub1 %>>
+                            <label for="sem2_sub1">Technical English</label>
+                        </div>
+                        <div class="input-field col m6 s12 l6">
+                            <input type="text" name="s2_sub2" id='sem2_sub2' class="validate"
+                                value=<%= exist.Semester_2.sub2 %>>
+                            <label for="sem2_sub2">Engineering Mathematics - I</label>
+                        </div>
+                        <div class="input-field col m6 s12 l6">
+                            <input type="text" name="s2_sub3" id='sem2_sub3' class="validate"
+                                value=<%= exist.Semester_2.sub3 %>>
+                            <label for="sem2_sub3">Physics for Information Science</label>
+                        </div>
+                        <div class="input-field col m6 s12 l6">
+                            <input type="text" name="s2_sub4" id='sem2_sub4' class="validate"
+                                value=<%= exist.Semester_2.sub4 %>>
+                            <label for="sem2_sub4">Basic Electrical, Electronics and Measurement Engineering</label>
+                        </div>
+                        <div class="input-field col m6 s12 l6">
+                            <input type="text" name="s2_sub5" id='sem2_sub5' class="validate"
+                                value=<%= exist.Semester_2.sub5 %>>
+                            <label for="sem2_sub5">Environmental Science and Engineering</label>
+                        </div>
+                        <div class="input-field col m6 s12 l6">
+                            <input type="text" name="s2_sub6" id='sem2_sub6' class="validate"
+                                value=<%= exist.Semester_2.sub6 %>>
+                            <label for="sem2_sub6">Programming in C</label>
+
+                        </div><br>
+                        <div class="row">
+                            <h4>Practical</h4><br>
+                            <div class="input-field col m6 s12 l6">
+                                <input type="text" name="s2_lab1" id='sem2_lab1' class="validate"
+                                    value=<%= exist.Semester_2.lab1 %>>
+                                <label for="sem2_lab1">Engineering Practices Laboratory</label>
+                            </div>
+                            <div class="input-field col m6 s12 l6">
+                                <input type="text" name="s2_lab2" id='sem2_lab2' class="validate"
+                                    value=<%= exist.Semester_2.lab2 %>>
+                                <label for="sem2_lab2">C Programming Laboratory</label>
+
+                            </div>
+                        </div>
+                        <div class="row">
+
+                            <div class="input-field col m6 s12 l6">
+                                <input type="text" name="sem2" id='mysem2' value=<%= exist.Semester_2.gpa %>>
+                                <label for="mysem2">CGPA</label>
+                            </div>
+                            <div class="input-field col m6 s12 l6">
+                                <input type="text" name="arrear2" id='myar2' value=<%= exist.Semester_2.arrear %>>
+                                <label for="myar2">Arrear</label>
+                            </div>
+                            <!-- <div class="input-field col m12 s12 l12">
+                                            <img class="materialboxed" width="650" src=<%= exist.Semester_2.sslc_file %>>
+                                        </div> -->
+
+                        </div>
+                        <div class="row">
+                            <div class="col m6 l6 s12">
+                                <input type="text" name="group3" id='later_sem2' class="validate"
+                                    value=<%= exist.Semester_2.later_entry %>>
+                                <label for="later_sem2">Later Entry</label>
+                            </div>
+                            <div class="col m6 l6 s12">
+                                <input type="text" name="group4" id='attended_sem2' class="validate"
+                                    value=<%= exist.Semester_2.attended %>>
+                                <label for="attended_sem2">Attended</label>
+                            </div>
+                            <div class="col m12 l12 s12">
+                                <input type="text" name="s2_file" hidden id='sem2_file'
+                                    value=<%= exist.Semester_2.s2_file %>>
+                            </div>
+                        </div><br>
+                    </div>
+                </div>
+                <% } %>
+                <!------------------------------- Semesters - III----------------------------------->
+                <% if((exist.Semester_3.later_entry === null && exist.Semester_3.attended === null) || (exist.Semester_3.later_entry === 'No' && exist.Semester_3.attended === 'No')) { %>
+                <div class="card center-align">
+                    <h4><b>THIRD SEMESTER</b></h4><br>
+                    <div class="row">
+                        <div class="row">
+                            <div class="col m6 l6 s12">
+                                <h4>Later Entry</h4>
+                                <label>
+                                    <input type="radio" name="group5" class="with-gap yes5-check" value="Yes" />
+                                    <span>Yes</span>
+                                </label>
+                                <label>
+                                    <input type="radio" name="group5" class="with-gap no5-check" value="No" />
+                                    <span>No</span>
+                                </label>
+                            </div>
+                            <div class="col m6 l6 s12">
+                                <h4>Attended</h4>
+                                <label>
+                                    <input type="radio" name="group6" class="with-gap yes6-check" value="Yes" />
+                                    <span>Yes</span>
+                                </label>
+                                <label>
+                                    <input type="radio" name="group6" class="with-gap no6-check" value="No" />
+                                    <span>No</span>
+                                </label>
+                            </div>
+                        </div><br>
+                        <div class="sem3">
+                            <div class="row">
+                                <div class="input-field col m6 s12 l6">
+                                    <select name='s3_sub1'>
+                                        <option value="" disabled selected>Grade</option>
+                                        <option value="O">O</option>
+                                        <option value="A+">A+</option>
+                                        <option value="A">A</option>
+                                        <option value="B+">B+</option>
+                                        <option value="B">B</option>
+                                        <option value="RA">RA</option>
+                                        <option value="SA">SA</option>
+                                        <option value="W">W</option>
+                                    </select>
+                                    <label>Discrete Mathematics</label>
+                                </div>
+                                <div class="input-field col m6 s12 l6">
+                                    <select name='s3_sub2'>
+                                        <option value="" disabled selected>Grade</option>
+                                        <option value="O">O</option>
+                                        <option value="A+">A+</option>
+                                        <option value="A">A</option>
+                                        <option value="B+">B+</option>
+                                        <option value="B">B</option>
+                                        <option value="RA">RA</option>
+                                        <option value="SA">SA</option>
+                                        <option value="W">W</option>
+                                    </select>
+                                    <label>Digital Principles and System Design</label>
+                                </div>
+                                <div class="input-field col m6 s12 l6">
+                                    <select name='s3_sub3'>
+                                        <option value="" disabled selected>Grade</option>
+                                        <option value="O">O</option>
+                                        <option value="A+">A+</option>
+                                        <option value="A">A</option>
+                                        <option value="B+">B+</option>
+                                        <option value="B">B</option>
+                                        <option value="RA">RA</option>
+                                        <option value="SA">SA</option>
+                                        <option value="W">W</option>
+                                    </select>
+                                    <label>Object Oriented Programming</label>
+                                </div>
+                                <div class="input-field col m6 s12 l6">
+                                    <select name='s3_sub4'>
+                                        <option value="" disabled selected>Grade</option>
+                                        <option value="O">O</option>
+                                        <option value="A+">A+</option>
+                                        <option value="A">A</option>
+                                        <option value="B+">B+</option>
+                                        <option value="B">B</option>
+                                        <option value="RA">RA</option>
+                                        <option value="SA">SA</option>
+                                        <option value="W">W</option>
+                                    </select>
+                                    <label>Data Structures</label>
+                                </div>
+                                <div class="input-field col m6 s12 l6">
+                                    <select name='s3_sub5'>
+                                        <option value="" disabled selected>Grade</option>
+                                        <option value="O">O</option>
+                                        <option value="A+">A+</option>
+                                        <option value="A">A</option>
+                                        <option value="B+">B+</option>
+                                        <option value="B">B</option>
+                                        <option value="RA">RA</option>
+                                        <option value="SA">SA</option>
+                                        <option value="W">W</option>
+                                    </select>
+                                    <label>Communication Engineering</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <h4>Practicals</h4><br>
+                                <div class="input-field col m6 s12 l6">
+                                    <select name='s3_lab1'>
+                                        <option value="" disabled selected>Grade</option>
+                                        <option value="O">O</option>
+                                        <option value="A+">A+</option>
+                                        <option value="A">A</option>
+                                        <option value="B+">B+</option>
+                                        <option value="B">B</option>
+                                        <option value="RA">RA</option>
+                                        <option value="SA">SA</option>
+                                        <option value="W">W</option>
+                                    </select>
+                                    <label>Digital Systems Laboratory</label>
+                                </div>
+                                <div class="input-field col m6 s12 l6">
+                                    <select name='s3_lab2'>
+                                        <option value="" disabled selected>Grade</option>
+                                        <option value="O">O</option>
+                                        <option value="A+">A+</option>
+                                        <option value="A">A</option>
+                                        <option value="B+">B+</option>
+                                        <option value="B">B</option>
+                                        <option value="RA">RA</option>
+                                        <option value="SA">SA</option>
+                                        <option value="W">W</option>
+                                    </select>
+                                    <label>Object Oriented Programming Laboratory</label>
+                                </div>
+                                <div class="input-field col m6 s12 l6">
+                                    <select name='s3_lab3'>
+                                        <option value="" disabled selected>Grade</option>
+                                        <option value="O">O</option>
+                                        <option value="A+">A+</option>
+                                        <option value="A">A</option>
+                                        <option value="B+">B+</option>
+                                        <option value="B">B</option>
+                                        <option value="RA">RA</option>
+                                        <option value="SA">SA</option>
+                                        <option value="W">W</option>
+                                    </select>
+                                    <label>Data Structures Laboratory</label>
+                                </div>
+                                <div class="input-field col m6 s12 l6">
+                                    <select name='s3_lab4'>
+                                        <option value="" disabled selected>Grade</option>
+                                        <option value="O">O</option>
+                                        <option value="A+">A+</option>
+                                        <option value="A">A</option>
+                                        <option value="B+">B+</option>
+                                        <option value="B">B</option>
+                                        <option value="RA">RA</option>
+                                        <option value="SA">SA</option>
+                                        <option value="W">W</option>
+                                    </select>
+                                    <label>Interpersonal Skills/Listening & Speaking</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col m6 s12 l6">
+                                    <input type="text" name="sem3" id='mysem3'>
+                                    <label for="mysem3">CGPA</label>
+                                </div>
+                                <div class="input-field col m6 s12 l6">
+                                    <input type="text" name="arrear3" id='myar3'>
+                                    <label for="myar3">Arrear</label>
+                                </div>
+                                <div class="input-field file-field col m12 s12 l12">
+                                    <div class="btn-large">
+                                        <span style="color:white">Mark Sheet</span>
+                                        <input type="file" name="s3_file" onchange="S3Size(this)">
+                                    </div>
+                                    <div class="file-path-wrapper">
+                                        <input class="file-path validate" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <% } else if(((exist.Semester_3.later_entry === 'Yes' && exist.Semester_3.attended === 'No'))){ %>
+                <div class="card center-align">
+                    <h4><b>THIRD SEMESTER</b></h4><br>
+                    <div class="row">
+                        <div class="row">
+                            <div class="col m6 l6 s12">
+                                <input type="text" name="group5" id='later_sem3' class="validate"
+                                    value=<%= exist.Semester_3.later_entry %>>
+                                <label for="later_sem3">Later Entry</label>
+                            </div>
+                            <div class="col m6 l6 s12">
+                                <input type="text" name="group6" id='attended_sem3' class="validate"
+                                    value=<%= exist.Semester_3.attended %>>
+                                <label for="attended_sem3">Attended</label>
+                            </div>
+                        </div><br>
+                    </div>
+                </div>
+                <%} else { %>
+                <div class="card center-align">
+                    <h4><b>THIRD SEMESTER</b></h4><br>
+                    <div class="row">
+                        <div class="input-field col m6 s12 l6">
+                            <input type="text" name="s3_sub1" id='sem3_sub1' class="validate"
+                                value=<%= exist.Semester_3.sub1 %>>
+                            <label for="sem3_sub1">Discrete Mathematics</label>
+                        </div>
+                        <div class="input-field col m6 s12 l6">
+                            <input type="text" name="s3_sub2" id='sem3_sub2' class="validate"
+                                value=<%= exist.Semester_3.sub2 %>>
+                            <label for="sem3_sub2">Digital Principles and System Design</label>
+                        </div>
+                        <div class="input-field col m6 s12 l6">
+                            <input type="text" name="s3_sub3" id='sem3_sub3' class="validate"
+                                value=<%= exist.Semester_3.sub3 %>>
+                            <label for="sem3_sub3">Object Oriented Programming</label>
+                        </div>
+                        <div class="input-field col m6 s12 l6">
+                            <input type="text" name="s3_sub4" id='sem3_sub4' class="validate"
+                                value=<%= exist.Semester_3.sub4 %>>
+                            <label for="sem3_sub4">Data Structures</label>
+                        </div>
+                        <div class="input-field col m6 s12 l6">
+                            <input type="text" name="s3_sub5" id='sem3_sub5' class="validate"
+                                value=<%= exist.Semester_3.sub5 %>>
+                            <label for="sem3_sub5">Communication Engineering</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <h4>Practical</h4><br>
+                        <div class="input-field col m6 s12 l6">
+                            <input type="text" name="s3_lab1" id='sem3_lab1' class="validate"
+                                value=<%= exist.Semester_3.lab1 %>>
+                            <label for="sem3_lab1">Digital Systems Laboratory</label>
+                        </div>
+                        <div class="input-field col m6 s12 l6">
+                            <input type="text" name="s3_lab2" id='sem3_lab2' class="validate"
+                                value=<%= exist.Semester_3.lab2 %>>
+                            <label for="sem3_lab2">Object Oriented Programming Laboratory</label>
+                        </div>
+                        <div class="input-field col m6 s12 l6">
+                            <input type="text" name="s3_lab3" id='sem3_lab3' class="validate"
+                                value=<%= exist.Semester_3.lab3 %>>
+                            <label for="sem3_lab3">Data Structures Laboratory</label>
+                        </div>
+                        <div class="input-field col m6 s12 l6">
+                            <input type="text" name="s3_lab4" id='sem3_lab4' class="validate"
+                                value=<%= exist.Semester_3.lab4 %>>
+                            <label for="sem3_lab4">Interpersonal Skills/Listening & Speaking</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col m6 s12 l6">
+                            <input type="text" name="sem3" id='mysem3' value=<%= exist.Semester_3.gpa %>>
+                            <label for="mysem3">CGPA</label>
+                        </div>
+                        <div class="input-field col m6 s12 l6">
+                            <input type="text" name="arrear3" id='myar3' value=<%= exist.Semester_3.arrear %>>
+                            <label for="myar3">Arrear</label>
+                        </div>
+                        <!-- <div class="input-field col m12 s12 l12">
+                                                <img class="materialboxed" width="650" src=<%= exist.Semester_1.sslc_file %>>
+                                            </div> -->
+
+                    </div>
+                    <div class="row">
+                        <div class="col m6 l6 s12">
+                            <input type="text" name="group5" id='later_sem3' class="validate"
+                                value=<%= exist.Semester_3.later_entry %>>
+                            <label for="later_sem3">Later Entry</label>
+                        </div>
+                        <div class="col m6 l6 s12">
+                            <input type="text" name="group6" id='attended_sem3' class="validate"
+                                value=<%= exist.Semester_3.attended %>>
+                            <label for="attended_sem3">Attended</label>
+                        </div>
+                        <div class="col m12 l12 s12">
+                            <input type="text" name="s3_file" id='sem3_file' hidden
+                                value=<%= exist.Semester_3.s3_file %>>
+                        </div>
+                    </div><br>
+                </div>
+            </div>
+            <% } %>
+
+            <!------------------------------- Semesters - IV----------------------------------->
+            <% if((exist.Semester_4.later_entry === null && exist.Semester_4.attended === null) || (exist.Semester_4.later_entry === 'No' && exist.Semester_4.attended === 'No')) { %>
+            <div class="card center-align">
+                <h4><b>FOURTH SEMESTER</b></h4><br>
+                <div class="row">
+                    <div class="row">
+                        <div class="col m6 l6 s12">
+                            <h4>Later Entry</h4>
+                            <label>
+                                <input type="radio" name="group7" class="with-gap yes7-check" value="Yes" />
+                                <span>Yes</span>
+                            </label>
+                            <label>
+                                <input type="radio" name="group7" class="with-gap no7-check" value="No" />
+                                <span>No</span>
+                            </label>
+                        </div>
+                        <div class="col m6 l6 s12">
+                            <h4>Attended</h4>
+                            <label>
+                                <input type="radio" name="group8" class="with-gap yes8-check" value="Yes" />
+                                <span>Yes</span>
+                            </label>
+                            <label>
+                                <input type="radio" name="group8" class="with-gap no8-check" value="No" />
+                                <span>No</span>
+                            </label>
+                        </div>
+                    </div><br>
+                    <div class="sem4">
+                        <div class="input-field col m6 s12 l6">
+                            <select name='s4_sub1'>
+                                <option value="" disabled selected>Grade</option>
+                                <option value="O">O</option>
+                                <option value="A+">A+</option>
+                                <option value="A">A</option>
+                                <option value="B+">B+</option>
+                                <option value="B">B</option>
+                                <option value="RA">RA</option>
+                                <option value="SA">SA</option>
+                                <option value="W">W</option>
+                            </select>
+                            <label>Probability and Queueing Theory</label>
+                        </div>
+                        <div class="input-field col m6 s12 l6">
+                            <select name='s4_sub2'>
+                                <option value="" disabled selected>Grade</option>
+                                <option value="O">O</option>
+                                <option value="A+">A+</option>
+                                <option value="A">A</option>
+                                <option value="B+">B+</option>
+                                <option value="B">B</option>
+                                <option value="RA">RA</option>
+                                <option value="SA">SA</option>
+                                <option value="W">W</option>
+                            </select>
+                            <label>Computer Architecture</label>
+                        </div>
+                        <div class="input-field col m6 s12 l6">
+                            <select name='s4_sub3'>
+                                <option value="" disabled selected>Grade</option>
+                                <option value="O">O</option>
+                                <option value="A+">A+</option>
+                                <option value="A">A</option>
+                                <option value="B+">B+</option>
+                                <option value="B">B</option>
+                                <option value="RA">RA</option>
+                                <option value="SA">SA</option>
+                                <option value="W">W</option>
+                            </select>
+                            <label>Database Management Systems</label>
+                        </div>
+                        <div class="input-field col m6 s12 l6">
+                            <select name='s4_sub4'>
+                                <option value="" disabled selected>Grade</option>
+                                <option value="O">O</option>
+                                <option value="A+">A+</option>
+                                <option value="A">A</option>
+                                <option value="B+">B+</option>
+                                <option value="B">B</option>
+                                <option value="RA">RA</option>
+                                <option value="SA">SA</option>
+                                <option value="W">W</option>
+                            </select>
+                            <label>Design and Analysis of Algorithms</label>
+                        </div>
+                        <div class="input-field col m6 s12 l6">
+                            <select name='s4_sub5'>
+                                <option value="" disabled selected>Grade</option>
+                                <option value="O">O</option>
+                                <option value="A+">A+</option>
+                                <option value="A">A</option>
+                                <option value="B+">B+</option>
+                                <option value="B">B</option>
+                                <option value="RA">RA</option>
+                                <option value="SA">SA</option>
+                                <option value="W">W</option>
+                            </select>
+                            <label>Operating Systems</label>
+                        </div>
+                        <div class="input-field col m6 s12 l6">
+                            <select name='s4_sub6'>
+                                <option value="" disabled selected>Grade</option>
+                                <option value="O">O</option>
+                                <option value="A+">A+</option>
+                                <option value="A">A</option>
+                                <option value="B+">B+</option>
+                                <option value="B">B</option>
+                                <option value="RA">RA</option>
+                                <option value="SA">SA</option>
+                                <option value="W">W</option>
+                            </select>
+                            <label>Software Engineering</label>
+                        </div><br>
+                        <div class="row">
+                            <h4>Practicals</h4><br>
+                            <div class="input-field col m4 s12 l4">
+                                <select name='s4_lab1'>
+                                    <option value="" disabled selected>Grade</option>
+                                    <option value="O">O</option>
+                                    <option value="A+">A+</option>
+                                    <option value="A">A</option>
+                                    <option value="B+">B+</option>
+                                    <option value="B">B</option>
+                                    <option value="RA">RA</option>
+                                    <option value="SA">SA</option>
+                                    <option value="W">W</option>
+                                </select>
+                                <label>Database Management Systems Laboratory</label>
+                            </div>
+                            <div class="input-field col m4 s12 l4">
+                                <select name='s4_lab2'>
+                                    <option value="" disabled selected>Grade</option>
+                                    <option value="O">O</option>
+                                    <option value="A+">A+</option>
+                                    <option value="A">A</option>
+                                    <option value="B+">B+</option>
+                                    <option value="B">B</option>
+                                    <option value="RA">RA</option>
+                                    <option value="SA">SA</option>
+                                    <option value="W">W</option>
+                                </select>
+                                <label>Operating Systems Laboratory</label>
+                            </div>
+                            <div class="input-field col m4 s12 l4">
+                                <select name='s4_lab3'>
+                                    <option value="" disabled selected>Grade</option>
+                                    <option value="O">O</option>
+                                    <option value="A+">A+</option>
+                                    <option value="A">A</option>
+                                    <option value="B+">B+</option>
+                                    <option value="B">B</option>
+                                    <option value="RA">RA</option>
+                                    <option value="SA">SA</option>
+                                    <option value="W">W</option>
+                                </select>
+                                <label>Advanced Reading and Writing</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col m6 s12 l6">
+                                <input type="text" name="sem4" id='mysem4'>
+                                <label for="mysem4">CGPA</label>
+                            </div>
+                            <div class="input-field col m6 s12 l6">
+                                <input type="text" name="arrear4" id='myar4'>
+                                <label for="myar4">Arrear</label>
+                            </div>
+                            <div class="input-field file-field col m12 s12 l12">
+                                <div class="btn-large">
+                                    <span style="color:white">Mark Sheet</span>
+                                    <input type="file" name="s4_file" onchange="S4Size(this)">
+                                </div>
+                                <div class="file-path-wrapper">
+                                    <input class="file-path validate" type="text">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <% } else if((exist.Semester_4.later_entry === 'Yes' && exist.Semester_4.attended === 'No')){ %>
+            <div class="card center-align">
+                <h4><b>FOURTH SEMESTER</b></h4><br>
+                <div class="row">
+                    <div class="row">
+                        <div class="col m6 l6 s12">
+                            <input type="text" name="group7" id='later_sem4' class="validate"
+                                value=<%= exist.Semester_4.later_entry %>>
+                            <label for="later_sem4">Later Entry</label>
+                        </div>
+                        <div class="col m6 l6 s12">
+                            <input type="text" name="group8" id='attended_sem4' class="validate"
+                                value=<%= exist.Semester_4.attended %>>
+                            <label for="attended_sem4">Attended</label>
+                        </div>
+
+                    </div><br>
+                </div>
+            </div>
+            <%} else { %>
+            <div class="card center-align">
+                <h4><b>FOURTH SEMESTER</b></h4><br>
+                <div class="row">
+                    <div class="input-field col m6 s12 l6">
+                        <input type="text" name="s4_sub1" id='sem4_sub1' class="validate"
+                            value=<%= exist.Semester_4.sub1 %>>
+                        <label for="sem4_sub1">Probability and Queueing Theory</label>
+                    </div>
+                    <div class="input-field col m6 s12 l6">
+                        <input type="text" name="s4_sub2" id='sem4_sub2' class="validate"
+                            value=<%= exist.Semester_4.sub2 %>>
+                        <label for="sem4_sub2">Computer Architecture</label>
+                    </div>
+                    <div class="input-field col m6 s12 l6">
+                        <input type="text" name="s4_sub3" id='sem4_sub3' class="validate"
+                            value=<%= exist.Semester_4.sub3 %>>
+                        <label for="sem4_sub3">Database Management Systems</label>
+                    </div>
+                    <div class="input-field col m6 s12 l6">
+                        <input type="text" name="s4_sub4" id='sem4_sub4' class="validate"
+                            value=<%= exist.Semester_4.sub4 %>>
+                        <label for="sem4_sub4">Design and Analysis of Algorithms</label>
+                    </div>
+                    <div class="input-field col m6 s12 l6">
+                        <input type="text" name="s4_sub5" id='sem3_sub5' class="validate"
+                            value=<%= exist.Semester_4.sub5 %>>
+                        <label for="sem4_sub5">Operating Systems</label>
+                    </div>
+                    <div class="input-field col m6 s12 l6">
+                        <input type="text" name="s4_sub6" id='sem3_sub6' class="validate"
+                            value=<%= exist.Semester_4.sub6 %>>
+                        <label for="sem4_sub6">Software Engineering</label>
+                    </div>
+                    <div class="row">
+                        <h4>Practical</h4><br>
+                        <div class="input-field col m6 s12 l6">
+                            <input type="text" name="s4_lab1" id='sem4_lab1' class="validate"
+                                value=<%= exist.Semester_4.lab1 %>>
+                            <label for="sem4_lab1">Database Management Systems Laboratory</label>
+                        </div>
+                        <div class="input-field col m6 s12 l6">
+                            <input type="text" name="s4_lab2" id='sem4_lab2' class="validate"
+                                value=<%= exist.Semester_4.lab2 %>>
+                            <label for="sem4_lab2">Operating Systems Laboratory</label>
+                        </div>
+                        <div class="input-field col m6 s12 l6">
+                            <input type="text" name="s4_lab3" id='sem4_lab3' class="validate"
+                                value=<%= exist.Semester_4.lab3 %>>
+                            <label for="sem4_lab3">Advanced Reading and Writing</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col m6 s12 l6">
+                            <input type="text" name="sem4" id='mysem4' value=<%= exist.Semester_4.gpa %>>
+                            <label for="mysem4">CGPA</label>
+                        </div>
+                        <div class="input-field col m6 s12 l6">
+                            <input type="text" name="arrear4" id='myar4' value=<%= exist.Semester_4.arrear %>>
+                            <label for="myar4">Arrear</label>
+                        </div>
+                        <!-- <div class="input-field col m12 s12 l12">
+                                                        <img class="materialboxed" width="650" src=<%= exist.Semester_1.sslc_file %>>
+                                                    </div> -->
+
+                    </div>
+                    <div class="row">
+                        <div class="col m6 l6 s12">
+                            <input type="text" name="group7" id='later_sem4' class="validate"
+                                value=<%= exist.Semester_4.later_entry %>>
+                            <label for="later_sem4">Later Entry</label>
+                        </div>
+                        <div class="col m6 l6 s12">
+                            <input type="text" name="group8" id='attended_sem4' class="validate"
+                                value=<%= exist.Semester_4.attended %>>
+                            <label for="attended_sem4">Attended</label>
+                        </div>
+                        <div class="col m12 l12 s12">
+                            <input type="text" name="s4_file" id='sem4_file' hidden
+                                value=<%= exist.Semester_4.s4_file %>>
+                        </div>
+                    </div><br>
+                </div>
+            </div>
+            <% } %>
+            <!------------------------------- Semesters - V----------------------------------->
+            <% if((exist.Semester_5.later_entry === null && exist.Semester_5.attended === null) || (exist.Semester_5.later_entry === 'No' && exist.Semester_5.attended === 'No')) { %>
+            <div class="card center-align">
+                <h4><b>FIFTH SEMESTER</b></h4><br>
+                <div class="row">
+                    <div class="row">
+                        <div class="col m6 l6 s12">
+                            <h4>Later Entry</h4>
+                            <label>
+                                <input type="radio" name="group9" class="with-gap yes9-check" value="Yes" />
+                                <span>Yes</span>
+                            </label>
+                            <label>
+                                <input type="radio" name="group9" class="with-gap no9-check" value="No" />
+                                <span>No</span>
+                            </label>
+                        </div>
+                        <div class="col m6 l6 s12">
+                            <h4>Attended</h4>
+                            <label>
+                                <input type="radio" name="group10" class="with-gap yes10-check" value="Yes" />
+                                <span>Yes</span>
+                            </label>
+                            <label>
+                                <input type="radio" name="group10" class="with-gap no10-check" value="No" />
+                                <span>No</span>
+                            </label>
+                        </div>
+                    </div><br>
+                    <div class="sem5">
+                        <div class="input-field col m6 s12 l6">
+                            <select name='s5_sub1'>
+                                <option value="" disabled selected>Grade</option>
+                                <option value="O">O</option>
+                                <option value="A+">A+</option>
+                                <option value="A">A</option>
+                                <option value="B+">B+</option>
+                                <option value="B">B</option>
+                                <option value="RA">RA</option>
+                                <option value="SA">SA</option>
+                                <option value="W">W</option>
+                            </select>
+                            <label>Algebra and Number Theory</label>
+                        </div>
+                        <div class="input-field col m6 s12 l6">
+                            <select name='s5_sub2'>
+                                <option value="" disabled selected>Grade</option>
+                                <option value="O">O</option>
+                                <option value="A+">A+</option>
+                                <option value="A">A</option>
+                                <option value="B+">B+</option>
+                                <option value="B">B</option>
+                                <option value="RA">RA</option>
+                                <option value="SA">SA</option>
+                                <option value="W">W</option>
+                            </select>
+                            <label>Computer Networks</label>
+                        </div>
+                        <div class="input-field col m6 s12 l6">
+                            <select name='s5_sub3'>
+                                <option value="" disabled selected>Grade</option>
+                                <option value="O">O</option>
+                                <option value="A+">A+</option>
+                                <option value="A">A</option>
+                                <option value="B+">B+</option>
+                                <option value="B">B</option>
+                                <option value="RA">RA</option>
+                                <option value="SA">SA</option>
+                                <option value="W">W</option>
+                            </select>
+                            <label>Microprocessors and Microcontrollers</label>
+                        </div>
+                        <div class="input-field col m6 s12 l6">
+                            <select name='s5_sub4'>
+                                <option value="" disabled selected>Grade</option>
+                                <option value="O">O</option>
+                                <option value="A+">A+</option>
+                                <option value="A">A</option>
+                                <option value="B+">B+</option>
+                                <option value="B">B</option>
+                                <option value="RA">RA</option>
+                                <option value="SA">SA</option>
+                                <option value="W">W</option>
+                            </select>
+                            <label>Theory of Computation</label>
+                        </div>
+                        <div class="input-field col m12 s12 l12">
+                            <select name='s5_sub5'>
+                                <option value="" disabled selected>Grade</option>
+                                <option value="O">O</option>
+                                <option value="A+">A+</option>
+                                <option value="A">A</option>
+                                <option value="B+">B+</option>
+                                <option value="B">B</option>
+                                <option value="RA">RA</option>
+                                <option value="SA">SA</option>
+                                <option value="W">W</option>
+                            </select>
+                            <label>Object Oriented Analysis and Design</label>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col m6 s12 l6">
+                                <select name='oe_1'>
+                                    <option value="" disabled selected>Choose</option>
+                                    <option value="Multi-core Architecture and Programming">Multi-core Architecture and
+                                        Programming</option>
+                                    <option value="Human Computer Interaction">Human Computer Interaction</option>
+                                    <option value="C# and .Net Programming">C# and .Net Programming</option>
+                                    <option value="Wireless Adhoc and Sensor Networks">Wireless Adhoc and Sensor
+                                        Networks</option>
+                                    <option value="Foundation Skills in Integrated Product Development">Foundation
+                                        Skills in Integrated Product Development</option>
+                                    <option value="Human Rights">Human Rights</option>
+                                    <option value="Disaster Management">Disaster Management</option>
+                                </select>
+                                <label>Open Elective I</label>
+                            </div><br>
+                            <div class="input-field col m6 s12 l6">
+                                <select name='s5_sub6'>
+                                    <option value="" disabled selected>Grade</option>
+                                    <option value="O">O</option>
+                                    <option value="A+">A+</option>
+                                    <option value="A">A</option>
+                                    <option value="B+">B+</option>
+                                    <option value="B">B</option>
+                                    <option value="RA">RA</option>
+                                    <option value="SA">SA</option>
+                                    <option value="W">W</option>
+                                </select>
+                                <label>Open ELective I</label>
+                            </div><br>
+                        </div>
+                        <div class="row">
+                            <h4>Practicals</h4><br>
+                            <div class="input-field col m4 s12 l4">
+                                <select name='s5_lab1'>
+                                    <option value="" disabled selected>Grade</option>
+                                    <option value="O">O</option>
+                                    <option value="A+">A+</option>
+                                    <option value="A">A</option>
+                                    <option value="B+">B+</option>
+                                    <option value="B">B</option>
+                                    <option value="RA">RA</option>
+                                    <option value="SA">SA</option>
+                                    <option value="W">W</option>
+                                </select>
+                                <label>Microprocessors and Microcontrollers Laboratory</label>
+                            </div>
+                            <div class="input-field col m4 s12 l4">
+                                <select name='s5_lab2'>
+                                    <option value="" disabled selected>Grade</option>
+                                    <option value="O">O</option>
+                                    <option value="A+">A+</option>
+                                    <option value="A">A</option>
+                                    <option value="B+">B+</option>
+                                    <option value="B">B</option>
+                                    <option value="RA">RA</option>
+                                    <option value="SA">SA</option>
+                                    <option value="W">W</option>
+                                </select>
+                                <label>Object Oriented Analysis and Design Laboratory</label>
+                            </div>
+                            <div class="input-field col m4 s12 l4">
+                                <select name='s5_lab3' id="select">
+                                    <option value="" disabled selected>Grade</option>
+                                    <option value="O">O</option>
+                                    <option value="A+">A+</option>
+                                    <option value="A">A</option>
+                                    <option value="B+">B+</option>
+                                    <option value="B">B</option>
+                                    <option value="RA">RA</option>
+                                    <option value="SA">SA</option>
+                                    <option value="W">W</option>
+                                </select>
+                                <label>Networks Laboratory</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col m6 s12 l6">
+                                <input type="text" name="sem5" id='mysem5'>
+                                <label for="mysem5">CGPA</label>
+                            </div>
+                            <div class="input-field col m6 s12 l6">
+                                <input type="text" name="arrear5" id='myar5'>
+                                <label for="myar5">Arrear</label>
+                            </div>
+                            <div class="input-field file-field col m12 s12 l12">
+                                <div class="btn-large">
+                                    <span style="color:white">Mark Sheet</span>
+                                    <input type="file" name="s5_file" onchange="S5Size(this)">
+                                </div>
+                                <div class="file-path-wrapper">
+                                    <input class="file-path validate" type="text">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <% } else if((exist.Semester_5.later_entry === 'Yes' && exist.Semester_5.attended === 'No')){ %>
+            <div class="card center-align">
+                <h4><b>FIFTH SEMESTER</b></h4><br>
+                <div class="row">
+                    <div class="row">
+                        <div class="col m6 l6 s12">
+                            <input type="text" name="group9" id='later_sem5' class="validate"
+                                value=<%= exist.Semester_5.later_entry %>>
+                            <label for="later_sem5">Later Entry</label>
+                        </div>
+                        <div class="col m6 l6 s12">
+                            <input type="text" name="group10" id='attended_sem5' class="validate"
+                                value=<%= exist.Semester_5.attended %>>
+                            <label for="attended_sem5">Attended</label>
+                        </div>
+                    </div><br>
+                </div>
+            </div>
+            <%} else { %>
+            <div class="card center-align">
+                <h4><b>FIFTH SEMESTER</b></h4><br>
+                <div class="row">
+                    <div class="input-field col m6 s12 l6">
+                        <input type="text" name="s5_sub1" id='sem5_sub1' class="validate"
+                            value=<%= exist.Semester_5.sub1 %>>
+                        <label for="sem4_sub1">Algebra and Number Theory</label>
+                    </div>
+                    <div class="input-field col m6 s12 l6">
+                        <input type="text" name="s5_sub2" id='sem5_sub2' class="validate"
+                            value=<%= exist.Semester_5.sub2 %>>
+                        <label for="sem5_sub2">Computer Networks</label>
+                    </div>
+                    <div class="input-field col m6 s12 l6">
+                        <input type="text" name="s5_sub3" id='sem5_sub3' class="validate"
+                            value=<%= exist.Semester_5.sub3 %>>
+                        <label for="sem5_sub3">Microprocessors and Microcontrollers</label>
+                    </div>
+                    <div class="input-field col m6 s12 l6">
+                        <input type="text" name="s5_sub4" id='sem5_sub4' class="validate"
+                            value=<%= exist.Semester_5.sub4 %>>
+                        <label for="sem5_sub4">Theory of Computation</label>
+                    </div>
+                    <div class="input-field col m6 s12 l6">
+                        <input type="text" name="s5_sub5" id='sem5_sub5' class="validate"
+                            value=<%= exist.Semester_5.sub5 %>>
+                        <label for="sem5_sub5">Object Oriented Analysis and Design</label>
+                    </div>
+                    <div class="input-field col m6 s12 l6">
+                        <input type="text" name="s5_sub6" id='sem5_sub6' class="validate"
+                            value=<%= exist.Semester_5.sub6 %>>
+                        <input type="text" name="oe_1" id='sem5_oe_1' class="validate" hidden
+                            value=<%= exist.Semester_5.oe_1 %>>
+                        <label for="sem5_oe_1"><%= exist.Semester_5.oe_1 %></label>
+                    </div>
+                    <div class="row">
+                        <h4>Practical</h4><br>
+                        <div class="input-field col m6 s12 l6">
+                            <input type="text" name="s5_lab1" id='sem5_lab1' class="validate"
+                                value=<%= exist.Semester_5.lab1 %>>
+                            <label for="sem5_lab1">Microprocessors and Microcontrollers Laboratory</label>
+                        </div>
+                        <div class="input-field col m6 s12 l6">
+                            <input type="text" name="s5_lab2" id='sem5_lab2' class="validate"
+                                value=<%= exist.Semester_5.lab2 %>>
+                            <label for="sem5_lab2">Object Oriented Analysis and Design Laboratory</label>
+                        </div>
+                        <div class="input-field col m6 s12 l6">
+                            <input type="text" name="s5_lab3" id='sem5_lab3' class="validate"
+                                value=<%= exist.Semester_5.lab3 %>>
+                            <label for="sem5_lab4">Networks Laboratory</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col m6 s12 l6">
+                            <input type="text" name="sem5" id='mysem5' value=<%= exist.Semester_5.gpa %>>
+                            <label for="mysem5">CGPA</label>
+                        </div>
+                        <div class="input-field col m6 s12 l6">
+                            <input type="text" name="arrear5" id='myar5' value=<%= exist.Semester_5.arrear %>>
+                            <label for="myar5">Arrear</label>
+                        </div>
+                        <!-- <div class="input-field col m12 s12 l12">
+                                <img class="materialboxed" width="650" src=<%= exist.Semester_1.sslc_file %>>
+                            </div> -->
+                    </div>
+                    <div class="row">
+                        <div class="col m6 l6 s12">
+                            <input type="text" name="group9" id='later_sem5' class="validate"
+                                value=<%= exist.Semester_5.later_entry %>>
+                            <label for="later_sem5">Later Entry</label>
+                        </div>
+                        <div class="col m6 l6 s12">
+                            <input type="text" name="group10" id='attended_sem5' class="validate"
+                                value=<%= exist.Semester_5.attended %>>
+                            <label for="attended_sem5">Attended</label>
+                        </div>
+                        <div class="col m12 l12 s12">
+                            <input type="text" name="s5_file" id='sem5_file' hidden
+                                value=<%= exist.Semester_5.s5_file %>>
+                        </div>
+                    </div><br>
+                </div>
+            </div>
+            <% } %>
+            <!------------------------------- Semesters - VI----------------------------------->
+
+            <% if((exist.Semester_6.later_entry === null && exist.Semester_6.attended === null) || (exist.Semester_6.later_entry === 'No' && exist.Semester_6.attended === 'No')) { %>
+            <div class="card center-align">
+                <h4><b>SIXTH SEMESTER</b></h4><br>
+                <div class="row">
+                    <div class="row">
+                        <div class="col m6 l6 s12">
+                            <h4>Later Entry</h4>
+                            <label>
+                                <input type="radio" name="group11" class="with-gap yes11-check" value="Yes" />
+                                <span>Yes</span>
+                            </label>
+                            <label>
+                                <input type="radio" name="group11" class="with-gap no11-check" value="No" />
+                                <span>No</span>
+                            </label>
+                        </div>
+                        <div class="col m6 l6 s12">
+                            <h4>Attended</h4>
+                            <label>
+                                <input type="radio" name="group12" class="with-gap yes12-check" value="Yes" />
+                                <span>Yes</span>
+                            </label>
+                            <label>
+                                <input type="radio" name="group12" class="with-gap no12-check" value="No" />
+                                <span>No</span>
+                            </label>
+                        </div>
+                    </div><br>
+                    <div class="sem6">
+                        <div class="input-field col m6 s12 l6">
+                            <select name='s6_sub1'>
+                                <option value="" disabled selected>Grade</option>
+                                <option value="O">O</option>
+                                <option value="A+">A+</option>
+                                <option value="A">A</option>
+                                <option value="B+">B+</option>
+                                <option value="B">B</option>
+                                <option value="RA">RA</option>
+                                <option value="SA">SA</option>
+                                <option value="W">W</option>
+                            </select>
+                            <label>Compiler Design</label>
+                        </div>
+                        <div class="input-field col m6 s12 l6">
+                            <select name='s6_sub2'>
+                                <option value="" disabled selected>Grade</option>
+                                <option value="O">O</option>
+                                <option value="A+">A+</option>
+                                <option value="A">A</option>
+                                <option value="B+">B+</option>
+                                <option value="B">B</option>
+                                <option value="RA">RA</option>
+                                <option value="SA">SA</option>
+                                <option value="W">W</option>
+                            </select>
+                            <label>Internet Programming</label>
+                        </div>
+                        <div class="input-field col m6 s12 l6">
+                            <select name='s6_sub3'>
+                                <option value="" disabled selected>Grade</option>
+                                <option value="O">O</option>
+                                <option value="A+">A+</option>
+                                <option value="A">A</option>
+                                <option value="B+">B+</option>
+                                <option value="B">B</option>
+                                <option value="RA">RA</option>
+                                <option value="SA">SA</option>
+                                <option value="W">W</option>
+                            </select>
+                            <label>Aritifical Intelligence</label>
+                        </div>
+                        <div class="input-field col m6 s12 l6">
+                            <select name='s6_sub4'>
+                                <option value="" disabled selected>Grade</option>
+                                <option value="O">O</option>
+                                <option value="A+">A+</option>
+                                <option value="A">A</option>
+                                <option value="B+">B+</option>
+                                <option value="B">B</option>
+                                <option value="RA">RA</option>
+                                <option value="SA">SA</option>
+                                <option value="W">W</option>
+                            </select>
+                            <label>Mobile Computing</label>
+                        </div>
+                        <div class="input-field col m12 s12 l12">
+                            <select name='s6_sub5'>
+                                <option value="" disabled selected>Grade</option>
+                                <option value="O">O</option>
+                                <option value="A+">A+</option>
+                                <option value="A">A</option>
+                                <option value="B+">B+</option>
+                                <option value="B">B</option>
+                                <option value="RA">RA</option>
+                                <option value="SA">SA</option>
+                                <option value="W">W</option>
+                            </select>
+                            <label>Distributed Systems</label>
+                        </div>
+                        <div class="input-field col m6 s12 l6">
+                            <select name='pe_1'>
+                                <option value="" disabled selected>Choose</option>
+                                <option value="Data Warehousing and Data Mining">Data Warehousing and Data Mining
+                                </option>
+                                <option value="Software Testing">Software Testing</option>
+                                <option value="Embedded Systems">Embedded Systems</option>
+                                <option value="Agile Methodology">Agile Methodology</option>
+                                <option value="Graph Theory and Applications">Graph Theory and Applications</option>
+                                <option value="Digital Signal Processing">Digital Signal Processing</option>
+                                <option value="Itellectual Property Rights">Itellectual Property Rights</option>
+                            </select>
+                            <label>Professional Elective I</label>
+                        </div><br>
+                        <div class="input-field col m6 s12 l6">
+                            <select name='s6_sub6'>
+                                <option value="" disabled selected>Grade</option>
+                                <option value="O">O</option>
+                                <option value="A+">A+</option>
+                                <option value="A">A</option>
+                                <option value="B+">B+</option>
+                                <option value="B">B</option>
+                                <option value="RA">RA</option>
+                                <option value="SA">SA</option>
+                                <option value="W">W</option>
+                            </select>
+                            <label>Professional Elective I</label>
+                        </div><br><br>
+                        <div class="row">
+                            <h4>Practicals</h4><br>
+                            <div class="input-field col m6 s12 l6">
+                                <select name='s6_lab1'>
+                                    <option value="" disabled selected>Grade</option>
+                                    <option value="O">O</option>
+                                    <option value="A+">A+</option>
+                                    <option value="A">A</option>
+                                    <option value="B+">B+</option>
+                                    <option value="B">B</option>
+                                    <option value="RA">RA</option>
+                                    <option value="SA">SA</option>
+                                    <option value="W">W</option>
+                                </select>
+                                <label>Internet Programming Laboratory</label>
+                            </div>
+                            <div class="input-field col m6 s12 l6">
+                                <select name='s6_lab2'>
+                                    <option value="" disabled selected>Grade</option>
+                                    <option value="O">O</option>
+                                    <option value="A+">A+</option>
+                                    <option value="A">A</option>
+                                    <option value="B+">B+</option>
+                                    <option value="B">B</option>
+                                    <option value="RA">RA</option>
+                                    <option value="SA">SA</option>
+                                    <option value="W">W</option>
+                                </select>
+                                <label>Mobile Application Development Laboratory</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col m12 s12 l12">
+                                <div class="row">
+                                    <h5>Mini Project</h5><br>
+                                    <div class="project-details">
+                                        <div class="input-field col l12 s12">
+                                            <input type="text" name="mini_head" id='m-head' class="validate">
+                                            <label for="m-head">Project Title</label>
+                                        </div>
+                                        <div class="input-field col l6 s12">
+                                            <input type="number" name="mini_count" id='m-count' class="validate">
+                                            <label for="m-count">Number of Members</label>
+                                        </div>
+                                        <div class="input-field col l6 s12">
+                                            <textarea class="materialize-textarea" data-length="30" class="validate"
+                                                name="m_name_team" id='m_team'></textarea>
+                                            <label for="m_team">Team Members Name</label>
+                                        </div>
+                                        <div class="input-field col s12 l12">
+                                            <textarea class="materialize-textarea" data-length="300" class="validate"
+                                                name="m_description" id='m_proj_description'></textarea>
+                                            <label for="m_proj_description">Description</label>
+                                        </div>
+                                        <div class="input-field col m12 l12 s12">
+                                            <input type="text" name="mini_remark" id='m-remark' class="validate">
+                                            <label for="m-remark">Remarks</label>
+                                        </div>
+                                    </div>
+                                </div><br>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col m6 s12 l6">
+                                <input type="text" name="sem6" id='mysem6'>
+                                <label for="mysem6">CGPA</label>
+                            </div>
+                            <div class="input-field col m6 s12 l6">
+                                <input type="text" name="arrear6" id='myar6'>
+                                <label for="myar6">Arrear</label>
+                            </div>
+                            <div class="input-field file-field col m12 s12 l12">
+                                <div class="btn-large">
+                                    <span style="color:white">Mark Sheet</span>
+                                    <input type="file" name="s6_file" onchange="S6Size(this)">
+                                </div>
+                                <div class="file-path-wrapper">
+                                    <input class="file-path validate" type="text">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <% } else if((exist.Semester_6.later_entry === 'Yes' && exist.Semester_6.attended === 'No')){ %>
+            <div class="card center-align">
+                <h4><b>SIXTH SEMESTER</b></h4><br>
+                <div class="row">
+                    <div class="col m6 l6 s12">
+                        <input type="text" name="group11" id='later_sem6' class="validate"
+                            value=<%= exist.Semester_6.later_entry %>>
+                        <label for="later_sem6">Later Entry</label>
+                    </div>
+                    <div class="col m6 l6 s12">
+                        <input type="text" name="group12" id='attended_sem6' class="validate"
+                            value=<%= exist.Semester_6.attended %>>
+                        <label for="attended_sem6">Attended</label>
+                    </div>
+                </div>
+            </div>
+            <%} else { %>
+            <div class="card center-align">
+                <h4><b>SIXTH SEMESTER</b></h4><br>
+                <div class="row">
+                    <div class="input-field col m6 s12 l6">
+                        <input type="text" name="s6_sub1" id='sem6_sub1' class="validate"
+                            value=<%= exist.Semester_6.sub1 %>>
+                        <label for="sem6_sub1">Compiler Design</label>
+                    </div>
+                    <div class="input-field col m6 s12 l6">
+                        <input type="text" name="s6_sub2" id='sem6_sub2' class="validate"
+                            value=<%= exist.Semester_6.sub2 %>>
+                        <label for="sem6_sub2">Internet Programming</label>
+                    </div>
+                    <div class="input-field col m6 s12 l6">
+                        <input type="text" name="s6_sub3" id='sem6_sub3' class="validate"
+                            value=<%= exist.Semester_6.sub3 %>>
+                        <label for="sem6_sub3">Aritifical Intelligence</label>
+                    </div>
+                    <div class="input-field col m6 s12 l6">
+                        <input type="text" name="s6_sub4" id='sem6_sub4' class="validate"
+                            value=<%= exist.Semester_6.sub4 %>>
+                        <label for="sem6_sub4">Mobile Computing</label>
+                    </div>
+                    <div class="input-field col m6 s12 l6">
+                        <input type="text" name="s6_sub5" id='sem6_sub5' class="validate"
+                            value=<%= exist.Semester_6.sub5 %>>
+                        <label for="sem6_sub5">Distributed Systems</label>
+                    </div>
+                    <div class="input-field col m6 s12 l6">
+                        <input type="text" name="s6_sub6" id='sem6_sub6' class="validate"
+                            value=<%= exist.Semester_6.sub6 %>>
+                        <input type="text" name="pe_1" class="validate" hidden value=<%= exist.Semester_6.pe_1 %>>
+                        <label for="sem6_pe_1"><%= exist.Semester_6.pe_1 %></label>
+                    </div>
+                    <div class="row">
+                        <h4>Practical</h4><br>
+                        <div class="input-field col m6 s12 l6">
+                            <input type="text" name="s6_lab1" id='sem6_lab1' class="validate"
+                                value=<%= exist.Semester_6.lab1 %>>
+                            <label for="sem6_lab1">Internet Programming Laboratory</label>
+                        </div>
+                        <div class="input-field col m6 s12 l6">
+                            <input type="text" name="s6_lab2" id='sem6_lab2' class="validate"
+                                value=<%= exist.Semester_6.lab2 %>>
+                            <label for="sem6_lab2">Mobile Application Development Laboratory</label>
+                        </div>
+                        <div class="input-field col m12 s12 l12">
+                            <div class="row">
+                                <h5>Mini Project</h5><br>
+                                <div class="project-details">
+                                    <div class="input-field col l12 s12">
+                                        <input type="text" name="mini_head" id='m-head' class="validate"
+                                            value=<%= exist.mini_project.mini_head %>>
+                                        <label for="m-head">Project Title</label>
+                                    </div>
+                                    <div class="input-field col l6 s12">
+                                        <input type="number" name="mini_count" id='m-count' class="validate"
+                                            value=<%= exist.mini_project.mini_count %>>
+                                        <label for="m-count">Number of Members</label>
+                                    </div>
+                                    <div class="input-field col l6 s12">
+                                        <input class="text" class="validate" name="m_name_team" id='m_team'
+                                            value=<%= exist.mini_project.m_name_team %>>
+                                        <label for="m_team">Team Members Name</label>
+                                    </div>
+                                    <div class="input-field col s12 l12">
+                                        <input class="text" class="validate" name="m_description"
+                                            id='m_proj_description' value=<%= exist.mini_project.m_description %>>
+                                        <label for="m_proj_description">Description</label>
+                                    </div>
+                                    <div class="input-field col m12 l12 s12">
+                                        <input type="text" name="mini_remark" id='m-remark' class="validate"
+                                            value=<%= exist.mini_project.mini_remark %>>
+                                        <label for="m-remark">Remarks</label>
+                                    </div>
+                                </div>
+                            </div><br>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col m6 s12 l6">
+                            <input type="text" name="sem6" id='mysem6' value=<%= exist.Semester_6.gpa %>>
+                            <label for="mysem6">CGPA</label>
+                        </div>
+                        <div class="input-field col m6 s12 l6">
+                            <input type="text" name="arrear6" id='myar6' value=<%= exist.Semester_6.arrear %>>
+                            <label for="myar6">Arrear</label>
+                        </div>
+                        <!-- <div class="input-field col m12 s12 l12">
+                                                                        <img class="materialboxed" width="650" src=<%= exist.Semester_1.sslc_file %>>
+                                                                    </div> -->
+
+                    </div>
+                    <div class="row">
+                        <div class="col m6 l6 s12">
+                            <input type="text" name="group11" id='later_sem6' class="validate"
+                                value=<%= exist.Semester_6.later_entry %>>
+                            <label for="later_sem6">Later Entry</label>
+                        </div>
+                        <div class="col m6 l6 s12">
+                            <input type="text" name="group12" id='attended_sem6' class="validate"
+                                value=<%= exist.Semester_6.attended %>>
+                            <label for="attended_sem6">Attended</label>
+                        </div>
+                        <div class="col m12 l12 s12">
+                            <input type="text" name="s6_file" id='sem6_file' hidden
+                                value=<%= exist.Semester_6.s6_file %>>
+                        </div>
+                    </div><br>
+                </div>
+            </div>
+            <% } %>
+
+            <!------------------------------- Semesters - VII----------------------------------->
+            <% if((exist.Semester_7.attended === null) || (exist.Semester_7.attended === 'No')) { %>
+            <div class="card center-align">
+                <h4><b>SEVENTH SEMESTER</b></h4><br>
+                <div class="row">
+                    <div class="row">
+                        <div class="col m12 l12 s12">
+                            <h4>Attended</h4>
+                            <label>
+                                <input type="radio" name="group13" class="with-gap yes13-check" value="Yes" />
+                                <span>Yes</span>
+                            </label>
+                            <label>
+                                <input type="radio" name="group13" class="with-gap no13-check" value="No" />
+                                <span>No</span>
+                            </label>
+                        </div>
+                    </div><br>
+                    <div class="sem7">
+                        <div class="input-field col m6 s12 l6">
+                            <select name='s7_sub1'>
+                                <option value="" disabled selected>Grade</option>
+                                <option value="O">O</option>
+                                <option value="A+">A+</option>
+                                <option value="A">A</option>
+                                <option value="B+">B+</option>
+                                <option value="B">B</option>
+                                <option value="RA">RA</option>
+                                <option value="SA">SA</option>
+                                <option value="W">W</option>
+                            </select>
+                            <label>Principles of Management</label>
+                        </div>
+                        <div class="input-field col m6 s12 l6">
+                            <select name='s7_sub2'>
+                                <option value="" disabled selected>Grade</option>
+                                <option value="O">O</option>
+                                <option value="A+">A+</option>
+                                <option value="A">A</option>
+                                <option value="B+">B+</option>
+                                <option value="B">B</option>
+                                <option value="RA">RA</option>
+                                <option value="SA">SA</option>
+                                <option value="W">W</option>
+                            </select>
+                            <label>Cryptography and Networks Security</label>
+                        </div>
+                        <div class="input-field col m12 s12 l12">
+                            <select name='s7_sub3'>
+                                <option value="" disabled selected>Grade</option>
+                                <option value="O">O</option>
+                                <option value="A+">A+</option>
+                                <option value="A">A</option>
+                                <option value="B+">B+</option>
+                                <option value="B">B</option>
+                                <option value="RA">RA</option>
+                                <option value="SA">SA</option>
+                                <option value="W">W</option>
+                            </select>
+                            <label>Cloud Computing</label>
+                        </div>
+                        <div class="input-field col m6 s12 l6">
+                            <select name='pe_2'>
+                                <option value="" disabled selected>Choose</option>
+                                <option value="Big Data Analysis">Big Data Analysis</option>
+                                <option value="Machine Learning Techniques">Machine Learning Techniques</option>
+                                <option value="Computer Graphics and Multimedia">Computer Graphics and Multimedia
+                                </option>
+                                <option value="Software Project Management">Software Project Management</option>
+                                <option value="Internet of Things">Internet of Things</option>
+                                <option value="Service Oriented Architecture">Service Oriented Architecture</option>
+                                <option value="Total Quality Management">Total Quality Management</option>
+                            </select>
+                            <label>Professional Elective II</label>
+                        </div><br>
+                        <div class="input-field col m6 s12 l6">
+                            <select name='s7_sub4'>
+                                <option value="" disabled selected>Grade</option>
+                                <option value="O">O</option>
+                                <option value="A+">A+</option>
+                                <option value="A">A</option>
+                                <option value="B+">B+</option>
+                                <option value="B">B</option>
+                                <option value="RA">RA</option>
+                                <option value="SA">SA</option>
+                                <option value="W">W</option>
+                            </select>
+                            <label>Professional Elective II</label>
+                        </div>
+                        <div class="input-field col m6 s12 l6">
+                            <select name='pe_3'>
+                                <option value="" disabled selected>Choose</option>
+                                <option value="Multi-core Architecture and Programming">Multi-core Architecture and
+                                    Programming</option>
+                                <option value="Human Computer Interaction">Human Computer Interaction</option>
+                                <option value="C# and .Net Programming">C# and .Net Programming</option>
+                                <option value="Wireless Adhoc and Sensor Networks">Wireless Adhoc and Sensor Networks
+                                </option>
+                                <option value="Foundation Skills in Integrated Product Development">Foundation Skills in
+                                    Integrated Product Development</option>
+                                <option value="Human Rights">Human Rights</option>
+                                <option value="Disaster Management">Disaster Management</option>
+                            </select>
+                            <label>Professional Elective III</label>
+                        </div><br>
+                        <div class="input-field col m6 s12 l6">
+                            <select name='s7_sub5'>
+                                <option value="" disabled selected>Grade</option>
+                                <option value="O">O</option>
+                                <option value="A+">A+</option>
+                                <option value="A">A</option>
+                                <option value="B+">B+</option>
+                                <option value="B">B</option>
+                                <option value="RA">RA</option>
+                                <option value="SA">SA</option>
+                                <option value="W">W</option>
+                            </select>
+                            <label>Professional Elective III</label>
+                        </div>
+                        <div class="input-field col m6 s12 l6">
+                            <select name='oe_2'>
+                                <option value="" disabled selected>Choose</option>
+                                <option value="Multi-core Architecture and Programming">Multi-core Architecture and
+                                    Programming</option>
+                                <option value="Human Computer Interaction">Human Computer Interaction</option>
+                                <option value="C# and .Net Programming">C# and .Net Programming</option>
+                                <option value="Wireless Adhoc and Sensor Networks">Wireless Adhoc and Sensor
+                                    Networks</option>
+                                <option value="Foundation Skills in Integrated Product Development">Foundation
+                                    Skills in Integrated Product Development</option>
+                                <option value="Human Rights">Human Rights</option>
+                                <option value="Disaster Management">Disaster Management</option>
+                            </select>
+                            <label>Open Elective II</label>
+                        </div><br>
+                        <div class="input-field col m6 s12 l6">
+                            <select name='s7_sub6'>
+                                <option value="" disabled selected>Grade</option>
+                                <option value="O">O</option>
+                                <option value="A+">A+</option>
+                                <option value="A">A</option>
+                                <option value="B+">B+</option>
+                                <option value="B">B</option>
+                                <option value="RA">RA</option>
+                                <option value="SA">SA</option>
+                                <option value="W">W</option>
+                            </select>
+                            <label>Open Elective II</label>
+                        </div><br>
+                        <div class="row">
+                            <h4>Practicals</h4><br>
+                            <div class="input-field col m6 s12 l6">
+                                <select name='s7_lab1'>
+                                    <option value="" disabled selected>Grade</option>
+                                    <option value="O">O</option>
+                                    <option value="A+">A+</option>
+                                    <option value="A">A</option>
+                                    <option value="B+">B+</option>
+                                    <option value="B">B</option>
+                                    <option value="RA">RA</option>
+                                    <option value="SA">SA</option>
+                                    <option value="W">W</option>
+                                </select>
+                                <label>Cloud Computing Laboratory</label>
+                            </div>
+                            <div class="input-field col m6 s12 l6">
+                                <select name='s7_lab2'>
+                                    <option value="" disabled selected>Grade</option>
+                                    <option value="O">O</option>
+                                    <option value="A+">A+</option>
+                                    <option value="A">A</option>
+                                    <option value="B+">B+</option>
+                                    <option value="B">B</option>
+                                    <option value="RA">RA</option>
+                                    <option value="SA">SA</option>
+                                    <option value="W">W</option>
+                                </select>
+                                <label>Security Laboratory</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col m6 s12 l6">
+                                <input type="text" name="sem7" id='mysem7'>
+                                <label for="mysem7">CGPA</label>
+                            </div>
+                            <div class="input-field col m6 s12 l6">
+                                <input type="text" name="arrear7" id='myar7'>
+                                <label for="myar7">Arrear</label>
+                            </div>
+                            <div class="input-field file-field col m12 s12 l12">
+                                <div class="btn-large">
+                                    <span style="color:white">Mark Sheet</span>
+                                    <input type="file" name="s7_file" onchange="S7Size(this)">
+                                </div>
+                                <div class="file-path-wrapper">
+                                    <input class="file-path validate" type="text">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <%} else { %>
+            <div class="card center-align">
+                <h4><b>SEVENTH SEMESTER</b></h4><br>
+                <div class="row">
+                    <div class="input-field col m6 s12 l6">
+                        <input type="text" name="s7_sub1" id='sem7_sub1' class="validate"
+                            value=<%= exist.Semester_7.sub1 %>>
+                        <label for="sem7_sub1">Principles of Management</label>
+                    </div>
+                    <div class="input-field col m6 s12 l6">
+                        <input type="text" name="s7_sub2" id='sem7_sub2' class="validate"
+                            value=<%= exist.Semester_7.sub2 %>>
+                        <label for="sem7_sub2">Cryptography and Networks Security</label>
+                    </div>
+                    <div class="input-field col m6 s12 l6">
+                        <input type="text" name="s7_sub3" id='sem7_sub3' class="validate"
+                            value=<%= exist.Semester_7.sub3 %>>
+                        <label for="sem7_sub3">Cloud Computing</label>
+                    </div>
+                    <div class="input-field col m6 s12 l6">
+                        <input type="text" name="s7_sub4" id='sem7_sub4' class="validate"
+                            value=<%= exist.Semester_7.sub4 %>>
+                        <input type="text" name="pe_2" class="validate" hidden value=<%= exist.Semester_7.pe_2 %>>
+                        <label for="sem7_sub4"><%= exist.Semester_7.pe_2 %></label>
+                    </div>
+                    <div class="input-field col m6 s12 l6">
+                        <input type="text" name="s7_sub5" id='sem7_sub5' class="validate"
+                            value=<%= exist.Semester_7.sub5 %>>
+                        <input type="text" name="pe_3" class="validate" hidden value=<%= exist.Semester_7.pe_3 %>>
+                        <label for="sem7_sub5"><%= exist.Semester_7.pe_3 %></label>
+                    </div>
+                    <div class="input-field col m6 s12 l6">
+                        <input type="text" name="s7_sub6" id='sem7_sub6' class="validate"
+                            value=<%= exist.Semester_7.sub6 %>>
+                        <input type="text" name="oe_2" class="validate" hidden value=<%= exist.Semester_7.oe_2 %>>
+                        <label for="sem7_sub6"><%= exist.Semester_7.oe_2 %></label>
+                    </div>
+                    <div class="row">
+                        <h4>Practical</h4><br>
+                        <div class="input-field col m6 s12 l6">
+                            <input type="text" name="s7_lab1" id='sem7_lab1' class="validate"
+                                value=<%= exist.Semester_7.lab1 %> />
+                            <label for="sem7_lab1">Cloud Computing Laboratory</label>
+                        </div>
+                        <div class="input-field col m6 s12 l6">
+                            <input type="text" name="s7_lab2" id='sem7_lab2' class="validate"
+                                value=<%= exist.Semester_7.lab2 %> />
+                            <label for="sem7_lab2">Security Laboratory</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col m6 s12 l6">
+                            <input type="text" name="sem7" id='mysem7' value=<%= exist.Semester_7.gpa %>>
+                            <label for="mysem7">CGPA</label>
+                        </div>
+                        <div class="input-field col m6 s12 l6">
+                            <input type="text" name="arrear7" id='myar7' value=<%= exist.Semester_7.arrear %>>
+                            <label for="myar7">Arrear</label>
+                        </div>
+                        <!-- <div class="input-field col m12 s12 l12">
+                            <img class="materialboxed" width="650" src=<%= exist.Semester_1.sslc_file %>>
+                        </div> -->
+
+                    </div>
+                    <div class="row">
+                        <div class="col m6 l6 s12">
+                            <input type="text" name="group13" id='attended_sem7' class="validate"
+                                value=<%= exist.Semester_7.attended %>>
+                            <label for="attended_sem7">Attended</label>
+                        </div>
+                        <div class="col m12 l12 s12">
+                            <input type="text" name="s7_file" id='sem7_file' hidden
+                                value=<%= exist.Semester_7.s7_file %>>
+                        </div>
+                    </div><br>
+                </div>
+            </div>
+            <% } %>
+            <!------------------------------- Semesters - VIII----------------------------------->
+
+            <% if((exist.Semester_8.attended === null) || (exist.Semester_8.attended === 'No')) { %>
+            <div class="card center-align">
+                <h4><b>EIGTH SEMESTER</b></h4><br>
+                <div class="row">
+                    <div class="row">
+                        <div class="col m12 l12 s12">
+                            <h4>Attended</h4>
+                            <label>
+                                <input type="radio" name="group14" class="with-gap yes14-check" value="Yes" />
+                                <span>Yes</span>
+                            </label>
+                            <label>
+                                <input type="radio" name="group14" class="with-gap no14-check" value="No" />
+                                <span>No</span>
+                            </label>
+                        </div>
+                    </div><br>
+                    <div class="sem8">
+                        <div class="row">
+                            <div class="input-field col m6 s12 l6">
+                                <select name='pe_4'>
+                                    <option value="" disabled selected>Choose</option>
+                                    <option value="Digital Image Processing">Digital Image Processing</option>
+                                    <option value="Social Network Analysis">Social Network Analysis</option>
+                                    <option value="Information Security">Information Security</option>
+                                    <option value="Software Defined Networks">Software Defined Networks</option>
+                                    <option value="Cyber Forensics">Cyber Forensics</option>
+                                    <option value="Soft Computing">Soft Computing</option>
+                                    <option value="Professional Ethics and Engineering">Professional Ethics and
+                                        Engineering</option>
+                                </select>
+                                <label>Professional Elective IV</label>
+                            </div>
+                            <div class="input-field col m6 s12 l6">
+                                <select name='s8_sub1'>
+                                    <option value="" disabled selected>Grade</option>
+                                    <option value="O">O</option>
+                                    <option value="A+">A+</option>
+                                    <option value="A">A</option>
+                                    <option value="B+">B+</option>
+                                    <option value="B">B</option>
+                                    <option value="RA">RA</option>
+                                    <option value="SA">SA</option>
+                                    <option value="W">W</option>
+                                </select>
+                                <label>Professional Elective IV</label>
+                            </div>
+                            <div class="input-field col m6 s12 l6">
+                                <select name='pe_5'>
+                                    <option value="" disabled selected>Choose</option>
+                                    <option value="Information Retrieval Techniques">Information Retrieval Techniques
+                                    </option>
+                                    <option value="Green Computing">Green Computing</option>
+                                    <option value="GPU Architecture and Programming">GPU Architecture and Programming
+                                    </option>
+                                    <option value="Natural Language Processing">Natural Language Processing</option>
+                                    <option value="Parallel Algorithms">Parallel Algorithms</option>
+                                    <option value="Speech Processing">Speech Processing</option>
+                                    <option value="Fundamentals of Nano Science">Fundamentals of Nano Science
+                                    </option>
+                                </select>
+                                <label>Professional Elective V</label>
+                            </div><br>
+                            <div class="input-field col m6 s12 l6">
+                                <select name='s8_sub2'>
+                                    <option value="" disabled selected>Grade</option>
+                                    <option value="O">O</option>
+                                    <option value="A+">A+</option>
+                                    <option value="A">A</option>
+                                    <option value="B+">B+</option>
+                                    <option value="B">B</option>
+                                    <option value="RA">RA</option>
+                                    <option value="SA">SA</option>
+                                    <option value="W">W</option>
+                                </select>
+                                <label>Professional Elective V</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <h5>Project Work</h5><br>
+                            <div class="project-details">
+                                <div class="input-field col l12 s12">
+                                    <input type="text" name="project_head" id='p-head' class="validate">
+                                    <label for="p-head">Project Title</label>
+                                </div>
+                                <div class="input-field col l6 s12">
+                                    <input type="number" name="project_count" id='p-count' class="validate">
+                                    <label for="p-count">Number of Members</label>
+                                </div>
+                                <div class="input-field col l6 s12">
+                                    <textarea class="materialize-textarea" data-length="30" class="validate"
+                                        name="name_team" id='team_name'></textarea>
+                                    <label for="team_name">Team Members Name</label>
+                                </div>
+                                <div class="input-field col s12 l12">
+                                    <textarea class="materialize-textarea" data-length="300" class="validate"
+                                        name="project_description" id='p_description'></textarea>
+                                    <label for="p_description">Description</label>
+                                </div>
+                                <div class="input-field col m12 l12 s12">
+                                    <input type="text" name="project_remark" id='p-remark' class="validate">
+                                    <label for="p-remark">Remarks</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col m6 s12 l6">
+                                <input type="text" name="sem8" id='mysem8'>
+                                <label for="mysem8">CGPA</label>
+                            </div>
+                            <div class="input-field col m6 s12 l6">
+                                <input type="text" name="arrear8" id='myar8'>
+                                <label for="myar8">Arrear</label>
+                            </div>
+                            <div class="input-field file-field col m12 s12 l12">
+                                <div class="btn-large">
+                                    <span style="color:white">Mark Sheet</span>
+                                    <input type="file" name="s8_file" onchange="S8Size(this)">
+                                </div>
+                                <div class="file-path-wrapper">
+                                    <input class="file-path validate" type="text">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <%} else { %>
+            <div class="card center-align">
+                <h4><b>EIGTH SEMESTER</b></h4><br>
+                <div class="row">
+                    <div class="input-field col m6 s12 l6">
+                        <input type="text" name="s8_sub1" id='sem8_sub1' class="validate"
+                            value=<%= exist.Semester_8.sub1 %> />
+                        <input type="text" name="pe_4" class="validate" hidden value=<%= exist.Semester_8.pe_4 %>>
+                        <label for="sem8_sub1"><%= exist.Semester_8.pe_4 %></label>
+                    </div>
+                    <div class="input-field col m6 s12 l6">
+                        <input type="text" name="s8_sub2" id='sem8_sub2' class="validate"
+                            value=<%= exist.Semester_8.sub2 %> />
+                        <input type="text" name="pe_5" class="validate" hidden value=<%= exist.Semester_8.pe_5 %>>
+                        <label for="sem8_sub2"><%= exist.Semester_8.pe_5 %></label>
+                    </div>
+                    <div class="row">
+                        <h5>Project Work</h5><br>
+                        <div class="project-details">
+                            <div class="input-field col l12 s12">
+                                <input type="text" name="project_head" id='p-head' class="validate"
+                                    value=<%= exist.project_work.project_head %> />
+                                <label for="p-head">Project Title</label>
+                            </div>
+                            <div class="input-field col l6 s12">
+                                <input type="number" name="project_count" id='p-count' class="validate"
+                                    value=<%= exist.project_work.project_count %>>
+                                <label for="p-count">Number of Members</label>
+                            </div>
+                            <div class="input-field col l6 s12">
+                                <input class="text" class="validate" name="name_team" id='team_name'
+                                    value=<%= exist.project_work.name_team %> />
+                                <label for="team_name">Team Members Name</label>
+                            </div>
+                            <div class="input-field col s12 l12">
+                                <input class="text" class="validate" name="project_description" id='p_description'
+                                    value=<%= exist.project_work.project_description %> />
+                                <label for="p_description">Description</label>
+                            </div>
+                            <div class="input-field col m12 l12 s12">
+                                <input type="text" name="project_remark" id='p-remark' class="validate"
+                                    value=<%= exist.project_work.project_remark %> />
+                                <label for="p-remark">Remarks</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col m6 s12 l6">
+                            <input type="text" name="sem8" id='mysem8' value=<%= exist.Semester_8.gpa %>>
+                            <label for="mysem8">CGPA</label>
+                        </div>
+                        <div class="input-field col m6 s12 l6">
+                            <input type="text" name="arrear8" id='myar8' value=<%= exist.Semester_8.arrear %>>
+                            <label for="myar8">Arrear</label>
+                        </div>
+                        <!-- <div class="input-field col m12 s12 l12">
+                            <img class="materialboxed" width="650" src=<%= exist.Semester_1.sslc_file %>>
+                        </div> -->
+
+                    </div>
+                    <div class="row">
+                        <div class="col m6 l6 s12">
+                            <input type="text" name="group14" id='attended_sem8' class="validate"
+                                value=<%= exist.Semester_8.attended %>>
+                            <label for="attended_sem8">Attended</label>
+                        </div>
+                        <div class="col m12 l12 s12">
+                            <input type="text" name="s8_file" id='sem8_file' hidden
+                                value=<%= exist.Semester_8.s8_file %>>
+                        </div>
+                    </div><br>
+                </div>
+            </div>
+            <% } %>
+            <button type='submit' class="waves-effect waves-light btn-large send">Next</button>
+        </div>
+    </form>
+</div>
+</div>
+<script>
+    function S8Size(file) {
+        var FileSize = Math.ceil((file.files[0].size / 1024)); // in MB
+        if (FileSize > 60) {
+            swal({
+                title: "File Size must be less than 60KB",
+                icon: "error",
+            });
+            // $(file).val(''); //for clearing with Jquery
+        } else {
+
+        }
+    }
+
+    function S7Size(file) {
+        var FileSize = Math.ceil((file.files[0].size / 1024)); // in MB
+        if (FileSize > 60) {
+            swal({
+                title: "File Size must be less than 60KB",
+                icon: "error",
+            });
+            // $(file).val(''); //for clearing with Jquery
+        } else {
+
+        }
+    }
+
+    function S6Size(file) {
+        var FileSize = Math.ceil((file.files[0].size / 1024)); // in MB
+        if (FileSize > 60) {
+            swal({
+                title: "File Size must be less than 60KB",
+                icon: "error",
+            });
+            // $(file).val(''); //for clearing with Jquery
+        } else {
+
+        }
+    }
+
+    function S5Size(file) {
+        var FileSize = Math.ceil((file.files[0].size / 1024)); // in MB
+        if (FileSize > 60) {
+            swal({
+                title: "File Size must be less than 60KB",
+                icon: "error",
+            });
+            // $(file).val(''); //for clearing with Jquery
+        } else {
+
+        }
+    }
+
+    function S4Size(file) {
+        var FileSize = Math.ceil((file.files[0].size / 1024)); // in MB
+        if (FileSize > 60) {
+            swal({
+                title: "File Size must be less than 60KB",
+                icon: "error",
+            });
+            // $(file).val(''); //for clearing with Jquery
+        } else {
+
+        }
+    }
+
+    function S3Size(file) {
+        var FileSize = Math.ceil((file.files[0].size / 1024)); // in MB
+        if (FileSize > 60) {
+            swal({
+                title: "File Size must be less than 60KB",
+                icon: "error",
+            });
+            // $(file).val(''); //for clearing with Jquery
+        } else {
+
+        }
+    }
+
+    function S2Size(file) {
+        var FileSize = Math.ceil((file.files[0].size / 1024)); // in MB
+        if (FileSize > 60) {
+            swal({
+                title: "File Size must be less than 60KB",
+                icon: "error",
+            });
+            // $(file).val(''); //for clearing with Jquery
+        } else {
+
+        }
+    }
+
+    function S1Size(file) {
+        var FileSize = Math.ceil((file.files[0].size / 1024)); // in MB
+        if (FileSize > 60) {
+            swal({
+                title: "File Size must be less than 60KB",
+                icon: "error",
+            });
+            // $(file).val(''); //for clearing with Jquery
+        } else {
+
+        }
+    }
+    $(document).ready(function () {
+        $('.sem1').hide()
+        $("input[type='radio']").change(() => {
+            if ($(".yes1-check").is(':checked') && $(".no2-check").is(':checked')) {
+                $('.sem1').hide()
+            } else if ($(".no1-check").is(':checked') && $(".yes2-check").is(':checked')) {
+                $('.sem1').show()
+            }
+        })
+    })
+    $(document).ready(function () {
+        $('.sem2').hide()
+        $("input[type='radio']").change(() => {
+            if ($(".yes3-check").is(':checked') && $(".no4-check").is(':checked')) {
+                $('.sem2').hide()
+            } else if ($(".no3-check").is(':checked') && $(".yes4-check").is(':checked')) {
+                $('.sem2').show()
+            }
+        })
+    })
+    $(document).ready(function () {
+        $('.sem3').hide()
+        $("input[type='radio']").change(() => {
+            if ($(".yes5-check").is(':checked') && $(".no6-check").is(':checked')) {
+                $('.sem3').hide()
+            } else if ($(".no5-check").is(':checked') && $(".yes6-check").is(':checked')) {
+                $('.sem3').show()
+            }
+        })
+    })
+    $(document).ready(function () {
+        $('.sem4').hide()
+        $("input[type='radio']").change(() => {
+            if ($(".yes7-check").is(':checked') && $(".no8-check").is(':checked')) {
+                $('.sem4').hide()
+            } else if ($(".no7-check").is(':checked') && $(".yes8-check").is(':checked')) {
+                $('.sem4').show()
+            }
+        })
+    })
+    $(document).ready(function () {
+        $('.sem5').hide()
+        $("input[type='radio']").change(() => {
+            if ($(".yes9-check").is(':checked') && $(".no10-check").is(':checked')) {
+                $('.sem5').hide()
+            } else if ($(".no9-check").is(':checked') && $(".yes10-check").is(':checked')) {
+                $('.sem5').show()
+            }
+        })
+    })
+    $(document).ready(function () {
+        $('.sem6').hide()
+        $("input[type='radio']").change(() => {
+            if ($(".yes11-check").is(':checked') && $(".no12-check").is(':checked')) {
+                $('.sem6').hide()
+            } else if ($(".no11-check").is(':checked') && $(".yes12-check").is(':checked')) {
+                $('.sem6').show()
+            }
+        })
+    })
+    $(document).ready(function () {
+        $('.sem7').hide()
+        $("input[type='radio']").change(() => {
+            if ($(".yes13-check").is(':checked')) {
+                $('.sem7').show()
+            } else if ($(".no13-check").is(':checked')) {
+                $('.sem7').hide()
+            }
+        })
+    })
+    $(document).ready(function () {
+        $('.sem8').hide()
+        $("input[type='radio']").change(() => {
+            if ($(".yes14-check").is(':checked')) {
+                $('.sem8').show()
+            } else if ($(".no14-check").is(':checked')) {
+                $('.sem8').hide()
+            }
+        })
+    })
+    $(document).ready(function () {
+        $('input#input_text, textarea#m_team').characterCounter();
+    });
+    $(document).ready(function () {
+        $('input#input_text, textarea#m_proj_description').characterCounter();
+    });
+    $(document).ready(function () {
+        $('input#input_text, textarea#team_name').characterCounter();
+    });
+    $(document).ready(function () {
+        $('input#input_text, textarea#p_description').characterCounter();
+    });
+    $(document).ready(function () {
+        swal({
+            title: "Please, fill out the details more carefully. Once, You submit your Marks, you can't change it anymore.",
+            icon: "info",
+        });
+    })
+</script>
+<!------------------------------- Semesters ----------------------------------->
+
+
+<%- include('partials/footer.ejs'); -%>

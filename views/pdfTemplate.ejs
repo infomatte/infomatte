@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>PdfGen</title>
+    <link rel="stylesheet" href="css/materialize.css">
+    <script src='js/materialize.js'></script>
+</head>
+<style>
+body{
+     padding: 20px;
+     font-size: 14px;
+}
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border: 2px solid rgb(0, 0, 0)
+}
+table, td, th {  
+    border: 1px solid rgb(0, 0, 0);
+    text-align: left;
+}
+hr{
+    width: 100%;
+    border: 1px solid black;
+}
+/* .home-logo{
+    width: 5rem;
+    height: 5rem;
+} */
+table {
+    border-collapse: collapse;
+    width: 90%;
+    margin: 5% auto;
+}
+th, td {
+    padding: 10px;
+}
+</style>
+<body>
+    <!-- <img src="img/AU.png" class='home-logo' alt='img'> -->
+    <br><br><br><br>
+                <table class="responsive-table">
+                        <thead>
+                          <tr>
+                              <th>Categories</th>
+                              <th>Information</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Student Name</td>
+                                <td><%= profile.name %></td>
+                            </tr>
+                                <tr>
+                                  <td>Nad ID</td>
+                                  <td><%= profile.nad %></td>
+                                </tr>
+                                <tr>
+                                  <td>Email</td>
+                                  <td><%= profile.mail %></td>
+                                </tr>
+                                <tr>
+                                  <td>Date of Birth</td>
+                                  <td><%= profile.dob %></td>
+                                </tr>
+                                <tr>
+                                    <td>Nationality</td>
+                                    <td><%= profile.nationality %></td>
+                                </tr>
+                                <tr>
+                                    <td>Mobile Number</td>
+                                    <td><%= profile.phone_no %></td>
+                                </tr>
+                                <tr>
+                                    <td>Address</td>
+                                    <td><%= profile.address %></td>
+                                </tr>
+                                <% if(profile.later_entry === 'Yes') { %>
+                                    <tr>
+                                        <td>Later Entry</td>
+                                        <td><%= profile.later_entry %></td>
+                                    </tr>
+                                    <% } else { %>
+                                <tr>
+                                    <td>SSLC Mark</td>
+                                    <td><%= profile.sslc %></td>
+                                </tr>
+                                <tr>
+                                    <td>SSLC CutOff</td>
+                                    <td><%= profile.sslc_cutoff %>%</td>
+                                </tr>
+                                <tr>
+                                    <td>HSC</td>
+                                    <td><%= profile.hsc %></td>
+                                </tr>
+                                <tr>
+                                    <td>HSC CutOff</td>
+                                    <td><%= profile.hsc_cutoff %>%</td>
+                                </tr>
+                                <% } %>
+                                
+                                <tr>
+                                    <td>Branch</td>
+                                    <td><%= profile.branch %></td>
+                                </tr>
+                                <tr>
+                                    <td>Year of Joining</td>
+                                    <td><%= profile.yearofJoining %></td>
+                                </tr>
+                                <tr>
+                                    <td>Regulation</td>
+                                    <td><%= profile.regulation %></td>
+                                </tr>
+                            </tbody>
+                        </table>                 
+                        <br><br><br><br><br><br><br><br>
+                    <h2>SEMESTER SCORES</h2>
+                    <% if(profile.Semester_1.later_entry === 'No' && profile.Semester_1.attended === 'Yes') { %>
+                        <table>
+                                <thead>
+                                  <tr>
+                                      <th>Semester</th>
+                                      <th>Subjects</th>
+                                      <th>Grade</th>
+                                      <th>CGPA</th>
+                                      <th>Arrear</th>
+                                  </tr>
+                                </thead>
+                                    <tbody>
+                                            <tr>
+                                              <td rowspan="9"><b>Semester I</b></td>
+                                              <td>Communicative English  </td>
+                                              <td><%= profile.Semester_1.sub1 %></td>
+                                              <td rowspan="9"><%= profile.Semester_1.gpa %></td>
+                                              <td rowspan="9"><%= profile.Semester_1.arrear %></td> 
+                                            </tr>
+                                            <tr>
+                                              <td>Engineering Mathematics - I </td>
+                                              <td><%= profile.Semester_1.sub2 %></td>
+                                             
+                                            </tr>
+                                            <tr>
+                                                <td>Engineering Graphics  </td>
+                                                <td><%= profile.Semester_1.sub3 %></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Engineering Physics </td>
+                                                <td><%= profile.Semester_1.sub4 %></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Engineering Chemistry </td>
+                                                <td><%= profile.Semester_1.sub5 %></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Problem Solving and Python Programming</td>
+                                                <td><%= profile.Semester_1.sub6 %></td>
+                                            </tr>
+                                            <tr>
+                                                <td><b>Practicals</b></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Problem Solving and Python Programming Laboratory </td>
+                                                <td><%= profile.Semester_1.lab1 %></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Physics and Chemistry Laboratory </td>
+                                                <td><%= profile.Semester_1.lab2 %></td>
+                                            </tr>
+                                            <% } else if (profile.Semester_1.later_entry === 'Yes' && profile.Semester_1.attended === 'No'){ %>
+                                                <table>
+                                                    <thead>
+                                                      <tr>
+                                                          <th>Semester</th>
+                                                          <th>Subjects</th>
+                                                          <th>Grade</th>
+                                                          <th>CGPA</th>
+                                                          <th>Arrear</th>
+                                                      </tr>
+                                                    </thead>
+                                                        <tbody>
+                                                <tr>
+                                                    <td><b>Semester I - Later Entry</b></td>
+                                                    <td><%= profile.Semester_1.later_entry %></td>
+                                                    <td>-</td>
+                                                    <td>-</td>
+                                                    <td>-</td>
+                                                </tr>
+                                                        </tbody>
+                                                        </table>
+                                            <% } else { %>
+                                                    
+                                            <% } %>
+                                            <% if(profile.Semester_2.later_entry === 'No' && profile.Semester_2.attended === 'Yes') { %>
+                                                <table>
+                                                    <thead>
+                                                      <tr>
+                                                          <th>Semester</th>
+                                                          <th>Subjects</th>
+                                                          <th>Grade</th>
+                                                          <th>CGPA</th>
+                                                          <th>Arrear</th>
+                                                      </tr>
+                                                    </thead>
+                                                        <tbody>
+                                            <tr>
+                                                <td rowspan="9"><b>Semester II</b></td>
+                                                <td>Technical English</td>
+                                                <td><%= profile.Semester_2.sub1 %></td>
+                                                <td rowspan="9"><%= profile.Semester_2.gpa %></td>
+                                                <td rowspan="9"><%= profile.Semester_2.arrear %></td> 
+                                                
+                                              </tr>
+                                              <tr>
+                                                <td>Engineering Mathematics - II</td>
+                                                <td><%= profile.Semester_2.sub2 %></td>
+                                              </tr>
+                                              <tr>
+                                                  <td>Physics for Information Science </td>
+                                                  <td><%= profile.Semester_2.sub3 %></td>
+                                              </tr>
+                                              <tr>
+                                                  <td>Basic Electrical, Electronics and Measurement Engineering</td>
+                                                  <td><%= profile.Semester_2.sub4 %></td>
+                                                  
+                                              </tr>
+                                              <tr>
+                                                  <td>Environmental Science and Engineering</td>
+                                                  <td><%= profile.Semester_2.sub5 %></td>
+                                              </tr>
+                                              <tr>
+                                                  <td>Programming in C</td>
+                                                  <td><%= profile.Semester_2.sub6 %></td>
+                                              </tr>
+                                              <tr>
+                                                  <td><b>Practicals</b></td>
+                                              </tr>
+                                              <tr>
+                                                  <td>Engineering Practices Laboratory</td>
+                                                  <td><%= profile.Semester_2.lab1 %></td>
+                                              </tr>
+                                              <tr>
+                                                  <td>C Programming Laboratory</td>
+                                                  <td><%= profile.Semester_2.lab2 %></td>
+                                              </tr>
+                                            </tbody>
+                                        </table> 
+
+                                            <% } else if (profile.Semester_2.later_entry === 'Yes' && profile.Semester_2.attended === 'No') { %>
+                                                <table>
+                                                    <thead>
+                                                      <tr>
+                                                          <th>Semester</th>
+                                                          <th>Subjects</th>
+                                                          <th>Grade</th>
+                                                          <th>CGPA</th>
+                                                          <th>Arrear</th>
+                                                      </tr>
+                                                    </thead>
+                                                        <tbody>
+                                                <tr>
+                                                    <td><b>Semester II - Later Entry</b></td>
+                                                    <td><%= profile.Semester_2.later_entry %></td>
+                                                    <td>-</td>
+                                                    <td>-</td>
+                                                    <td>-</td>
+                                                </tr>
+                                                        </tbody>
+                                                        </table>
+                                                <% } else { %>
+                                                    
+                                            <% } %>
+                                            <br>
+                                            <% if(profile.Semester_3.later_entry === 'No' && profile.Semester_3.attended === 'Yes') { %>
+                                                <table>
+                                                    <thead>
+                                                      <tr>
+                                                          <th>Semester</th>
+                                                          <th>Subjects</th>
+                                                          <th>Grade</th>
+                                                          <th>CGPA</th>
+                                                          <th>Arrear</th>
+                                                      </tr>
+                                                    </thead>
+                                                        <tbody>
+                                                <td rowspan="10"><b>Semester III</b></td>
+                                                <td>Discrete Mathematics</td>
+                                                <td><%= profile.Semester_3.sub1 %></td>
+                                                <td rowspan="10"><%= profile.Semester_3.gpa %></td>
+                                                <td rowspan="10"><%= profile.Semester_3.arrear %></td> 
+                                              </tr>
+                                              <tr>
+                                                <td>Digital Principles and System Design</td>
+                                                <td><%= profile.Semester_3.sub2 %></td>
+                                              </tr>
+                                              <tr>
+                                                  <td>Object Oriented Programming</td>
+                                                  <td><%= profile.Semester_3.sub3 %></td>
+                                              </tr>
+                                              <tr>
+                                                  <td>Engineering Physics </td>
+                                                  <td><%= profile.Semester_3.sub4 %></td>
+                                                  
+                                              </tr>
+                                              <tr>
+                                                  <td>Data Structures</td>
+                                                  <td><%= profile.Semester_3.sub5 %></td>
+                                              </tr>
+                                              <tr>
+                                                  <td>Communication Engineering</td>
+                                                  <td><%= profile.Semester_3.sub6 %></td>
+                                              </tr>
+                                              <tr>
+                                                  <td><b>Practicals</b></td>
+                                              </tr>
+                                              <tr>
+                                                  <td>Digital Systems Laboratory</td>
+                                                  <td><%= profile.Semester_3.lab1 %></td>
+                                              </tr>
+                                              <tr>
+                                                  <td>Object Oriented Programming Laboratory</td>
+                                                  <td><%= profile.Semester_3.lab2 %></td>
+                                              </tr>
+                                              <tr>
+                                                <td>Interpersonal Skills/Listening & Speaking</td>
+                                                <td><%= profile.Semester_3.lab2 %></td>
+                                            </tr>
+                                                        </tbody>
+                                                        </table>
+
+                                            <% } else if (profile.Semester_3.later_entry === 'Yes' && profile.Semester_3.attended === 'No') { %>
+                                                <table>
+                                                    <thead>
+                                                      <tr>
+                                                          <th>Semester</th>
+                                                          <th>Subjects</th>
+                                                          <th>Grade</th>
+                                                          <th>CGPA</th>
+                                                          <th>Arrear</th>
+                                                      </tr>
+                                                    </thead>
+                                                        <tbody>
+                                                <tr>
+                                                    <td><b>Semester III - Later Entry</b></td>
+                                                    <td><%= profile.Semester_2.later_entry %></td>
+                                                    <td>-</td>
+                                                    <td>-</td>
+                                                    <td>-</td>
+                                                </tr>
+                                                        </tbody>
+                                                        </table>
+                                                <% } else { %>
+                                                   
+                                            <% } %>
+                                            <% if(profile.Semester_4.later_entry === 'No' && profile.Semester_4.attended === 'Yes') { %>
+                                                <table>
+                                                    <thead>
+                                                      <tr>
+                                                          <th>Semester</th>
+                                                          <th>Subjects</th>
+                                                          <th>Grade</th>
+                                                          <th>CGPA</th>
+                                                          <th>Arrear</th>
+                                                      </tr>
+                                                    </thead>
+                                                        <tbody>
+                                              <tr>
+                                                <td rowspan="10"><b>Semester IV</b></td>
+                                                <td>Probability and Queueing Theory</td>
+                                                <td><%= profile.Semester_4.sub1 %></td>
+                                                <td rowspan="10"><%= profile.Semester_4.gpa %></td>
+                                                <td rowspan="10"><%= profile.Semester_4.arrear %></td> 
+                                                
+                                              </tr>
+                                              <tr>
+                                                <td>Computer Architecture</td>
+                                                <td><%= profile.Semester_4.sub2 %></td>
+                                              </tr>
+                                              <tr>
+                                                  <td>Database Management Systems</td>
+                                                  <td><%= profile.Semester_4.sub3 %></td>
+                                              </tr>
+                                              <tr>
+                                                  <td>Design and Analysis of Algorithms</td>
+                                                  <td><%= profile.Semester_4.sub4 %></td>
+                                                 
+                                              </tr>
+                                              <tr>
+                                                  <td>Operating Systems</td>
+                                                  <td><%= profile.Semester_4.sub5 %></td>
+                                              </tr>
+                                              <tr>
+                                                  <td>Software Engineering</td>
+                                                  <td><%= profile.Semester_4.sub6 %></td>
+                                              </tr>
+                                              <tr>
+                                                  <td><b>Practicals</b></td>
+                                              </tr>
+                                              <tr>
+                                                  <td>Database Management Systems Laboratory</td>
+                                                  <td><%= profile.Semester_4.lab1 %></td>
+                                              </tr>
+                                              <tr>
+                                                  <td>Operating Systems Laboratory</td>
+                                                  <td><%= profile.Semester_4.lab2 %></td>
+                                              </tr>
+                                              <tr>
+                                                <td>Advanced Reading and Writing</td>
+                                                <td><%= profile.Semester_4.lab3 %></td>
+                                            </tr>
+                                                        </tbody>
+                                                        </table>
+
+                                            <% } else if (profile.Semester_4.later_entry === 'Yes' && profile.Semester_4.attended === 'No') { %>
+                                                <tr>
+                                                    <td><b>Semester IV - Later Entry</b></td>
+                                                    <td><%= profile.Semester_4.later_entry %></td>
+                                                    <td>-</td>
+                                                    <td>-</td>
+                                                    <td>-</td>
+                                                </tr>
+                                                <% } else { %>
+                                                   
+                                            <% } %>
+                                            <% if(profile.Semester_5.later_entry === 'No' && profile.Semester_5.attended === 'Yes') { %>
+                                                <table>
+                                                    <thead>
+                                                      <tr>
+                                                          <th>Semester</th>
+                                                          <th>Subjects</th>
+                                                          <th>Grade</th>
+                                                          <th>CGPA</th>
+                                                          <th>Arrear</th>
+                                                      </tr>
+                                                    </thead>
+                                                        <tbody>
+                                              <tr>
+                                                <td rowspan="10"><b>Semester V</b></td>
+                                                <td>Algebra and Number Theory</td>
+                                                <td><%= profile.Semester_5.sub1 %></td>
+                                                <td rowspan="10"><%= profile.Semester_5.gpa %></td>
+                                                <td rowspan="10"><%= profile.Semester_5.arrear %></td> 
+                                              </tr>
+                                              <tr>
+                                                <td>Computer Networks</td>
+                                                <td><%= profile.Semester_5.sub2 %></td>
+                                              </tr>
+                                              <tr>
+                                                  <td>Microprocessors and Microcontrollers</td>
+                                                  <td><%= profile.Semester_5.sub3 %></td>
+                                              </tr>
+                                              <tr>
+                                                  <td>Theory of Computation</td>
+                                                  <td><%= profile.Semester_5.sub4 %></td>
+                                                  
+                                              </tr>
+                                              <tr>
+                                                  <td>Object Oriented Analysis and Design</td>
+                                                  <td><%= profile.Semester_5.sub5 %></td>
+                                              </tr>
+                                              <tr>
+                                                  <td><%= profile.Semester_5.oe_1 %></td>
+                                                  <td><%= profile.Semester_5.sub6 %></td>
+                                              </tr>
+                                              <tr>
+                                                  <td><b>Practicals</b></td>
+                                              </tr>
+                                              <tr>
+                                                  <td>Microprocessors and Microcontrollers Laboratory</td>
+                                                  <td><%= profile.Semester_5.lab1 %></td>
+                                              </tr>
+                                              <tr>
+                                                  <td>Object Oriented Analysis and Design Laboratory</td>
+                                                  <td><%= profile.Semester_5.lab2 %></td>
+                                              </tr>
+                                              <tr>
+                                                <td>Networks Laboratory</td>
+                                                <td><%= profile.Semester_5.lab3 %></td>
+                                            </tr>
+                                                        </tbody>
+                                                        </table>
+
+                                            <% } else if (profile.Semester_5.later_entry === 'Yes' && profile.Semester_5.attended === 'No') { %>
+                                                <table>
+                                                    <thead>
+                                                      <tr>
+                                                          <th>Semester</th>
+                                                          <th>Subjects</th>
+                                                          <th>Grade</th>
+                                                          <th>CGPA</th>
+                                                          <th>Arrear</th>
+                                                      </tr>
+                                                    </thead>
+                                                        <tbody>
+                                                <tr>
+                                                    <td><b>Semester V - Later Entry</b></td>
+                                                    <td><%= profile.Semester_5.later_entry %></td>
+                                                    <td>-</td>
+                                                    <td>-</td>
+                                                    <td>-</td>
+                                                </tr>
+                                                        </tbody>
+                                                        </table>
+
+                                                <% } else { %>
+                                                    
+                                            <% } %>
+                                            <% if(profile.Semester_6.later_entry === 'No' && profile.Semester_6.attended === 'Yes') { %>
+                                                <table>
+                                                    <thead>
+                                                      <tr>
+                                                          <th>Semester</th>
+                                                          <th>Subjects</th>
+                                                          <th>Grade</th>
+                                                          <th>CGPA</th>
+                                                          <th>Arrear</th>
+                                                      </tr>
+                                                    </thead>
+                                                        <tbody>
+                                            <tr>
+                                                <td rowspan="9"><b>Semester VI</b></td>
+                                                <td>Compiler Design</td>
+                                                <td><%= profile.Semester_6.sub1 %></td>
+                                                <td rowspan="9"><%= profile.Semester_6.gpa %></td>
+                                                <td rowspan="9"><%= profile.Semester_6.arrear %></td> 
+                                              </tr>
+                                              <tr>
+                                                <td>Internet Programming</td>
+                                                <td><%= profile.Semester_6.sub2 %></td>
+                                              </tr>
+                                              <tr>
+                                                  <td>Aritifical Intelligence</td>
+                                                  <td><%= profile.Semester_6.sub3 %></td>
+                                              </tr>
+                                              <tr>
+                                                  <td>Mobile Computing</td>
+                                                  <td><%= profile.Semester_6.sub4 %></td>
+                                                  
+                                              </tr>
+                                              <tr>
+                                                  <td>Distributed Systems</td>
+                                                  <td><%= profile.Semester_6.sub5 %></td>
+                                              </tr>
+                                              <tr>
+                                                  <td><%= profile.Semester_6.pe_1 %></td>
+                                                  <td><%= profile.Semester_6.sub6 %></td>
+                                              </tr>
+                                              <tr>
+                                                  <td><b>Practicals</b></td>
+                                              </tr>
+                                              <tr>
+                                                  <td>Internet Programming Laboratory</td>
+                                                  <td><%= profile.Semester_6.lab1 %></td>
+                                              </tr>
+                                              <tr>
+                                                  <td>Mobile Application Development Laboratory</td>
+                                                  <td><%= profile.Semester_6.lab2 %></td>
+                                                
+                                              </tr></tbody></table><br><br><br><br>
+                                              <table>
+                                                <thead>
+                                                    <td colspan="2"><b>Mini Project Work</b></td>
+                                                
+                                                </thead>
+                                                <tbody>
+                                                <tr>
+                                                    <td><b>Project Title: </b></td>
+                                                    <td><%= profile.mini_project.mini_head %></td>
+                                                </tr>
+                                                <tr>
+                                                    <td ><b>Number of Members: </b></td>
+                                                    <td><%= profile.mini_project.mini_count %></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>Team Members: </b></td>
+                                                    <td> <%= profile.mini_project.m_name_team %></td> 
+                                                </tr>
+                                                <tr>
+                                                    <td ><b>Description: </b></td>
+                                                    <td><%= profile.mini_project.m_description %></td> 
+                                                </tr>
+                                                <tr>
+                                                    <td ><b>Remarks: </b></td>
+                                                    <td><%= profile.mini_project.mini_remark %></td> 
+                                                </tr>
+                                                </tbody>
+                                             </table>    
+                                             <% } else if (profile.Semester_6.later_entry === 'Yes' && profile.Semester_6.attended === 'No') { %>
+                                                <table>
+                                                    <thead>
+                                                      <tr>
+                                                          <th>Semester</th>
+                                                          <th>Subjects</th>
+                                                          <th>Grade</th>
+                                                          <th>CGPA</th>
+                                                          <th>Arrear</th>
+                                                      </tr>
+                                                    </thead>
+                                                        <tbody>
+                                                <tr>
+                                                    <td><b>Semester VI - Later Entry</b></td>
+                                                    <td><%= profile.Semester_6.later_entry %></td>
+                                                    <td>-</td>
+                                                    <td>-</td>
+                                                    <td>-</td>
+                                                </tr>
+                                                </tbody>
+                                                </table>
+                                                <% } else { %>
+                                                    
+                                            <% } %>
+                                            
+                                            <% if(profile.Semester_7.attended === 'Yes') { %>
+                                                <table>
+                                                    <thead>
+                                                      <tr>
+                                                          <th>Semester</th>
+                                                          <th>Subjects</th>
+                                                          <th>Grade</th>
+                                                          <th>CGPA</th>
+                                                          <th>Arrear</th>
+                                                      </tr>
+                                                    </thead>
+                                                        <tbody>
+                                            <tr>
+                                                <td rowspan="9"><b>Semester VII</b></td>
+                                                <td>Principles of Management</td>
+                                                <td><%= profile.Semester_7.sub1 %></td>
+                                                <td rowspan="9"><%= profile.Semester_7.gpa %></td>
+                                                <td rowspan="9"><%= profile.Semester_7.arrear %></td> 
+                                              </tr>
+                                              <tr>
+                                                <td>Cryptography and Networks Security</td>
+                                                <td><%= profile.Semester_7.sub2 %></td>
+                                              </tr>
+                                              <tr>
+                                                  <td>Cloud Computing</td>
+                                                  <td><%= profile.Semester_7.sub3 %></td>
+                                              </tr>
+                                              <tr>
+                                                  <td><%= profile.Semester_7.pe_2 %></td>
+                                                  <td><%= profile.Semester_7.sub4 %></td>
+                                                 
+                                              </tr>
+                                              <tr>
+                                                  <td><%= profile.Semester_7.pe_3 %></td>
+                                                  <td><%= profile.Semester_7.sub5 %></td>
+                                              </tr>
+                                              <tr>
+                                                  <td><%= profile.Semester_7.oe_2 %></td>
+                                                  <td><%= profile.Semester_7.sub6 %></td>
+                                              </tr>
+                                              <tr>
+                                                  <td><b>Practicals</b></td>
+                                              </tr>
+                                              <tr>
+                                                  <td>Cloud Computing Laboratory</td>
+                                                  <td><%= profile.Semester_7.lab1 %></td>
+                                              </tr>
+                                              <tr>
+                                                  <td>Security Laboratory</td>
+                                                  <td><%= profile.Semester_7.lab2 %></td>
+                                                  
+                                              </tr>
+                                            </tbody>
+                                        </table>
+                                              <% } else { %>
+                                                <% } %>
+                                             
+                        
+                                            <% if(profile.Semester_8.attended === 'Yes') { %>
+                                                <table>
+                                                    <thead>
+                                                      <tr>
+                                                          <th>Semester</th>
+                                                          <th>Subjects</th>
+                                                          <th>Grade</th>
+                                                          <th>CGPA</th>
+                                                          <th>Arrear</th>
+                                                      </tr>
+                                                    </thead>
+                                                        <tbody>
+                                              <tr>
+                                                <td rowspan="2"><b>Semester VIII</b></td>
+                                                <td><%= profile.Semester_8.pe_4 %></td>
+                                                <td><%= profile.Semester_8.sub1 %></td>
+                                                <td rowspan="2"><%= profile.Semester_8.gpa %></td>
+                                                <td rowspan="2"><%= profile.Semester_8.arrear %></td> 
+                                              </tr>
+                                              <tr>
+                                                <td><%= profile.Semester_8.pe_5 %></td>
+                                                <td><%= profile.Semester_8.sub2 %></td>
+                                                
+                                              </tr>
+                                            </table><br><br><br><br><br><br>
+                                            <table>
+                                              <thead>
+                                                  <td colspan="2"><b>Project Work</b></td>
+                                                
+                                              </thead>
+                                              <tbody>
+                                              <tr>
+                                                  <td><b>Project Title: </b></td>
+                                                  <td><%= profile.project_work.project_head %></td>
+                                              </tr>
+                                              <tr>
+                                                  <td ><b>Number of Members: </b></td>
+                                                  <td><%= profile.project_work.project_count %></td>
+                                              </tr>
+                                              <tr>
+                                                  <td><b>Team Members: </b></td>
+                                                  <td><%= profile.project_work.name_team %></td> 
+                                              </tr>
+                                              <tr>
+                                                  <td ><b>Description: </b></td>
+                                                  <td><%= profile.project_work.project_description %></td> 
+                                              </tr>
+                                              <tr>
+                                                  <td ><b>Remarks: </b></td>
+                                                  <td><%= profile.project_work.project_remark %></td> 
+                                              </tr>
+                                              </tbody>
+                                           </table>    
+                                              <% } else { %>
+                                                
+                                            <% } %>
+                                </div>
+            
+                        <% profile.technical.map(data => { %>
+                            <% if(data.tech_option === 'Yes') { %>
+                                <h2><b>TECHNICAL ACTIVITIES</b></h2>
+                            <table>
+                                <thead>
+                                    <td><b>Technical Events</b></td>
+                                    <td><b>Details</b></td>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td><b>Event Type: </b></td>
+                                    <td><%= data.technical_head %></td>
+                                </tr>
+                                <tr>
+                                    <td ><b>Duration: </b></td>
+                                    <td><%= data.technical_start %> <b>to</b> <%= data.technical_end %></td>
+                                </tr>
+                                <tr>
+                                    <td ><b>Title: </b></td>
+                                    <td><%= data.technical_title %></td> 
+                                </tr>
+                                <tr>
+                                    <td ><b>Description: </b></td>
+                                    <td><%= data.technical_description %></td> 
+                                </tr>
+                                <tr>
+                                    <td ><b>Remarks: </b></td>
+                                    <td><%= data.technical_remark %></td> 
+                                </tr>
+                                </tbody>
+                             </table>
+                             <%} else {%>
+                            
+                                <%}%>
+                            <%})%>
+                        <h2><b>SPORTS ACTIVITIES</b></h2>
+                        <% profile.sports.map(data => { %>
+                            <% if(data.sports_option === 'Yes') { %>
+                            <table>
+                                <thead>
+                                    <td><b>Sports Events</b></td>
+                                    <td><b>Details</b></td>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td><b>Event Type: </b></td>
+                                    <td><%= data.sports_head %></td>
+                                </tr>
+                                <tr>
+                                    <td ><b>Held On: </b></td>
+                                    <td><%= data.sports_start %></td>
+                                </tr>
+                                <tr>
+                                    <td ><b>Remarks: </b></td>
+                                    <td><%= data.sports_remark %></td> 
+                                </tr>
+                                </tbody>
+                             </table><br><br>
+                             <%} else {%>
+                                
+                                    <%}%>
+                            <%})%>
+             
+</body>
+</html>

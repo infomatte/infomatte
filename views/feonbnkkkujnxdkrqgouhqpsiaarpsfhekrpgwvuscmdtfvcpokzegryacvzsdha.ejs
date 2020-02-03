@@ -1,0 +1,52 @@
+<%- include('partials/header.ejs'); -%>
+<div class='preloader'>
+    <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect id='rotator' x="50.4609" y="13" width="43.0782" height="43.0782" rx="2" transform="rotate(45 50.4609 13)"
+            fill="#200B76" />
+    </svg>
+</div>
+<div class="navbar-fixed">
+    <nav>
+        <div class="container">
+            <div class="nav-wrapper">
+                <a href="#!" class="brand-logo">im.</a>
+            </div>
+        </div>
+    </nav>
+</div>
+
+<div class="container">
+    <div data-aos="fade-up">
+        <div class="card credential_cards animated fadeInUp">
+            <h4><i class="material-icons medium">
+                    trip_origin
+                </i><br>LOGIN</h4>
+            <form action='/students_feonbnkkkujnxdkrqgouhqpsiaarpsfhekrpgwvuscmdtfvcpokzegryacvzsdha' method='post'>
+                <div class="input-field col s12">
+                    <input type='number' name='id' id='nadid' required class="validate">
+                    <label for="nadid">Register ID</label>
+                    <span class="helper-text" data-error="ID is required*"></span>
+                </div>
+                <div class="input-field col s12">
+                    <input type='date' name='date' class='datepicker' id='mydate' required class="validate">
+                    <label for="mydate">Date of Birth</label>
+                    <span class="helper-text" data-error="DOB is required*" data-success="Valid"></span>
+                </div><br>
+                <button class="waves-effect waves-light btn-large send" type='submit'>LOGIN</button>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    $('#nadid').change(() => {
+        if ($('#nadid').val().toString().length !== 12) {
+            swal({
+                title: "ID is Invalid",
+                icon: "error",
+            });
+        } else {
+            $('.helper').attr("data-success", "Valid*");
+        }
+    })
+</script>
+<%- include('partials/footer.ejs'); -%>

@@ -1,0 +1,439 @@
+<%- include('partials/header.ejs'); -%>
+<div class='preloader'>
+    <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect id='rotator' x="50.4609" y="13" width="43.0782" height="43.0782" rx="2" transform="rotate(45 50.4609 13)"
+            fill="#200B76" />
+    </svg>
+</div>
+<div class="container">
+    <div data-aos="fade-up">
+        <div class="formfield">
+            <img src="img/AU.png" class='home-logo' alt='img'>
+            <h4 class='form-head'>Univeristy college of Engineering - Kancheepuram</h4>
+            <h5 class="form-sub">Department of Computer Science and Engineering</h5><br>
+            <h3 class="heading">STUDENT DATABASE</h3><br>
+            <form action="/students_formEntry" method="post" class="formEntry">
+                <div class="row">
+                    <div class="input-field col m6 s12 l6">
+                        <input type="text" name="username" id='myname' class="validate" required value=<%= myname %>>
+                        <label for="myname">Student Name</label>
+                        <span class="helper-text" data-error="Name is required*" data-success="Valid"></span>
+                    </div>
+                    <div class="input-field col m6 s12 l6">
+                        <input type="number" name="id" id='myid' class="validate" required value=<%= myid %>>
+                        <label for="myid">Nad ID</label>
+                        <span class="helper-text" data-error="ID is required*" data-success="Valid"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col m6 s12 l6">
+                        <input type="text" name="date" id='mydob' required value=<%= mydob %>>
+                        <label for="mydob">Date of Birth</label>
+                        <span class="helper-text" data-error="DOB is required*" data-success="Valid"></span>
+                    </div>
+                    <div class="input-field col m6 s12 l6">
+                        <input type="email" name="email" required class="validate" id='myemail' value=<%= mymail %>>
+                        <label for="myemail">Email</label>
+                        <span class="helper-text" data-error="Email is required*" data-success="Valid"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col m6 s12 l6">
+                        <input type="text" name="nation" required class="validate" id='mynation' value=<%= mynation %>>
+                        <label for="mynation">Nationality</label>
+                        <span class="helper-text" data-error="Nationality is required*" data-success="Valid"></span>
+                    </div>
+                    <div class="input-field col m6 s12 l6">
+                        <input type="tel" name="tele" required class="validate" id='mynum' value=<%= myph %>>
+                        <label for="mynum">Mobile Number</label>
+                        <span class="helper-text" data-error="Mobile Number is required*" data-success="Valid"></span>
+                    </div>
+                </div>
+                <div class="input-field col s12 ">
+                    <% if(!(myaddress)) { %>
+                    <textarea class="materialize-textarea" data-length="120" class="validate" name="address"
+                        id='myadd'></textarea>
+                    <label for="myadd">Address</label>
+                    <% } else { %>
+                    <input type='text' name="address" required id='myadd' value=<%= myaddress %>>
+                    <label for="myadd">Address</label>
+                    <%}%>
+                        <span class="helper-text" data-error="Address is required*" data-success="Valid"></span>
+                    </div>
+                        <div class="col m6 l6 s12">
+                            <h4>Later Entry</h4>
+                            <label>
+                                <input type="radio" name="form_group1" class="with-gap yes-check" id='yes' value="Yes"
+                                    required />
+                                <span>Yes</span>
+                            </label>
+                            <label>
+                                <input type="radio" name="form_group1" class="with-gap no-check" value="No" required />
+                                <span>No</span>
+                            </label>
+                        </div><br><br>
+                        <% if(later_entry === 'No') { %>
+                    <div class="primary_marks">
+                        <div class="row">
+                            <div class="input-field col m6 s12 l6">
+                                <input type="number" name="sslc" class="validate" id='mysslc' value=<%= mysslc %>>
+                                <label for="mysslc">SSLC Mark(500)</label>
+                                <span class="helper-text" data-error="Required*" data-success="Valid"></span>
+                            </div>
+                            <div class="input-field col m6 s12 l6">
+                                <input type="number" step=0.01 name="sslc_cutoff" class="validate" id='myscutoff'
+                                    value=<%= mysslc_cutoff %>>
+                                <label for="myscutoff">SSLC Cutoff(100)</label>
+                                <span class="helper-text" data-error="Required*" data-success="Valid"></span>
+                            </div>
+                            <% if(!(sslc_file)) { %>
+                            <div class="input-field file-field col m12 s12 l12">
+                                <div class="btn-large">
+                                    <span style="color:white">File</span>
+                                    <input type="file" name="sslc_file" onchange="ValidateSslcSize(this)">
+                                </div>
+                                <div class="file-path-wrapper">
+                                    <input class="file-path validate" type="text">
+                                </div>
+                            </div>
+                            <% } else { %>
+                            <div class="input-field file-field col m12 s12 l12">
+                                <input type="text" name="sslc_file" hidden value=<%= sslc_file %>>
+                                <img class="materialboxed responsive-img" width="650" src=<%= sslc_file %>>
+                            </div>
+                            <% } %>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col m6 s12 l6">
+                                <input type="number" name="hsc" class="validate" id='myhsc' value=<%= myhsc %>>
+                                <label for="myhsc">HSC Mark(1200)</label>
+                                <span class="helper-text" data-error="Required*" data-success="Valid"></span>
+                            </div>
+                            <div class="input-field col m6 s12 l6">
+                                <input type="number" step=0.01 name="hsc_cutoff" class="validate" id='myhcutoff'
+                                    value=<%= myhsc_cutoff %>>
+                                <label for="myhcutoff">HSC Cutoff(100)</label>
+                                <span class="helper-text" data-error="Required*" data-success="Valid"></span>
+                            </div>
+                            <% if(!(hsc_file)) { %>
+                            <div class="input-field file-field col m12 s12 l12">
+                                <div class="btn-large">
+                                    <span style="color:white">File</span>
+                                    <input type="file" name="hsc_file" onchange="ValidateHscSize(this)">
+                                    <span class="helper-text" data-error="Required*" data-success="Valid"></span>
+                                </div>
+                                <div class="file-path-wrapper">
+                                    <input class="file-path validate" type="text">
+                                </div>
+                            </div>
+                            <% } else { %>
+                            <div class="file-field col m12 s12 l12">
+                                <input type="text" name="hsc_file" hidden value=<%= hsc_file %>>
+                                <img class="materialboxed responsive-img" width="650" src=<%= hsc_file %>>
+                            </div>
+                            <% } %>
+                        </div>
+                    </div>
+                    <% } else if(later_entry === 'Yes') { %>
+
+                    <% } else { %>
+                    <div class="primary_marks">
+                        <div class="row">
+                            <div class="input-field col m6 s12 l6">
+                                <input type="number" name="sslc" class="validate" id='mysslc'>
+                                <label for="mysslc">SSLC Mark(500)</label>
+                                <span class="helper-text" data-error="Required*" data-success="Valid"></span>
+                            </div>
+                            <div class="input-field col m6 s12 l6">
+                                <input type="number" step=0.01 name="sslc_cutoff" class="validate" id='myscutoff'>
+                                <label for="myscutoff">SSLC Cutoff(100)</label>
+                                <span class="helper-text" data-error="Required*" data-success="Valid"></span>
+                            </div>
+                            <div class="input-field file-field col m12 s12 l12">
+                                <div class="btn-large">
+                                    <span style="color:white">File</span>
+                                    <input type="file" name="sslc_file" onchange="ValidateSslcSize(this)">
+                                </div>
+                                <div class="file-path-wrapper">
+                                    <input class="file-path validate" type="text">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col m6 s12 l6">
+                                <input type="number" name="hsc" class="validate" id='myhsc'>
+                                <label for="myhsc">HSC Mark(1200)</label>
+                                <span class="helper-text" data-error="Required*" data-success="Valid"></span>
+                            </div>
+                            <div class="input-field col m6 s12 l6">
+                                <input type="number" step=0.01 name="hsc_cutoff" class="validate" id='myhcutoff'>
+                                <label for="myhcutoff">HSC Cutoff(100)</label>
+                                <span class="helper-text" data-error="Required*" data-success="Valid"></span>
+                            </div>
+
+                            <div class="input-field file-field col m12 s12 l12">
+                                <div class="btn-large">
+                                    <span style="color:white">File</span>
+                                    <input type="file" name="hsc_file" onchange="ValidateHscSize(this)">
+                                    <span class="helper-text" data-error="Required*" data-success="Valid"></span>
+                                </div>
+                                <div class="file-path-wrapper">
+                                    <input class="file-path validate" type="text">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <% } %>
+                    <div class="row">
+                        <div class="input-field col m4 s12 l4">
+                            <% if(!(mybranch)) { %>
+                            <select name='branch' required>
+                                <option value="" disabled selected>Choose your Branch</option>
+                                <option value="CSE">CSE</option>
+                            </select>
+                            <label>Branch</label>
+                            <% } else { %>
+                            <input type="text" name="branch" id='mybranch' value=<%= mybranch %>>
+                            <label for="mybranch">Branch</label>
+                            <span class="helper-text" data-error="Branch is required*" data-success="Valid"></span>
+                            <% } %>
+                        </div>
+                        <div class="input-field col m4 s12 l4">
+                            <% if(!(myyearofJoining)) { %>
+                            <select name='yearofJoining' required>
+                                <option value="" disabled selected>Choose...</option>
+                                <option value="<%= year4 %>"><%= year4 %></option>
+                                <option value="<%= year3 %>"><%= year3 %></option>
+                                <option value="<%= year2 %>"><%= year2 %></option>
+                                <option value="<%= year1 %>"><%= year1 %></option>
+                            </select>
+                            <label>Year of Joining</label>
+                            <% } else { %>
+                            <input type="number" name="yearofJoining" id='myyear' value=<%= myyearofJoining %>>
+                            <label for="myyear">Year of Joining</label>
+                            <span class="helper-text" data-error="Year is required*" data-success="Valid"></span>
+                            <% } %>
+                        </div>
+                        <div class="input-field col m4 s12 l4">
+                            <% if(!(myregulation)) { %>
+                            <select name='regulation' required>
+                                <option value="" disabled selected>Choose...</option>
+                                <option value="2017">2017</option>
+                            </select>
+                            <label>Regulation</label>
+                            <% } else { %>
+                            <input type="text" name="regulation" id='myreg' value=<%= myregulation %>>
+                            <label for="myreg">Regulation</label>
+                            <span class="helper-text" data-error="Regulation is required*" data-success="Valid"></span>
+                            <% } %>
+                        </div>
+                    </div><br>
+                    <div class="row">
+                        <h5>Technical Activities</h5><br>
+                        <h6>Do you attend or submitted any Workshops/Symphosiums/Paper Presentations</h6><br>
+                        <label>
+                            <input type="radio" name="group1" class="with-gap yes1-check" value="Yes" required />
+                            <span>Yes</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="group1" class="with-gap no1-check" value="No" required />
+                            <span>No</span>
+                        </label>
+                        <div class="tech-details">
+                            <div class="input-field col l12 s12">
+                                <input type="text" name="technical_head" id='t-head' class="validate">
+                                <label for="t-head">Events</label>
+                            </div>
+                            <div class="input-field col m6 l6 s12">
+                                <input type="date" name="technical_start" id='t-start' class="validate">
+                                <label for="t-start">From</label>
+                            </div>
+                            <div class="input-field col m6 l6 s12">
+                                <input type="date" name="technical_end" id='t-end' class="validate">
+                                <label for="t-end">To</label>
+                            </div>
+                            <div class="input-field col l12 s12">
+                                <input type="text" name="technical_title" id='t-title' class="validate">
+                                <label for="t-title">Title</label>
+                            </div>
+                            <div class="input-field col s12 l12">
+                                <textarea class="materialize-textarea" data-length="120" class="validate"
+                                    name="technical_description" id='t-description'></textarea>
+                                <label for="t-description">Description</label>
+                            </div>
+                            <div class="input-field col m12 l12 s12">
+                                <input type="text" name="technical_remark" id='t-remark' class="validate">
+                                <label for="t-remark">Remarks</label>
+                            </div>
+                            <div class="input-field file-field col m12 s12 l12">
+                                <div class="btn-large">
+                                    <span style="color:white">Certificate</span>
+                                    <input type="file" name="technical_file" onchange="ValidateTechSize(this)">
+                                </div>
+                                <div class="file-path-wrapper">
+                                    <input class="file-path validate" type="text">
+                                </div>
+                            </div>
+                        </div>
+                    </div><br>
+                    <div class="row">
+                        <h5>Sports Activities</h5><br>
+                        <h6>Do you participated in any Sports Activities on behalf of our college</h6><br>
+                        <label>
+                            <input type="radio" name="group2" class="with-gap yes2-check" value="Yes" required />
+                            <span>Yes</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="group2" class="with-gap no2-check" value="No" required />
+                            <span>No</span>
+                        </label>
+                        <div class="sports-details">
+                            <div class="input-field col l12 s12">
+                                <input type="text" name="sports_head" id='s-head' class="validate">
+                                <label for="s-head">Events</label>
+                            </div>
+                            <div class="input-field col m6 l12 s12">
+                                <input type="date" name="sports_start" id='s-start' class="validate">
+                                <label for="s-start">Held on</label>
+                            </div>
+                            <div class="input-field col m12 l12 s12">
+                                <input type="text" name="sports_remark" id='s-remark' class="validate">
+                                <label for="s-remark">Prize Persuied</label>
+                            </div>
+                            <div class="input-field file-field col m12 s12 l12">
+                                <div class="btn-large">
+                                    <span style="color:white">Certificate</span>
+                                    <input type="file" name="sports_file" onchange="ValidateSportsSize(this)">
+                                </div>
+                                <div class="file-path-wrapper">
+                                    <input class="file-path validate" type="text">
+                                </div>
+                            </div>
+                        </div><br><br><br>
+                        <button type='submit' class="waves-effect waves-light btn-large send">Next</button><br><br>
+            </form>
+            <% if(later_entry) { %>
+            <form action="/download" method="post" target="_blank">
+                <button type='submit' class="waves-effect waves-light btn-large">Previous PDF</button>
+            </form>
+            <% } %>
+        </div>
+    </div>
+</div>
+
+<script>
+    function ValidateSslcSize(file) {
+        var FileSize = Math.ceil((file.files[0].size / 1024)); // in MB
+        $('#sslc_out').val(FileSize + 'KB')
+        if (FileSize > 60) {
+            swal({
+                title: "File Size must be less than 60KB",
+                icon: "error",
+            });
+            // $(file).val(''); //for clearing with Jquery
+        } else {
+
+        }
+    }
+
+    function ValidateTechSize(file) {
+        var FileSize = Math.ceil((file.files[0].size / 1024)); // in MB
+        $('#tech_out').val(FileSize + 'KB')
+        if (FileSize > 60) {
+            swal({
+                title: "File Size must be less than 60KB",
+                icon: "error",
+            });
+        }
+    }
+
+    function ValidateSportsSize(file) {
+        var FileSize = Math.ceil((file.files[0].size / 1024)); // in MB
+        $('#sport_out').val(FileSize + 'KB')
+        if (FileSize > 60) {
+            swal({
+                title: "File Size must be less than 60KB",
+                icon: "error",
+            });
+        }
+    }
+
+    function ValidateHscSize(file) {
+        var FileSize = Math.ceil((file.files[0].size / 1024)); // in MB
+        $('#hsc_out').val(FileSize + 'KB')
+        if (FileSize > 60) {
+            swal({
+                title: "File Size must be less than 60KB",
+                icon: "error",
+            });
+
+            // $(file).val(''); //for clearing with Jquery
+        } else {
+
+        }
+    }
+
+    $(document).ready(function () {
+        $('.primary_marks').hide()
+        $("input[type='radio']").change(() => {
+            if ($(".yes-check").is(':checked')) {
+                $('.primary_marks').hide()
+            } else if ($(".no-check").is(':checked')) {
+                $('.primary_marks').show()
+            }
+        })
+    })
+    $(document).ready(function () {
+        $('select').formSelect();
+    });
+    $(document).ready(function () {
+        $('input#input_text, textarea#t-description').characterCounter();
+    });
+    $(document).ready(function () {
+        $('input#input_text, textarea#s-description').characterCounter();
+    });
+    $(document).ready(function () {
+        $('input#input_text, textarea#myadd').characterCounter();
+    });
+    $(document).ready(function () {
+        $('.materialboxed').materialbox();
+    });
+    $('#mysslc').change(() => {
+        const value = $('#mysslc').val();
+        const percent = value / 5;
+        $('#myscutoff').val(percent)
+    })
+    $(document).ready(function () {
+        $('.tech-details').hide();
+        $("input[type='radio']").change(() => {
+            if ($(".yes1-check").is(':checked')) {
+                $('.tech-details').show()
+            } else if ($(".no1-check").is(':checked')) {
+                $('.tech-details').hide()
+            }
+        })
+    })
+    $(document).ready(function () {
+        $('.sports-details').hide();
+        $("input[type='radio']").change(() => {
+            if ($(".yes2-check").is(':checked')) {
+                $('.sports-details').show()
+            } else if ($(".no2-check").is(':checked')) {
+                $('.sports-details').hide()
+            }
+        })
+    })
+    $(document).ready(function () {
+        $('.send').attr('disabled', true);
+        $("input[name='group2']").change(() => {
+            $('.send').attr('disabled', false);
+        })
+    })
+    $(document).ready(function () {
+        swal({
+            title: "Please, fill out the details more carefully.",
+            icon: "info",
+        });
+    })
+</script>
+<%- include('partials/footer.ejs'); -%>

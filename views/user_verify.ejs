@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Verify your Email - Gain Access</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+</head>
+<style>
+    body {
+        font-family: 'Poppins', 'sans-serif';
+    }
+
+    div .card {
+        box-shadow: 2px 14px 38px 0 rgb(219, 219, 219);
+        border-radius: 20px;
+    }
+
+    .verify-card {
+        margin: 20% auto !important;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        padding: 40px 10px !important;
+        width: 40%;
+        transform-origin: center;
+        text-align: center
+    }
+
+    form {
+        width: 80%
+    }
+
+    div .btn-large {
+        background-color: #311b92;
+        border-radius: 40px;
+    }
+
+    div .btn-large:hover {
+        background-color: #6442b4;
+        -webkit-box-shadow: 0px 5px 40px -5px rgba(51, 1, 80, 0.57);
+        -moz-box-shadow: 0px 5px 40px -5px rgba(51, 1, 80, 0.57);
+    }
+
+    .preloader {
+        margin: 20% auto !important;
+        position: fixed;
+        top: 0;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        transition: all 0.5 ease;
+    }
+
+    .preloader-finish {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    i {
+        color: #311b92
+    }
+
+    @media(max-width: 1024px) {
+        .verify-card {
+            margin: 60% auto !important;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            padding: 40px 10px !important;
+            width: 80%;
+            transform-origin: center;
+            text-align: center
+        }
+
+        form {
+            width: 80%
+        }
+    }
+
+    @media(max-width: 1006px) {
+        .verify-card {
+            margin: 60% auto !important;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            padding: 40px 10px !important;
+            width: 40%;
+            transform-origin: center;
+            text-align: center
+        }
+
+        form {
+            width: 80%
+        }
+    }
+
+    @media(max-width: 768px) {
+        .verify-card {
+            margin: 40% auto !important;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            padding: 40px 10px !important;
+            width: 60%;
+            transform-origin: center;
+            text-align: center
+        }
+
+        form {
+            width: 80%
+        }
+    }
+
+    @media(max-width: 600px) {
+        .verify-card {
+            margin: 40% auto !important;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            padding: 40px 10px !important;
+            width: 80%;
+            transform-origin: center;
+            text-align: center
+        }
+
+        form {
+            width: 80%
+        }
+    }
+
+    @media(max-width: 411px) {
+        .verify-card {
+            margin: 40% auto !important;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            padding: 40px 10px !important;
+            width: 90%;
+            transform-origin: center;
+            text-align: center
+        }
+
+        form {
+            width: 80%
+        }
+    }
+
+    @media(max-width:400px) {
+        .verify-card {
+            margin: 50% auto !important;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            padding: 40px 10px !important;
+            width: 100%;
+            transform-origin: center;
+            text-align: center
+        }
+
+        form {
+            width: 80%
+        }
+    }
+
+    @media(max-width:320px) {
+        .verify-card {
+            margin: 30% auto !important;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            padding: 20px 10px !important;
+            width: 100%;
+            transform-origin: center;
+            text-align: center
+        }
+
+        form {
+            width: 80%
+        }
+    }
+
+    @media(max-width:300px) {
+        .verify-card {
+            margin: 30% auto !important;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            padding: 40px 10px !important;
+            width: 80%;
+            transform-origin: center;
+            text-align: center
+        }
+
+        form {
+            width: 80%
+        }
+    }
+</style>
+
+<body>
+    <div class='preloader'>
+        <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect id='rotator' x="50.4609" y="13" width="43.0782" height="43.0782" rx="2"
+                transform="rotate(45 50.4609 13)" fill="#200B76" />
+        </svg>
+    </div>
+    <div class="container">
+        <div data-aos="fade-down">
+            <div class="card verify-card">
+                <h5><i class="material-icons small">check_circle</i><br>Verification</h5><br>
+                <form action='/students_feonbnkkkujnxdkrqgouhqpsiaarpsfhekrpgwvuscmdtfvcpokzegryacvzsdha' method='post'>
+                    <div class="input-field col s12">
+                        <input type='number' name='id' id='mynad' value=<%= myid %>>
+                        <label for="mynad">Nad ID</label>
+                    </div>
+                    <div class="input-field col s12">
+                        <input type='text' name='date' id='mydobg' value=<%= mydob %>>
+                        <label for="mydobg">Date of Birth</label>
+                    </div><br>
+                    <button type='submit' class="waves-effect waves-light btn-large">Verify</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        AOS.init({
+            offset: 400,
+            delay: 0,
+            duration: 800
+        });
+
+        window.addEventListener('load', () => {
+            const preloader = document.querySelector('.preloader');
+            preloader.classList.add('preloader-finish');
+        })
+    </script>
+    <script src="js/materialize.js"></script>
+    <script type="text/javascript" href='js/initialize.js'></script>
+</body>
+
+</html>
