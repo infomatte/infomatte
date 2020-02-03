@@ -61,7 +61,7 @@ router.post('/', async (req, res) => {
             <h4>Department of Computer Science and Engineering</h5><br>
             <p>Please confirm your Mail ID within 2 hours! Otherwise, your licence will be revoked.</p><br>
             <p>Once you get verified using this Email, this Mail will become invalid!</p><br>
-            <button style="padding:10px 20px;background:#4f37b9;border-radius: 20px;border:1px solid #4f37b9"><a style="text-decoration: none; color: white" href="${fullUrl}/verify_email/${token}">Verify Me!</a></button></div>`
+            <button style="padding:10px 20px;background:#4f37b9;border-radius: 20px;border:1px solid #4f37b9"><a style="text-decoration: none; color: white" href="${fullUrl}/students_verify_email/${token}">Verify Me!</a></button></div>`
             };
 
             transporter.sendMail(mailOptions, function (error, info) {
