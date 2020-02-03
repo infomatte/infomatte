@@ -47,14 +47,14 @@ router.post('/', async (req, res) => {
             const transporter = nodemailer.createTransport({
                 service: 'gmail',
                 auth: {
-                    user: 'ucekhoster@gmail.com',
-                    pass: 'ucekcse@44'
+                    user: 'infomatte.com@gmail.com',
+                    pass: 'domainTohost@error'
                 }
             });
 
             const mailOptions = {
                 to: req.body.mail,
-                from: 'ucekhoster@gmail.com',
+                from: 'infomatte.com@gmail.com',
                 subject: `Hello, ${req.body.username}. Verification Mail from UCEK`,
                 html: `<div style="text-align: center">
             <h2>Univeristy college of Engineering - Kancheepuram</h4>
