@@ -8,7 +8,7 @@ cloudinary.config({
     api_key: process.env.CLOUDINARY_KEY,
     api_secret: process.env.CLOUDINARY_SECRET
 });
-router.get('/students_error', async (req, res) => {
+router.get('/error', async (req, res) => {
     res.render('error', {
         header: "Internal Server Error"
     })

@@ -1,0 +1,36 @@
+<%- include('partials/header.ejs'); -%>
+<div data-aos="fade-down">
+  <div class="card">
+    <table class="striped centered">
+      <thead>
+        <tr>
+          <th>S.No</th>
+          <th>Student Name</th>
+          <th>Autherized</th>
+          <th>Student ID</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% var i = 1 %>
+        <% data.map(data => { %>
+        <tr>
+          <form action='/staffs_reader/<%= data.register_id %>' method='post' target="_blank">
+            <td><%= i++ %></td>
+            <td><%= data.name %></td>
+            <td>
+              <% if(data.autherized === 'No') { %>
+              <img src="/img/close.svg" style="width: 35px; height: 35px" alt="approved" />
+              <% } else { %>
+              <img src="/img/check.svg" style="width: 35px; height: 35px" alt="approved" />
+              <% } %>
+            </td>
+            <td><button type='submit' class="mybtn"><%= data.register_id %></button></td>
+          </form>
+        </tr>
+        <%})%>
+
+      </tbody>
+    </table>
+  </div>
+</div>
+<%- include('partials/footer.ejs'); -%>

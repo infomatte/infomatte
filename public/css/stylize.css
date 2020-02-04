@@ -152,6 +152,11 @@ nav {
     text-align: center !important;
 }
 
+.home-logo {
+    width: 500px;
+    height: 500px
+}
+
 .card {
     border-radius: 20px;
     margin: 5% auto;
@@ -285,7 +290,7 @@ svg {
     }
 
     to {
-        transform: scale(2);
+        transform: scale(1.5);
     }
 }
 
@@ -348,7 +353,7 @@ div #rotator {
 }
 
 .mailing {
-    margin: 10% auto !important;
+    margin: 5% auto !important;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -368,4 +373,8 @@ input::-webkit-inner-spin-button {
 
 input[type=number] {
     -moz-appearance: textfield;
+}
+
+.formfield {
+    text-align: center;
 }

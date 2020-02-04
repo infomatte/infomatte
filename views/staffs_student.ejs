@@ -1,15 +1,10 @@
 <%- include('partials/header.ejs'); -%>
-<div class='preloader'>
-    <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect id='rotator' x="50.4609" y="13" width="43.0782" height="43.0782" rx="2" transform="rotate(45 50.4609 13)" fill="#200B76"/>
-    </svg>
-</div> 
-<div class="download_container">
-<div data-aos="fade-down">
-<img src="img/AU.png" class='home-logo' alt='img'>
-        <h4 class='download-head'>Univeristy college of Engineering - Kancheepuram</h4>
-        <h5 class="download-sub">Department of Computer Science and Engineering</h5>
 <div class="card display-card">
+    <h4>Student Name: <b><%= profile.name %><% if(profile.autherized === 'Yes') { %>
+        <i class="small material-icons" style="color: rgb(21, 219, 21)">check_circle</i> 
+    <% } else { %>
+        <img src="/img/close.svg" style="width: 30px; height: 30px" alt="approved" />
+        <% } %></b></h4><br>
     <h4><b>GENERAL INFORMATION</b></h4><br><br>
         <table class="responsive-table">
                 <thead>
@@ -24,8 +19,8 @@
                           <td><%= profile.name %></td>
                         </tr>
                         <tr>
-                          <td>Nad ID</td>
-                          <td><%= profile.nad %></td>
+                          <td>Registration ID</td>
+                          <td><%= profile.register_id %></td>
                         </tr>
                         <tr>
                           <td>Email</td>
@@ -62,12 +57,28 @@
                             <td><%= profile.sslc_cutoff %>%</td>
                         </tr>
                         <tr>
+                            <td>Mark Sheet</td>
+                            <td><% if(profile.sslc_file) { %>
+                                <div class=" file-field col m12 s12 l12">
+                                    <img class="materialboxed" width="650" src=<%= profile.sslc_file %>>
+                                </div>
+                                <% } %></td>
+                        </tr>
+                        <tr>
                             <td>HSC</td>
                             <td><%= profile.hsc %></td>
                         </tr>
                         <tr>
                             <td>HSC CutOff</td>
                             <td><%= profile.hsc_cutoff %>%</td>
+                        </tr>
+                        <tr>
+                            <td>Mark Sheet</td>
+                            <td><% if(profile.hsc_file) { %>
+                                <div class=" file-field col m12 s12 l12">
+                                    <img class="materialboxed" width="650" src=<%= profile.hsc_file %>>
+                                </div>
+                                <% } %></td>
                         </tr>
                         <% } %>
                         <tr>
@@ -83,24 +94,27 @@
                             <td><%= profile.regulation %></td>
                         </tr>
                       </tbody>
-                </table><br><br>
+                </table><br><br><br>
             </div>
-            <div class="card display-card">
+            
                 <h4><b>SEMESTER SCORES</b></h4>
-                    <table class="responsive-table">
+                   
+                    <% if(profile.Semester_1.later_entry === 'No' && profile.Semester_1.attended === 'Yes') { %>
+                        <div class="card display-card">
+                            <h4><b>SEMESTER I</b></h4><br>
+                        <table class="responsive-table">
                             <thead>
-                              <tr>
-                                  <th>Semester</th>
-                                  <th>Subjects</th>
-                                  <th>Grade</th>
-                                  <th>CGPA</th>
-                                  <th>Arrear</th>
-                              </tr>
+                                <tr>
+                                    <th>Semester</th>
+                                    <th>Subjects</th>
+                                    <th>Grade</th>
+                                    <th>CGPA</th>
+                                    <th>Arrear</th>
+                                </tr>
                             </thead>
                                 <tbody>
-                                    <% if(profile.Semester_1.later_entry === 'No' && profile.Semester_1.attended === 'Yes') { %>
                                     <tr>
-                                      <td rowspan="9"><b>Semester I</b></td>
+                                      <td rowspan="10"><b>Semester I</b></td>
                                       <td>Communicative English  </td>
                                       <td><%= profile.Semester_1.sub1 %></td>
                                       
@@ -138,9 +152,16 @@
                                         <td>Physics and Chemistry Laboratory </td>
                                         <td><%= profile.Semester_1.lab2 %></td>
                                     </tr>
-                                    <!-- <tr>
-                                        <td><img src=<%= profile.Semester_1.s1_file %>></td>
-                                    </tr> -->
+                                    <tr>
+                                        <td>Physics and Chemistry Laboratory </td>
+                                        <td><%= profile.Semester_1.lab2 %></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Mark Sheet</td>
+                                        <td><img class="materialboxed" width="650" src=<%= profile.Semester_1.s1_file %>></td>
+                                    </tr>
+                                    
+                                    
                                     <% } else if (profile.Semester_1.later_entry === 'Yes' && profile.Semester_1.attended === 'No'){ %>
                                         <tr>
                                             <td><b>Semester I - Later Entry</b></td>
@@ -158,7 +179,24 @@
                                                 <td>-</td>
                                             </tr>
                                     <% } %>
+                                </tbody>
+                    </table>
+                </div>
+
                                     <% if(profile.Semester_2.later_entry === 'No' && profile.Semester_2.attended === 'Yes') { %>
+                                        <div class="card display-card">
+                                            <h4><b>SEMESTER II</b></h4><br>
+                                            <table class="responsive-table">
+                                                <thead>
+                                                  <tr>
+                                                      <th>Semester</th>
+                                                      <th>Subjects</th>
+                                                      <th>Grade</th>
+                                                      <th>CGPA</th>
+                                                      <th>Arrear</th>
+                                                  </tr>
+                                                </thead>
+                                                    <tbody>
                                     <tr>
                                         <td rowspan="9"><b>Semester II</b></td>
                                         <td>Technical English</td>
@@ -199,6 +237,9 @@
                                           <td><%= profile.Semester_2.lab2 %></td>
                                       </tr>
                                       <tr>
+                                        <td>Mark Sheet</td>
+                                        <td><img class="materialboxed" width="650" src=<%= profile.Semester_2.s2_file %>></td>
+                                    </tr>
                                     <% } else if (profile.Semester_2.later_entry === 'Yes' && profile.Semester_2.attended === 'No') { %>
                                         <tr>
                                             <td><b>Semester II - Later Entry</b></td>
@@ -216,8 +257,24 @@
                                                 <td>-</td>
                                             </tr>
                                     <% } %>
+                            </tbody>
+                    </table>
+                                        </div>
                                     <% if(profile.Semester_3.later_entry === 'No' && profile.Semester_3.attended === 'Yes') { %>
-                                        <td rowspan="9"><b>Semester III</b></td>
+                                        <div class="card display-card">
+                                            <h4><b>SEMESTER III</b></h4><br>
+                                        <table class="responsive-table">
+                                            <thead>
+                                              <tr>
+                                                  <th>Semester</th>
+                                                  <th>Subjects</th>
+                                                  <th>Grade</th>
+                                                  <th>CGPA</th>
+                                                  <th>Arrear</th>
+                                              </tr>
+                                            </thead>
+                                                <tbody>
+                                        <td rowspan="10"><b>Semester III</b></td>
                                         <td>Discrete Mathematics</td>
                                         <td><%= profile.Semester_3.sub1 %></td>
                                         
@@ -231,14 +288,18 @@
                                           <td><%= profile.Semester_3.sub3 %></td>
                                       </tr>
                                       <tr>
-                                          <td>Data Structures</td>
+                                          <td>Engineering Physics </td>
                                           <td><%= profile.Semester_3.sub4 %></td>
                                           <td><%= profile.Semester_3.gpa %></td>
                                           <td><%= profile.Semester_3.arrear %></td>
                                       </tr>
                                       <tr>
-                                          <td>Communication Engineering</td>
+                                          <td>Data Structures</td>
                                           <td><%= profile.Semester_3.sub5 %></td>
+                                      </tr>
+                                      <tr>
+                                          <td>Communication Engineering</td>
+                                          <td><%= profile.Semester_3.sub6 %></td>
                                       </tr>
                                       <tr>
                                           <td><b>Practicals</b></td>
@@ -254,6 +315,10 @@
                                       <tr>
                                         <td>Interpersonal Skills/Listening & Speaking</td>
                                         <td><%= profile.Semester_3.lab2 %></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Mark Sheet</td>
+                                        <td><img class="materialboxed" width="650" src=<%= profile.Semester_3.s3_file %>></td>
                                     </tr>
                                     <% } else if (profile.Semester_3.later_entry === 'Yes' && profile.Semester_3.attended === 'No') { %>
                                         <tr>
@@ -272,7 +337,23 @@
                                                 <td>-</td>
                                             </tr>
                                     <% } %>
+                            </tbody>
+                    </table>
+                    </div>
                                     <% if(profile.Semester_4.later_entry === 'No' && profile.Semester_4.attended === 'Yes') { %>
+                                        <div class="card display-card">
+                                            <h4><b>SEMESTER IV</b></h4><br>
+                                        <table class="responsive-table">
+                                            <thead>
+                                              <tr>
+                                                  <th>Semester</th>
+                                                  <th>Subjects</th>
+                                                  <th>Grade</th>
+                                                  <th>CGPA</th>
+                                                  <th>Arrear</th>
+                                              </tr>
+                                            </thead>
+                                                <tbody>
                                       <tr>
                                         <td rowspan="10"><b>Semester IV</b></td>
                                         <td>Probability and Queueing Theory</td>
@@ -316,6 +397,10 @@
                                         <td>Advanced Reading and Writing</td>
                                         <td><%= profile.Semester_4.lab3 %></td>
                                     </tr>
+                                    <tr>
+                                        <td>Mark Sheet</td>
+                                        <td><img class="materialboxed" width="650" src=<%= profile.Semester_4.s4_file %>></td>
+                                    </tr>
                                     <% } else if (profile.Semester_4.later_entry === 'Yes' && profile.Semester_4.attended === 'No') { %>
                                         <tr>
                                             <td><b>Semester IV - Later Entry</b></td>
@@ -333,7 +418,23 @@
                                                 <td>-</td>
                                             </tr>
                                     <% } %>
+                            </tbody>
+                    </table>
+                                        </div>
                                     <% if(profile.Semester_5.later_entry === 'No' && profile.Semester_5.attended === 'Yes') { %>
+                                        <div class="card display-card">
+                                            <h4><b>SEMESTER V</b></h4><br>
+                                        <table class="responsive-table">
+                                            <thead>
+                                              <tr>
+                                                  <th>Semester</th>
+                                                  <th>Subjects</th>
+                                                  <th>Grade</th>
+                                                  <th>CGPA</th>
+                                                  <th>Arrear</th>
+                                              </tr>
+                                            </thead>
+                                                <tbody>
                                       <tr>
                                         <td rowspan="10"><b>Semester V</b></td>
                                         <td>Algebra and Number Theory</td>
@@ -378,7 +479,26 @@
                                         <td><%= profile.Semester_5.lab3 %></td>
                                         <td></td>
                                     </tr>
+                                    <tr>
+                                        <td>Mark Sheet</td>
+                                        <td><img class="materialboxed" width="650" src=<%= profile.Semester_5.s5_file %>></td>
+                                    </tr>
+                                    </tbody>
+                                    </table>
                                     <% } else if (profile.Semester_5.later_entry === 'Yes' && profile.Semester_5.attended === 'No') { %>
+                                        <div class="card display-card">
+                                            <h4><b>SEMESTER V</b></h4><br>
+                                        <table class="responsive-table">
+                                            <thead>
+                                              <tr>
+                                                  <th>Semester</th>
+                                                  <th>Subjects</th>
+                                                  <th>Grade</th>
+                                                  <th>CGPA</th>
+                                                  <th>Arrear</th>
+                                              </tr>
+                                            </thead>
+                                                <tbody>
                                         <tr>
                                             <td><b>Semester V - Later Entry</b></td>
                                             <td><%= profile.Semester_5.later_entry %></td>
@@ -386,7 +506,21 @@
                                             <td>-</td>
                                             <td>-</td>
                                         </tr>
+                                                </tbody></table>
                                         <% } else { %>
+                                            <div class="card display-card">
+                                                <h4><b>SEMESTER V</b></h4><br>
+                                            <table class="responsive-table">
+                                                <thead>
+                                                  <tr>
+                                                      <th>Semester</th>
+                                                      <th>Subjects</th>
+                                                      <th>Grade</th>
+                                                      <th>CGPA</th>
+                                                      <th>Arrear</th>
+                                                  </tr>
+                                                </thead>
+                                                    <tbody>
                                             <tr>
                                                 <td><b>Semester V - Attended</b></td>
                                                 <td><%= profile.Semester_5.attended %></td>
@@ -394,8 +528,26 @@
                                                 <td>-</td>
                                                 <td>-</td>
                                             </tr>
+                                        </tbody>
+                                    </table>
                                     <% } %>
+                            
+                                        </div>
+                  
                                     <% if(profile.Semester_6.later_entry === 'No' && profile.Semester_6.attended === 'Yes') { %>
+                                        <div class="card display-card">
+                                            <h4><b>SEMESTER VI</b></h4><br>
+                                        <table class="responsive-table">
+                                            <thead>
+                                              <tr>
+                                                  <th>Semester</th>
+                                                  <th>Subjects</th>
+                                                  <th>Grade</th>
+                                                  <th>CGPA</th>
+                                                  <th>Arrear</th>
+                                              </tr>
+                                            </thead>
+                                                <tbody>
                                     <tr>
                                         <td rowspan="9"><b>Semester VI</b></td>
                                         <td>Compiler Design</td>
@@ -461,9 +613,27 @@
                                             <td ><b>Remarks: </b></td>
                                             <td><%= profile.mini_project.mini_remark %></td> 
                                         </tr>
-                                        </tbody>
-                                     </table>    
+                                        <tr>
+                                            <td>Mark Sheet</td>
+                                            <td><img class="materialboxed" width="650" src=<%= profile.Semester_6.s6_file %>></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                    </div>
                                      <% } else if (profile.Semester_6.later_entry === 'Yes' && profile.Semester_6.attended === 'No') { %>
+                                        <div class="card display-card">
+                                            <h4><b>SEMESTER VI</b></h4><br>
+                                        <table class="responsive-table">
+                                            <thead>
+                                              <tr>
+                                                  <th>Semester</th>
+                                                  <th>Subjects</th>
+                                                  <th>Grade</th>
+                                                  <th>CGPA</th>
+                                                  <th>Arrear</th>
+                                              </tr>
+                                            </thead>
+                                                <tbody>
                                         <tr>
                                             <td><b>Semester VI - Later Entry</b></td>
                                             <td><%= profile.Semester_6.later_entry %></td>
@@ -471,7 +641,22 @@
                                             <td>-</td>
                                             <td>-</td>
                                         </tr>
+                                        </tbody>
+                                        </table>
                                         <% } else { %>
+                                            <div class="card display-card">
+                                                <h4><b>SEMESTER VI</b></h4><br>
+                                            <table class="responsive-table">
+                                                <thead>
+                                                  <tr>
+                                                      <th>Semester</th>
+                                                      <th>Subjects</th>
+                                                      <th>Grade</th>
+                                                      <th>CGPA</th>
+                                                      <th>Arrear</th>
+                                                  </tr>
+                                                </thead>
+                                                    <tbody>
                                             <tr>
                                                 <td><b>Semester VI - Attended</b></td>
                                                 <td><%= profile.Semester_6.attended %></td>
@@ -479,19 +664,26 @@
                                                 <td>-</td>
                                                 <td>-</td>
                                             </tr>
+                                            </tbody>
+                                            </table>
+                                            </div>
                                     <% } %>
-                                    <table class="responsive-table">
-                                        <thead>
-                                          <tr>
-                                              <th>Semester</th>
-                                              <th>Subjects</th>
-                                              <th>Grade</th>
-                                              <th>CGPA</th>
-                                              <th>Arrear</th>
-                                          </tr>
-                                        </thead>
-                                            <tbody>
+                                       
+                                  
                                     <% if(profile.Semester_7.attended === 'Yes') { %>
+                                        <div class="card display-card">
+                                            <h4><b>SEMESTER VII</b></h4><br>
+                                        <table class="responsive-table">
+                                            <thead>
+                                              <tr>
+                                                  <th>Semester</th>
+                                                  <th>Subjects</th>
+                                                  <th>Grade</th>
+                                                  <th>CGPA</th>
+                                                  <th>Arrear</th>
+                                              </tr>
+                                            </thead>
+                                                <tbody>
                                     <tr>
                                         <td rowspan="9"><b>Semester VII</b></td>
                                         <td>Principles of Management</td>
@@ -531,7 +723,26 @@
                                           <td><%= profile.Semester_7.lab2 %></td>
                                           <td></td>
                                       </tr>
+                                      <tr>
+                                        <td>Mark Sheet</td>
+                                        <td><img class="materialboxed" width="650" src=<%= profile.Semester_7.s7_file %>></td>
+                                    </tr>
+                                                </tbody></table>
+                                        </div>
                                       <% } else { %>
+                                        <div class="card display-card">
+                                            <h4><b>SEMESTER VII</b></h4><br>
+                                        <table class="responsive-table">
+                                            <thead>
+                                              <tr>
+                                                  <th>Semester</th>
+                                                  <th>Subjects</th>
+                                                  <th>Grade</th>
+                                                  <th>CGPA</th>
+                                                  <th>Arrear</th>
+                                              </tr>
+                                            </thead>
+                                                <tbody>
                                         <tr>
                                             <td><b>Semester VII - Attended</b></td>
                                             <td><%= profile.Semester_7.attended %></td>
@@ -539,10 +750,14 @@
                                             <td>-</td>
                                             <td>-</td>
                                         </tr>
-                                        </tbody>
-                                    </table>
+                                                </tbody></table>
+                                        </div>
                                     <% } %>
+                                
+                                
                                     <% if(profile.Semester_8.attended === 'Yes') { %>
+                                        <div class="card display-card">
+                                            <h4><b>SEMESTER VIII</b></h4><br>
                                         <table class="responsive-table">
                                             <thead>
                                               <tr>
@@ -584,17 +799,23 @@
                                           <td><%= profile.project_work.name_team %></td> 
                                       </tr>
                                       <tr>
-                                          <td><b>Description: </b></td>
+                                          <td ><b>Description: </b></td>
                                           <td><%= profile.project_work.project_description %></td> 
                                       </tr>
                                       <tr>
                                           <td ><b>Remarks: </b></td>
                                           <td><%= profile.project_work.project_remark %></td> 
                                       </tr>
+                                      <tr>
+                                        <td>Mark Sheet</td>
+                                        <td><img class="materialboxed" width="650" src=<%= profile.Semester_8.s8_file %>></td>
+                                    </tr>
                                       </tbody>
                                    </table>  
-                                   
+                                        </div>  
                                       <% } else { %>
+                                        <div class="card display-card">
+                                            <h4><b>SEMESTER VIII</b></h4><br>
                                         <table class="responsive-table">
                                             <thead>
                                               <tr>
@@ -615,12 +836,13 @@
                                         </tr>
                                         </tbody>
                                         </table>
+                                        </div>
                                     <% } %>
                         </div>
             <div class="card display-card">
                 <h4><b>TECHNICAL ACTIVITIES</b></h4><br>
                 <% profile.technical.map(data => { %>
-                    <% if(data.tech_option === 'Yes') { %>
+                    <% if(data.tech_option === 'Yes' && data.tech_file) { %>
                     <table>
                         <thead>
                             <td><b>Technical Events</b></td>
@@ -647,6 +869,10 @@
                             <td ><b>Remarks: </b></td>
                             <td><%= data.technical_remark %></td> 
                         </tr>
+                        <tr>
+                            <td ><b>Certificate: </b></td>
+                            <td><img class="materialboxed" width="650" src=<%= data.tech_file %>></td>
+                        </tr>
                         </tbody>
                      </table><br><br>
                      <%} else {%>
@@ -668,7 +894,7 @@
             <div class="card display-card">
                 <h4><b>SPORTS ACTIVITIES</b></h4><br>
                 <% profile.sports.map(data => { %>
-                    <% if(data.sports_option === 'Yes') { %>
+                    <% if(data.sports_option === 'Yes' && data.sport_file) { %>
                     <table>
                         <thead>
                             <td><b>Sports Events</b></td>
@@ -686,6 +912,10 @@
                         <tr>
                             <td ><b>Remarks: </b></td>
                             <td><%= data.sports_remark %></td> 
+                        </tr>
+                        <tr>
+                            <td ><b>Certificate: </b></td>
+                            <td><img class="materialboxed" width="650" src=<%= data.sport_file %>></td>
                         </tr>
                         </tbody>
                      </table><br><br>
@@ -705,12 +935,15 @@
                             <%}%>
                     <%})%>
             </div>
-        <form action="/download" method="post" target="_blank" style='width: 100%'>
-            <button type='submit' class="waves-effect waves-light btn-large">Download PDF</button>
-            <a class="waves-effect waves-purple btn-large" href="/feedback">feedback</a>
+        <form action="/staffs_auth_yes/<%= profile.register_id %>" method="post" style='width: 100%'>
+            <button type='submit' style="background-color: rgb(37, 201, 65);" class="waves-effect waves-light btn-large">Approve</button>
         </form><br>
-</div>
-</div>
+        <form action="/staffs_auth_no/<%= profile.register_id %>" method="post" style='width: 100%'>
+            <button type='submit' style="background-color: rgb(201, 37, 59);" class="waves-effect waves-light btn-large">Reject</button>
+        </form><br><br><br>
 <script>
+$(document).ready(function () {
+        $('.materialboxed').materialbox();
+    });
 </script>
 <%- include('partials/footer.ejs'); -%>

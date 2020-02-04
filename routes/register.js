@@ -66,14 +66,14 @@ router.post('/', async (req, res) => {
 
             transporter.sendMail(mailOptions, function (error, info) {
                 if (error) {
-                    res.redirect('/students_error')
+                    res.redirect('/error')
                 } else {
 
                 }
             });
             // sendgrid_mail.send(email)
         } catch (err) {
-            res.redirect('/students_error');
+            res.redirect('/error');
         }
         res.redirect('/students_sent');
     }

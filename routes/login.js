@@ -57,9 +57,7 @@ router.post('/', async (req, res) => {
 
                     transporter.sendMail(mailOptions, function (error, info) {
                         if (error) {
-                            res.redirect('/students_error')
-                        } else {
-
+                            res.redirect('/error')
                         }
                     });
                 })();
@@ -71,7 +69,6 @@ router.post('/', async (req, res) => {
             }
         } catch (err) {
             res.render('feonbnkkkujnxdkrqgouhqpsiaarpsfhekrpgwvuscmdtfvcpokzegryacvzsdha', {
-                addOn: 'add',
                 header: "Login - Student Database"
             })
         }

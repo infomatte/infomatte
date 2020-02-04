@@ -23,8 +23,8 @@
                 </i><br>LOGIN</h4>
             <form action='/students_feonbnkkkujnxdkrqgouhqpsiaarpsfhekrpgwvuscmdtfvcpokzegryacvzsdha' method='post'>
                 <div class="input-field col s12">
-                    <input type='number' name='id' id='nadid' required class="validate">
-                    <label for="nadid">Register ID</label>
+                    <input type='number' name='id' id='register_id' required class="validate">
+                    <label for="register_id">Register ID</label>
                     <span class="helper-text" data-error="ID is required*"></span>
                 </div>
                 <div class="input-field col s12">
@@ -38,8 +38,8 @@
     </div>
 </div>
 <script>
-    $('#nadid').change(() => {
-        if ($('#nadid').val().toString().length !== 12) {
+    $('#register_id').change(() => {
+        if ($('#register_id').val().toString().length !== 12) {
             swal({
                 title: "ID is Invalid",
                 icon: "error",

@@ -21,7 +21,7 @@ router.post('/', async (req, res) => {
             useCreateIndex: true
         },
         async (err, client) => {
-            let db = client.db('mainStore')
+            let db = client.db('datastore')
             let collection = db.collection('feedback')
             await collection.insertOne(feedback);
         })

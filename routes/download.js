@@ -10,7 +10,7 @@ const mongodb = require('mongodb');
 const mongoClient = mongodb.MongoClient
 const Binary = mongodb.Binary
 
-router.get('/students_error', async (req, res) => {
+router.get('/error', async (req, res) => {
     res.render('error', {
         header: "Internal Server Error"
     })
@@ -57,7 +57,7 @@ router.get('/', async (req, res) => {
                         };
                         pdf.create(data, options).toBuffer(function (err, data) {
                             if (err) {
-                                res.redirect('/students_download', {
+                                res.render('/students_download', {
                                     profile: profile,
                                     header: 'Download Details'
                                 });
@@ -75,14 +75,14 @@ router.get('/', async (req, res) => {
                         });
                     }
                 });
-                res.render('download', {
+                res.render('students_download', {
                     profile: profile,
                     header: 'Download details'
                 });
             }
         });
     } else {
-        res.redirect('/students_feonbnkkkujnxdkrqgouhqpsiaarpsfhekrpgwvuscmdtfvcpokzegryacvzsdha')
+        res.redirect(200, '/students_feonbnkkkujnxdkrqgouhqpsiaarpsfhekrpgwvuscmdtfvcpokzegryacvzsdha')
     }
 });
 
@@ -96,7 +96,7 @@ router.post('/', async (req, res) => {
             useCreateIndex: true
         },
         async (err, client) => {
-            let db = client.db('mainStore')
+            let db = client.db('datastore')
             let collection = db.collection('storage')
             collection.findOne({
                 nad: ref_nad
@@ -104,8 +104,9 @@ router.post('/', async (req, res) => {
                 if (err) {
 
                 } else {
-                    res.setHeader('content-type', 'application/json')
-                    res.setHeader('content-disposition', 'inline; filename="' + data.na + '"')
+                    console.log(data)
+                    res.setHeader('content-type', 'application/pdf')
+                    res.setHeader('content-disposition', 'inline; filename="' + data.nad + '"')
                     toStream(data.file.buffer).pipe(res)
                 }
             });
@@ -125,7 +126,7 @@ async function insertFile(file, res) {
             useCreateIndex: true
         },
         async (err, client) => {
-            let db = client.db('mainStore')
+            let db = client.db('datastore')
             let collection = db.collection('storage')
             collection.findOne({
                 nad: file.nad
@@ -148,7 +149,7 @@ async function insertFile(file, res) {
                             upsert: true
                         });
                     } catch (err) {
-                        res.redirect('/students_error');
+                        res.redirect('/error');
                     }
                 }
                 client.close(true)
