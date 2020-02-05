@@ -10,10 +10,10 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-    const emailExist = await User.findOne({
-        mail: req.body.mail
-    });
-    if (emailExist) {
+    // const emailExist = await User.findOne({
+    //     mail: req.body.mail
+    // });
+    if (false) {
         return res.status(400)
             .redirect('/students_emailExist');
     } else {

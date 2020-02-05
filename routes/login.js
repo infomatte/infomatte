@@ -26,7 +26,7 @@ router.post('/', async (req, res) => {
     switch(req.body.branch){
         case 'CSE':
             await CSE.findOne({
-                nad: req.body.id,
+                register_id: req.body.id,
                 dob: req.body.date
             }, (err, data) => {
                 try {

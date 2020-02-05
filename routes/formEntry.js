@@ -35,7 +35,7 @@ router.get('/', async (req, res) => {
         switch(Branch){
             case 'CSE':
                  await CSE.findOne({
-                        nad: data.nad
+                        register_id: data.nad
                     }, (err, hold) => {
                         if (err) {
                             res.render('formEntry', {
@@ -141,7 +141,7 @@ router.get('/', async (req, res) => {
                 break
             case 'ECE':
                 await ECE.findOne({
-            nad: data.nad
+                    register_id: data.nad
         }, (err, hold) => {
             if (err) {
                 res.render('formEntry', {
@@ -247,7 +247,7 @@ router.get('/', async (req, res) => {
                 break
             case 'EEE':
                 await EEE.findOne({
-            nad: data.nad
+                    register_id: data.nad
         }, (err, hold) => {
             if (err) {
                 res.render('formEntry', {
@@ -353,7 +353,7 @@ router.get('/', async (req, res) => {
                 break
             case 'MECH':
                 await MECH.findOne({
-            nad: data.nad
+                    register_id: data.nad
         }, (err, hold) => {
             if (err) {
                 res.render('formEntry', {

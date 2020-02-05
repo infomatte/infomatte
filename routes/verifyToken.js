@@ -25,9 +25,9 @@ router.get('/:token', async (req, res) => {
             }, async (userField) => {
                 try {
                     if (expValue / 60 <= 6) {
-                        const user = new User({
+                        const user = new CSE({
                             name: name,
-                            nad: nad,
+                            register_id: nad,
                             autherized: 'No',
                             mail: mail,
                             dob: dob,
@@ -42,7 +42,8 @@ router.get('/:token', async (req, res) => {
                         await user.save();
                         res.render('user_verify', {
                             myid: nad,
-                            mydob: dob
+                            mydob: dob,
+                            branch: data.branch
                         });
                     }
                 } catch (e) {
@@ -58,9 +59,9 @@ router.get('/:token', async (req, res) => {
             }, async (userField) => {
                 try {
                     if (expValue / 60 <= 6) {
-                        const user = new User({
+                        const user = new ECE({
                             name: name,
-                            nad: nad,
+                            register_id: nad,
                             autherized: 'No',
                             mail: mail,
                             dob: dob,
@@ -75,7 +76,8 @@ router.get('/:token', async (req, res) => {
                         await user.save();
                         res.render('user_verify', {
                             myid: nad,
-                            mydob: dob
+                            mydob: dob,
+                            branch: data.branch
                         });
                     }
                 } catch (e) {
@@ -91,9 +93,9 @@ router.get('/:token', async (req, res) => {
             }, async (userField) => {
                 try {
                     if (expValue / 60 <= 6) {
-                        const user = new User({
+                        const user = new EEE({
                             name: name,
-                            nad: nad,
+                            register_id: nad,
                             autherized: 'No',
                             mail: mail,
                             dob: dob,
@@ -108,7 +110,8 @@ router.get('/:token', async (req, res) => {
                         await user.save();
                         res.render('user_verify', {
                             myid: nad,
-                            mydob: dob
+                            mydob: dob,
+                            branch: data.branch
                         });
                     }
                 } catch (e) {
@@ -124,9 +127,9 @@ router.get('/:token', async (req, res) => {
             }, async (userField) => {
                 try {
                     if (expValue / 60 <= 6) {
-                        const user = new User({
+                        const user = new MECH({
                             name: name,
-                            nad: nad,
+                            register_id: nad,
                             autherized: 'No',
                             mail: mail,
                             dob: dob,
@@ -141,7 +144,8 @@ router.get('/:token', async (req, res) => {
                         await user.save();
                         res.render('user_verify', {
                             myid: nad,
-                            mydob: dob
+                            mydob: dob,
+                            branch: data.branch
                         });
                     }
                 } catch (e) {
