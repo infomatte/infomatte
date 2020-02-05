@@ -2,8 +2,6 @@ const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer')
-const User = require('../model/User');
-
 
 router.get('/', (req, res) => {
     res.render('register', {
@@ -27,23 +25,13 @@ router.post('/', async (req, res) => {
             nad: req.body.id,
             dob: req.body.date,
             mail: req.body.mail,
-            name: req.body.username
+            name: req.body.username,
+            branch:req.body.branch
         }, process.env.TOKEN_SECRET, {
             expiresIn: '6h'
         });
         res.cookie('TOKEN', token, expiration);
         try {
-            // const email = {
-            //     to: req.body.mail,
-            //     from: 'ucekcsedb@gmail.com',
-            //     subject: `Hello, ${req.body.username}. Verification Mail from UCEK`,
-            //     html: `<div style="text-align: center">
-            // <h2>Univeristy college of Engineering - Kancheepuram</h4>
-            // <h4>Department of Computer Science and Engineering</h5><br>
-            // <p>Please confirm your Mail ID within 2 hours! Otherwise, your licence will be revoked.</p><br>
-            // <p>Once you get verified using this Email, this Mail will become invalid!</p><br>
-            // <button style="padding:10px 20px;background:#4f37b9;border-radius: 20px;border:1px solid #4f37b9"><a style="text-decoration: none; color: white" href="${fullUrl}/verify_email/${token}">Verify Me!</a></button></div>`
-            // };
             const transporter = nodemailer.createTransport({
                 service: 'gmail',
                 auth: {

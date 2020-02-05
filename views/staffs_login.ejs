@@ -5,26 +5,27 @@
             fill="#200B76" />
     </svg>
 </div>
+
 <div class="navbar-fixed">
     <nav>
         <div class="container">
             <div class="nav-wrapper">
-                <a href="#!" class="brand-logo">im.</a>
+                <a href="" class="brand-logo">im.</a>
             </div>
         </div>
     </nav>
 </div>
-
 <div class="container">
     <div data-aos="fade-up">
         <div class="card credential_cards animated fadeInUp">
             <h4><i class="material-icons medium">
                     trip_origin
                 </i><br>LOGIN</h4>
-            <form action='/students_feonbnkkkujnxdkrqgouhqpsiaarpsfhekrpgwvuscmdtfvcpokzegryacvzsdha' method='post'>
+            <form action='/staffs_login' method='post'>
+                <div class="row">
                 <div class="input-field col s12">
-                    <input type='number' name='id' id='nadid' required class="validate">
-                    <label for="nadid">Register ID</label>
+                    <input type='number' name='id' id='ranId' required class="validate">
+                    <label for="ranId">ID</label>
                     <span class="helper-text" data-error="ID is required*"></span>
                 </div>
                 <div class="input-field col s12">
@@ -38,18 +39,19 @@
                     <label>Department</label>
                 </div><br>
                 <div class="input-field col s12">
-                    <input type='date' name='date' class='datepicker' id='mydate' required class="validate">
-                    <label for="mydate">Date of Birth</label>
-                    <span class="helper-text" data-error="DOB is required*" data-success="Valid"></span>
+                    <input type='password' name='pass' id='mypass' required class="validate">
+                    <label for="mypass">Password</label>
+                    <span class="helper-text" data-error="Password is required*" data-success="Valid"></span>
                 </div><br>
+            </div>
                 <button class="waves-effect waves-light btn-large send" type='submit'>LOGIN</button>
             </form>
         </div>
     </div>
 </div>
 <script>
-    $('#nadid').change(() => {
-        if ($('#nadid').val().toString().length !== 12) {
+    $('#ranId').change(() => {
+        if ($('#ranId').val().toString().length !== 6) {
             swal({
                 title: "ID is Invalid",
                 icon: "error",
@@ -62,4 +64,5 @@
     $('select').formSelect();
   });
 </script>
+
 <%- include('partials/footer.ejs'); -%>

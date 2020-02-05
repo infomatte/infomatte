@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../model/User');
+const CSE = require('../model/CSE');
+const ECE = require('../model/ECE');
+const EEE = require('../model/EEE');
+const MECH = require('../model/MECH');
 const jwt = require('jsonwebtoken');
 const cloudinary = require('cloudinary').v2;
 cloudinary.config({
@@ -18,6 +21,7 @@ router.get('/', async (req, res) => {
     const token = req.cookies.TOKEN;
     if (token) {
         const data = jwt.decode(token, process.env.TOKEN_SECRET);
+        const Branch = data.branch;
         const d1 = new Date();
         const year0 = d1.getFullYear();
         const d = new Date(year0, 4, 25);
@@ -28,7 +32,115 @@ router.get('/', async (req, res) => {
         // const second_year = new Date(year-1, d.getMonth(), d.getDate())
         // const third_year = new Date(year-2, d.getMonth(), d.getDate())
         // const fourth_year = new Date(year-3, d.getMonth(), d.getDate())
-        await User.findOne({
+        switch(Branch){
+            case 'CSE':
+                 await CSE.findOne({
+                        nad: data.nad
+                    }, (err, hold) => {
+                        if (err) {
+                            res.render('formEntry', {
+                                myid: data.nad,
+                                mydob: data.dob,
+                                mymail: '',
+                                myname: '',
+                                mynation: '',
+                                myph: '',
+                                myaddress: '',
+                                later_entry: '',
+                                mysslc: '',
+                                mysslc_cutoff: '',
+                                branch: Branch,     
+                                myhsc_cutoff: '',
+                                hsc_file: '',
+                                mybranch: '',
+                                myyearofJoining: '',
+                                myregulation: '',
+                                year1: first_year,
+                                year2: second_year,
+                                year3: third_year,
+                                year4: fourth_year,
+                                header: 'Student Information'
+                            });
+                        } else {
+                            if (hold.later_entry === 'No') {
+                                res.render('formEntry', {
+                                    myid: hold.nad,
+                                    mydob: hold.dob,
+                                    mymail: hold.mail,
+                                    myname: hold.name,
+                                    mynation: hold.nationality,
+                                    myph: hold.phone_no,
+                                    myaddress: hold.address,
+                                    later_entry: hold.later_entry,
+                                    mysslc: hold.sslc,
+                                    mysslc_cutoff: hold.sslc_cutoff,
+                                    sslc_file: hold.sslc_file,
+                                    sslc_size: hold.sslc_size,
+                                    myhsc: hold.hsc,
+                                    myhsc_cutoff: hold.hsc_cutoff,
+                                    hsc_file: hold.hsc_file,
+                                    hsc_size: hold.hsc_size,
+                                    mybranch: hold.branch,
+                                    myyearofJoining: hold.yearofJoining,
+                                    myregulation: hold.regulation,
+                                    year1: first_year,
+                                    year2: second_year,
+                                    year3: third_year,
+                                    year4: fourth_year,
+                                    header: 'Student Information'
+                                });
+                            } else if (hold.later_entry === 'Yes') {
+                                res.render('formEntry', {
+                                    myid: hold.nad,
+                                    mydob: hold.dob,
+                                    mymail: hold.mail,
+                                    myname: hold.name,
+                                    mynation: hold.nationality,
+                                    myph: hold.phone_no,
+                                    myaddress: hold.address,
+                                    later_entry: hold.later_entry,
+                                    mybranch: hold.branch,
+                                    myyearofJoining: hold.yearofJoining,
+                                    myregulation: hold.regulation,
+                                    year1: first_year,
+                                    year2: second_year,
+                                    year3: third_year,
+                                    year4: fourth_year,
+                                    header: 'Student Information'
+                                });
+                            } else {
+                                res.render('formEntry', {
+                                    myname: hold.name,
+                                    myid: data.nad,
+                                    mydob: data.dob,
+                                    mymail: hold.mail,
+                                    mymail: '',
+                                    myname: '',
+                                    mynation: '',
+                                    myph: '',
+                                    myaddress: '',
+                                    later_entry: '',
+                                    mysslc: '',
+                                    mysslc_cutoff: '',
+                                    sslc_file: '',
+                                    myhsc: '',
+                                    myhsc_cutoff: '',
+                                    hsc_file: '',
+                                    mybranch: '',
+                                    myyearofJoining: '',
+                                    myregulation: '',
+                                    year1: first_year,
+                                    year2: second_year,
+                                    year3: third_year,
+                                    year4: fourth_year,
+                                    header: 'Student Information'
+                                });
+                           }
+                        }
+                    });
+                break
+            case 'ECE':
+                await ECE.findOne({
             nad: data.nad
         }, (err, hold) => {
             if (err) {
@@ -42,9 +154,8 @@ router.get('/', async (req, res) => {
                     myaddress: '',
                     later_entry: '',
                     mysslc: '',
-                    mysslc_cutoff: '',
-                    sslc_file: '',
-                    myhsc: '',
+                    mysslc_cutoff: '',        
+                    branch: req.body.branch,
                     myhsc_cutoff: '',
                     hsc_file: '',
                     mybranch: '',
@@ -130,9 +241,327 @@ router.get('/', async (req, res) => {
                         year4: fourth_year,
                         header: 'Student Information'
                     });
-                }
+               }
             }
-        })
+        });
+                break
+            case 'EEE':
+                await EEE.findOne({
+            nad: data.nad
+        }, (err, hold) => {
+            if (err) {
+                res.render('formEntry', {
+                    myid: data.nad,
+                    mydob: data.dob,
+                    mymail: '',
+                    myname: '',
+                    mynation: '',
+                    myph: '',
+                    myaddress: '',
+                    later_entry: '',
+                    mysslc: '',
+                    mysslc_cutoff: '',        
+                    branch: req.body.branch,
+                    myhsc_cutoff: '',
+                    hsc_file: '',
+                    mybranch: '',
+                    myyearofJoining: '',
+                    myregulation: '',
+                    year1: first_year,
+                    year2: second_year,
+                    year3: third_year,
+                    year4: fourth_year,
+                    header: 'Student Information'
+                });
+            } else {
+                if (hold.later_entry === 'No') {
+                    res.render('formEntry', {
+                        myid: hold.nad,
+                        mydob: hold.dob,
+                        mymail: hold.mail,
+                        myname: hold.name,
+                        mynation: hold.nationality,
+                        myph: hold.phone_no,
+                        myaddress: hold.address,
+                        later_entry: hold.later_entry,
+                        mysslc: hold.sslc,
+                        mysslc_cutoff: hold.sslc_cutoff,
+                        sslc_file: hold.sslc_file,
+                        sslc_size: hold.sslc_size,
+                        myhsc: hold.hsc,
+                        myhsc_cutoff: hold.hsc_cutoff,
+                        hsc_file: hold.hsc_file,
+                        hsc_size: hold.hsc_size,
+                        mybranch: hold.branch,
+                        myyearofJoining: hold.yearofJoining,
+                        myregulation: hold.regulation,
+                        year1: first_year,
+                        year2: second_year,
+                        year3: third_year,
+                        year4: fourth_year,
+                        header: 'Student Information'
+                    });
+                } else if (hold.later_entry === 'Yes') {
+                    res.render('formEntry', {
+                        myid: hold.nad,
+                        mydob: hold.dob,
+                        mymail: hold.mail,
+                        myname: hold.name,
+                        mynation: hold.nationality,
+                        myph: hold.phone_no,
+                        myaddress: hold.address,
+                        later_entry: hold.later_entry,
+                        mybranch: hold.branch,
+                        myyearofJoining: hold.yearofJoining,
+                        myregulation: hold.regulation,
+                        year1: first_year,
+                        year2: second_year,
+                        year3: third_year,
+                        year4: fourth_year,
+                        header: 'Student Information'
+                    });
+                } else {
+                    res.render('formEntry', {
+                        myname: hold.name,
+                        myid: data.nad,
+                        mydob: data.dob,
+                        mymail: hold.mail,
+                        mymail: '',
+                        myname: '',
+                        mynation: '',
+                        myph: '',
+                        myaddress: '',
+                        later_entry: '',
+                        mysslc: '',
+                        mysslc_cutoff: '',
+                        sslc_file: '',
+                        myhsc: '',
+                        myhsc_cutoff: '',
+                        hsc_file: '',
+                        mybranch: '',
+                        myyearofJoining: '',
+                        myregulation: '',
+                        year1: first_year,
+                        year2: second_year,
+                        year3: third_year,
+                        year4: fourth_year,
+                        header: 'Student Information'
+                    });
+               }
+            }
+        });
+                break
+            case 'MECH':
+                await MECH.findOne({
+            nad: data.nad
+        }, (err, hold) => {
+            if (err) {
+                res.render('formEntry', {
+                    myid: data.nad,
+                    mydob: data.dob,
+                    mymail: '',
+                    myname: '',
+                    mynation: '',
+                    myph: '',
+                    myaddress: '',
+                    later_entry: '',
+                    mysslc: '',
+                    mysslc_cutoff: '',        
+                    branch: req.body.branch,
+                    myhsc_cutoff: '',
+                    hsc_file: '',
+                    mybranch: '',
+                    myyearofJoining: '',
+                    myregulation: '',
+                    year1: first_year,
+                    year2: second_year,
+                    year3: third_year,
+                    year4: fourth_year,
+                    header: 'Student Information'
+                });
+            } else {
+                if (hold.later_entry === 'No') {
+                    res.render('formEntry', {
+                        myid: hold.nad,
+                        mydob: hold.dob,
+                        mymail: hold.mail,
+                        myname: hold.name,
+                        mynation: hold.nationality,
+                        myph: hold.phone_no,
+                        myaddress: hold.address,
+                        later_entry: hold.later_entry,
+                        mysslc: hold.sslc,
+                        mysslc_cutoff: hold.sslc_cutoff,
+                        sslc_file: hold.sslc_file,
+                        sslc_size: hold.sslc_size,
+                        myhsc: hold.hsc,
+                        myhsc_cutoff: hold.hsc_cutoff,
+                        hsc_file: hold.hsc_file,
+                        hsc_size: hold.hsc_size,
+                        mybranch: hold.branch,
+                        myyearofJoining: hold.yearofJoining,
+                        myregulation: hold.regulation,
+                        year1: first_year,
+                        year2: second_year,
+                        year3: third_year,
+                        year4: fourth_year,
+                        header: 'Student Information'
+                    });
+                } else if (hold.later_entry === 'Yes') {
+                    res.render('formEntry', {
+                        myid: hold.nad,
+                        mydob: hold.dob,
+                        mymail: hold.mail,
+                        myname: hold.name,
+                        mynation: hold.nationality,
+                        myph: hold.phone_no,
+                        myaddress: hold.address,
+                        later_entry: hold.later_entry,
+                        mybranch: hold.branch,
+                        myyearofJoining: hold.yearofJoining,
+                        myregulation: hold.regulation,
+                        year1: first_year,
+                        year2: second_year,
+                        year3: third_year,
+                        year4: fourth_year,
+                        header: 'Student Information'
+                    });
+                } else {
+                    res.render('formEntry', {
+                        myname: hold.name,
+                        myid: data.nad,
+                        mydob: data.dob,
+                        mymail: hold.mail,
+                        mymail: '',
+                        myname: '',
+                        mynation: '',
+                        myph: '',
+                        myaddress: '',
+                        later_entry: '',
+                        mysslc: '',
+                        mysslc_cutoff: '',
+                        sslc_file: '',
+                        myhsc: '',
+                        myhsc_cutoff: '',
+                        hsc_file: '',
+                        mybranch: '',
+                        myyearofJoining: '',
+                        myregulation: '',
+                        year1: first_year,
+                        year2: second_year,
+                        year3: third_year,
+                        year4: fourth_year,
+                        header: 'Student Information'
+                    });
+               }
+            }
+        });
+                break
+        }
+        // await Branch.findOne({
+        //     nad: data.nad
+        // }, (err, hold) => {
+        //     if (err) {
+        //         res.render('formEntry', {
+        //             myid: data.nad,
+        //             mydob: data.dob,
+        //             mymail: '',
+        //             myname: '',
+        //             mynation: '',
+        //             myph: '',
+        //             myaddress: '',
+        //             later_entry: '',
+        //             mysslc: '',
+        //             mysslc_cutoff: '',        branch: req.body.branch
+
+        //             myhsc_cutoff: '',
+        //             hsc_file: '',
+        //             mybranch: '',
+        //             myyearofJoining: '',
+        //             myregulation: '',
+        //             year1: first_year,
+        //             year2: second_year,
+        //             year3: third_year,
+        //             year4: fourth_year,
+        //             header: 'Student Information'
+        //         });
+        //     } else {
+        //         if (hold.later_entry === 'No') {
+        //             res.render('formEntry', {
+        //                 myid: hold.nad,
+        //                 mydob: hold.dob,
+        //                 mymail: hold.mail,
+        //                 myname: hold.name,
+        //                 mynation: hold.nationality,
+        //                 myph: hold.phone_no,
+        //                 myaddress: hold.address,
+        //                 later_entry: hold.later_entry,
+        //                 mysslc: hold.sslc,
+        //                 mysslc_cutoff: hold.sslc_cutoff,
+        //                 sslc_file: hold.sslc_file,
+        //                 sslc_size: hold.sslc_size,
+        //                 myhsc: hold.hsc,
+        //                 myhsc_cutoff: hold.hsc_cutoff,
+        //                 hsc_file: hold.hsc_file,
+        //                 hsc_size: hold.hsc_size,
+        //                 mybranch: hold.branch,
+        //                 myyearofJoining: hold.yearofJoining,
+        //                 myregulation: hold.regulation,
+        //                 year1: first_year,
+        //                 year2: second_year,
+        //                 year3: third_year,
+        //                 year4: fourth_year,
+        //                 header: 'Student Information'
+        //             });
+        //         } else if (hold.later_entry === 'Yes') {
+        //             res.render('formEntry', {
+        //                 myid: hold.nad,
+        //                 mydob: hold.dob,
+        //                 mymail: hold.mail,
+        //                 myname: hold.name,
+        //                 mynation: hold.nationality,
+        //                 myph: hold.phone_no,
+        //                 myaddress: hold.address,
+        //                 later_entry: hold.later_entry,
+        //                 mybranch: hold.branch,
+        //                 myyearofJoining: hold.yearofJoining,
+        //                 myregulation: hold.regulation,
+        //                 year1: first_year,
+        //                 year2: second_year,
+        //                 year3: third_year,
+        //                 year4: fourth_year,
+        //                 header: 'Student Information'
+        //             });
+        //         } else {
+        //             res.render('formEntry', {
+        //                 myname: hold.name,
+        //                 myid: data.nad,
+        //                 mydob: data.dob,
+        //                 mymail: hold.mail,
+        //                 mymail: '',
+        //                 myname: '',
+        //                 mynation: '',
+        //                 myph: '',
+        //                 myaddress: '',
+        //                 later_entry: '',
+        //                 mysslc: '',
+        //                 mysslc_cutoff: '',
+        //                 sslc_file: '',
+        //                 myhsc: '',
+        //                 myhsc_cutoff: '',
+        //                 hsc_file: '',
+        //                 mybranch: '',
+        //                 myyearofJoining: '',
+        //                 myregulation: '',
+        //                 year1: first_year,
+        //                 year2: second_year,
+        //                 year3: third_year,
+        //                 year4: fourth_year,
+        //                 header: 'Student Information'
+        //             });
+        //        }
+        //     }
+        //});
     } else {
         res.redirect('/students_feonbnkkkujnxdkrqgouhqpsiaarpsfhekrpgwvuscmdtfvcpokzegryacvzsdha')
     }

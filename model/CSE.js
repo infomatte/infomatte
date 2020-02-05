@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
 const Float = require('mongoose-float').loadType(mongoose);
 
-const userSchema = new mongoose.Schema({
+const studentSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
     },
-    nad: {
+    register_id: {
         type: String,
         required: true,
         unique: true
@@ -235,4 +235,4 @@ const userSchema = new mongoose.Schema({
     timestamps: true
 });
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('CSE', studentSchema);
