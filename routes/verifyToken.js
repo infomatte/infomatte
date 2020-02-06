@@ -13,21 +13,21 @@ router.get('/:token', async (req, res) => {
     const exp = data.exp;
     const iat = data.iat;
     const name = data.name;
-    const nad = data.nad;
+    const register_id = data.register_id;
     const dob = data.dob;
     const mail = data.mail;
     const expValue = (exp - iat) / 60;
-    switch(data.branch){
+    switch (data.branch) {
         case 'CSE':
             await CSE.findOne({
-                nad,
+                register_id,
                 dob
             }, async (userField) => {
                 try {
                     if (expValue / 60 <= 6) {
                         const user = new CSE({
                             name: name,
-                            register_id: nad,
+                            register_id: register_id,
                             autherized: 'No',
                             mail: mail,
                             dob: dob,
@@ -35,13 +35,13 @@ router.get('/:token', async (req, res) => {
                             nationality: null,
                             phone_no: null,
                             address: null,
-                            branch: null,
+                            branch: data.branch,
                             yearofJoining: null,
                             regulation: null,
                         });
                         await user.save();
                         res.render('user_verify', {
-                            myid: nad,
+                            myid: register_id,
                             mydob: dob,
                             branch: data.branch
                         });
@@ -50,18 +50,18 @@ router.get('/:token', async (req, res) => {
                     console.log(e)
                     res.redirect('/students_verifyExist')
                 }
-            });    
-        break
+            });
+            break
         case 'ECE':
             await ECE.findOne({
-                nad,
+                register_id,
                 dob
             }, async (userField) => {
                 try {
                     if (expValue / 60 <= 6) {
                         const user = new ECE({
                             name: name,
-                            register_id: nad,
+                            register_id: register_id,
                             autherized: 'No',
                             mail: mail,
                             dob: dob,
@@ -69,13 +69,13 @@ router.get('/:token', async (req, res) => {
                             nationality: null,
                             phone_no: null,
                             address: null,
-                            branch: null,
+                            branch: data.branch,
                             yearofJoining: null,
                             regulation: null,
                         });
                         await user.save();
                         res.render('user_verify', {
-                            myid: nad,
+                            myid: register_id,
                             mydob: dob,
                             branch: data.branch
                         });
@@ -84,11 +84,11 @@ router.get('/:token', async (req, res) => {
                     console.log(e)
                     res.redirect('/students_verifyExist')
                 }
-            });    
-        break
+            });
+            break
         case 'EEE':
             await EEE.findOne({
-                nad,
+                register_id,
                 dob
             }, async (userField) => {
                 try {
@@ -103,13 +103,13 @@ router.get('/:token', async (req, res) => {
                             nationality: null,
                             phone_no: null,
                             address: null,
-                            branch: null,
+                            branch: data.branch,
                             yearofJoining: null,
                             regulation: null,
                         });
                         await user.save();
                         res.render('user_verify', {
-                            myid: nad,
+                            myid: register_id,
                             mydob: dob,
                             branch: data.branch
                         });
@@ -118,18 +118,18 @@ router.get('/:token', async (req, res) => {
                     console.log(e)
                     res.redirect('/students_verifyExist')
                 }
-            });    
-        break
+            });
+            break
         case 'MECH':
             await MECH.findOne({
-                nad,
+                register_id,
                 dob
             }, async (userField) => {
                 try {
                     if (expValue / 60 <= 6) {
                         const user = new MECH({
                             name: name,
-                            register_id: nad,
+                            register_id: register_id,
                             autherized: 'No',
                             mail: mail,
                             dob: dob,
@@ -137,13 +137,13 @@ router.get('/:token', async (req, res) => {
                             nationality: null,
                             phone_no: null,
                             address: null,
-                            branch: null,
+                            branch: data.branch,
                             yearofJoining: null,
                             regulation: null,
                         });
                         await user.save();
                         res.render('user_verify', {
-                            myid: nad,
+                            myid: register_id,
                             mydob: dob,
                             branch: data.branch
                         });
@@ -152,8 +152,8 @@ router.get('/:token', async (req, res) => {
                     console.log(e)
                     res.redirect('/students_verifyExist')
                 }
-            });    
-        break
+            });
+            break
     }
 });
 

@@ -43,14 +43,14 @@
                         <span class="helper-text" data-error="Name is required*" data-success="Valid"></span>
                     </div>
                     <div class="input-field col m6 s12 l6">
-                        <input type="number" name="id" id='myid' class="validate" required value=<%= myid %>>
+                        <input type="number" name="id" id='myid' readonly class="validate" required value=<%= myid %>>
                         <label for="myid">Registration ID</label>
                         <span class="helper-text" data-error="ID is required*" data-success="Valid"></span>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col m6 s12 l6">
-                        <input type="text" name="date" id='mydob' required value=<%= mydob %>>
+                        <input type="text" name="date" id='mydob' readonly required value=<%= mydob %>>
                         <label for="mydob">Date of Birth</label>
                         <span class="helper-text" data-error="DOB is required*" data-success="Valid"></span>
                     </div>
@@ -141,7 +141,7 @@
                         <% if(!(hsc_file)) { %>
                         <div class="input-field file-field col m12 s12 l12">
                             <div class="btn-large">
-                                <span style="color:white">File</span>
+                                <span style="color:white">Certificate</span>
                                 <input type="file" name="hsc_file" onchange="ValidateHscSize(this)">
                                 <span class="helper-text" data-error="Required*" data-success="Valid"></span>
                             </div>
@@ -173,7 +173,7 @@
                         </div>
                         <div class="input-field file-field col m12 s12 l12">
                             <div class="btn-large">
-                                <span style="color:white">File</span>
+                                <span style="color:white">Certificate</span>
                                 <input type="file" name="sslc_file" onchange="ValidateSslcSize(this)">
                             </div>
                             <div class="file-path-wrapper">
@@ -195,7 +195,7 @@
 
                         <div class="input-field file-field col m12 s12 l12">
                             <div class="btn-large">
-                                <span style="color:white">File</span>
+                                <span style="color:white">Certificate</span>
                                 <input type="file" name="hsc_file" onchange="ValidateHscSize(this)">
                                 <span class="helper-text" data-error="Required*" data-success="Valid"></span>
                             </div>
@@ -208,17 +208,9 @@
                 <% } %>
                 <div class="row">
                     <div class="input-field col m4 s12 l4">
-                        <% if(!(mybranch)) { %>
-                        <select name='branch' required>
-                            <option value="" disabled selected>Choose your Branch</option>
-                            <option value="CSE">CSE</option>
-                        </select>
-                        <label>Branch</label>
-                        <% } else { %>
-                        <input type="text" name="branch" id='mybranch' value=<%= mybranch %>>
+                        <input type="text" name="branch" id='mybranch' readonly value=<%= branch %>>
                         <label for="mybranch">Branch</label>
                         <span class="helper-text" data-error="Branch is required*" data-success="Valid"></span>
-                        <% } %>
                     </div>
                     <div class="input-field col m4 s12 l4">
                         <% if(!(myyearofJoining)) { %>
@@ -231,7 +223,7 @@
                         </select>
                         <label>Year of Joining</label>
                         <% } else { %>
-                        <input type="number" name="yearofJoining" id='myyear' value=<%= myyearofJoining %>>
+                        <input type="number" name="yearofJoining" id='myyear' readonly value=<%= myyearofJoining %>>
                         <label for="myyear">Year of Joining</label>
                         <span class="helper-text" data-error="Year is required*" data-success="Valid"></span>
                         <% } %>
@@ -244,7 +236,7 @@
                         </select>
                         <label>Regulation</label>
                         <% } else { %>
-                        <input type="text" name="regulation" id='myreg' value=<%= myregulation %>>
+                        <input type="text" name="regulation" id='myreg' readonly value=<%= myregulation %>>
                         <label for="myreg">Regulation</label>
                         <span class="helper-text" data-error="Regulation is required*" data-success="Valid"></span>
                         <% } %>

@@ -22,11 +22,11 @@ router.get('/', async (req, res) => {
     const token = req.cookies.TOKEN;
     if (token) {
         const data = jwt.decode(token, process.env.TOKEN_SECRET);
-        const ref_nad = data.nad;
-        switch(data.branch){
+        const ref_nad = data.register_id;
+        switch (data.branch) {
             case 'CSE':
                 await CSE.findOne({
-                    nad: ref_nad
+                    register_id: ref_nad
                 }, (err, profile) => {
                     if (err) {
                         res.redirect('/error');
@@ -68,9 +68,10 @@ router.get('/', async (req, res) => {
                                         });
                                     } else {
                                         let file = {
-                                            nad: profile.nad,
+                                            register_id: profile.register_id,
                                             username: profile.name,
                                             yearofJoining: profile.yearofJoining,
+                                            branch: profile.branch,
                                             email: profile.mail,
                                             autherized: profile.autherized,
                                             file: Binary(data)
@@ -86,10 +87,10 @@ router.get('/', async (req, res) => {
                         });
                     }
                 });
-            break
+                break
             case 'ECE':
                 await ECE.findOne({
-                    nad: ref_nad
+                    register_id: ref_nad
                 }, (err, profile) => {
                     if (err) {
                         res.redirect('/error');
@@ -131,9 +132,10 @@ router.get('/', async (req, res) => {
                                         });
                                     } else {
                                         let file = {
-                                            nad: profile.nad,
+                                            register_id: profile.register_id,
                                             username: profile.name,
                                             yearofJoining: profile.yearofJoining,
+                                            branch: profile.branch,
                                             email: profile.mail,
                                             autherized: profile.autherized,
                                             file: Binary(data)
@@ -152,7 +154,7 @@ router.get('/', async (req, res) => {
                 break
             case 'EEE':
                 await EEE.findOne({
-                    nad: ref_nad
+                    register_id: ref_nad
                 }, (err, profile) => {
                     if (err) {
                         res.redirect('/error');
@@ -194,9 +196,10 @@ router.get('/', async (req, res) => {
                                         });
                                     } else {
                                         let file = {
-                                            nad: profile.nad,
+                                            register_id: profile.register_id,
                                             username: profile.name,
                                             yearofJoining: profile.yearofJoining,
+                                            branch: profile.branch,
                                             email: profile.mail,
                                             autherized: profile.autherized,
                                             file: Binary(data)
@@ -215,7 +218,7 @@ router.get('/', async (req, res) => {
                 break
             case 'MECH':
                 await MECH.findOne({
-                    nad: ref_nad
+                    register_id: ref_nad
                 }, (err, profile) => {
                     if (err) {
                         res.redirect('/error');
@@ -257,10 +260,11 @@ router.get('/', async (req, res) => {
                                         });
                                     } else {
                                         let file = {
-                                            nad: profile.nad,
+                                            register_id: profile.register_id,
                                             username: profile.name,
                                             yearofJoining: profile.yearofJoining,
                                             email: profile.mail,
+                                            branch: profile.branch,
                                             autherized: profile.autherized,
                                             file: Binary(data)
                                         }
@@ -274,8 +278,8 @@ router.get('/', async (req, res) => {
                             header: 'Download details'
                         });
                     }
-                });        
-            break
+                });
+                break
         }
     } else {
         res.redirect(200, '/students_feonbnkkkujnxdkrqgouhqpsiaarpsfhekrpgwvuscmdtfvcpokzegryacvzsdha')
@@ -285,7 +289,7 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
     const token = req.cookies.TOKEN;
     const data = jwt.decode(token, process.env.TOKEN_SECRET);
-    const ref_nad = data.nad;
+    const ref_nad = data.register_id;
     mongoClient.connect(process.env.DB_SECRET_KEY, {
             useUnifiedTopology: true,
             useNewUrlParser: true,
@@ -295,14 +299,13 @@ router.post('/', async (req, res) => {
             let db = client.db('datastore')
             let collection = db.collection('storage')
             collection.findOne({
-                nad: ref_nad
+                register_id: ref_nad
             }, (err, data) => {
                 if (err) {
 
                 } else {
-                    console.log(data)
                     res.setHeader('content-type', 'application/pdf')
-                    res.setHeader('content-disposition', 'inline; filename="' + data.nad + '"')
+                    res.setHeader('content-disposition', 'inline; filename="' + data.register_id + '"')
                     toStream(data.file.buffer).pipe(res)
                 }
             });
@@ -325,14 +328,14 @@ async function insertFile(file, res) {
             let db = client.db('datastore')
             let collection = db.collection('storage')
             collection.findOne({
-                nad: file.nad
+                register_id: file.register_id
             }, async (err, data) => {
                 if (err) {
                     collection.insertOne(file);
                 } else {
                     try {
                         await collection.updateMany({
-                            nad: file.nad
+                            register_id: file.register_id
                         }, {
                             $set: {
                                 "name": file.username,

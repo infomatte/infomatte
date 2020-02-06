@@ -36,6 +36,7 @@ app.use('/students_formEntry', require('./routes/formEntry'));
 app.use('/students_semesters', require('./routes/semesters'))
 app.use('/students_download', require('./routes/download'))
 app.use('/students_feedback', require('./routes/feedback'))
+app.use('/thanks', require('./routes/thanks'));
 //-----------------------------infoPages-----------------------------------
 app.use('/logout', require('./routes/logout'));
 app.use('/error', require('./routes/error'));

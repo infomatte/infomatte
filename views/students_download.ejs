@@ -14,7 +14,7 @@
                         style="color: rgb(75, 0, 110)">menu</i></a>
                 <ul class="right hide-on-med-and-down">
                     <li>
-                        <a style="color: rgb(29, 29, 29)"><%= profile.nad %></a>
+                        <a style="color: rgb(29, 29, 29)"><%= profile.register_id %></a>
                     </li>
                     <li>
                         <form method="get" action="/logout">
@@ -27,10 +27,10 @@
     </nav>
 </div>
 <ul class="sidenav" id="mobile-demo">
-    <li><a><a><%= profile.nad %></a></a></li>
+    <li><a><%= profile.register_id %></a></li>
     <li><a>Logout</a></li>
-</ul><br><br>
-<div class="formfield">
+</ul><br>
+<div class="container formfield">
     <div class="card">
     <h4><b>GENERAL INFORMATION</b></h4><br><br>
         <table class="responsive-table">
@@ -47,7 +47,7 @@
                         </tr>
                         <tr>
                           <td>Registration ID</td>
-                          <td><%= profile.nad %></td>
+                          <td><%= profile.register_id %></td>
                         </tr>
                         <tr>
                           <td>Email</td>
@@ -728,11 +728,13 @@
                     <%})%>
             </div>
         <form action="/students_download" method="post" target="_blank" style='width: 100%'>
-            <button type='submit' class="waves-effect waves-light btn-large">Download PDF</button>
-            <a class="waves-effect waves-purple btn-large" href="/feedback">feedback</a>
+            <button type='submit' class="waves-effect waves-light btn-large">Download PDF</button><br><br>
         </form><br>
+        <form action="/students_feedback" method="get" target="_blank" style='width: 100%'>
+        <button class="waves-effect waves-purple btn-large btn-outline" >Feedback</button><br>
+    </form>
 </div>
-</div>
+</div><br>
 <script>
 </script>
 <%- include('partials/footer.ejs'); -%>
