@@ -1,7 +1,7 @@
 {
-  "name": "ucek-student-database",
+  "name": "infomatte",
   "version": "1.0.0",
-  "description": "Student Database",
+  "description": "Infomatte - Student Database",
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js",

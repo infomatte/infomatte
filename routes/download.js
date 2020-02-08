@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const Storage = require('../model/Storage')
 const CSE = require('../model/CSE');
 const ECE = require('../model/ECE');
 const EEE = require('../model/EEE');
@@ -10,7 +11,6 @@ const path = require('path');
 const pdf = require('html-pdf');
 const Duplex = require('stream').Duplex;
 const mongodb = require('mongodb');
-const mongoClient = mongodb.MongoClient
 const Binary = mongodb.Binary
 
 router.get('/error', async (req, res) => {
@@ -290,26 +290,17 @@ router.post('/', async (req, res) => {
     const token = req.cookies.TOKEN;
     const data = jwt.decode(token, process.env.TOKEN_SECRET);
     const ref_nad = data.register_id;
-    mongoClient.connect(process.env.DB_SECRET_KEY, {
-            useUnifiedTopology: true,
-            useNewUrlParser: true,
-            useCreateIndex: true
-        },
-        async (err, client) => {
-            let db = client.db('datastore')
-            let collection = db.collection('storage')
-            collection.findOne({
-                register_id: ref_nad
-            }, (err, data) => {
-                if (err) {
+    Storage.findOne({
+        register_id: ref_nad
+    }, (err, data) => {
+        if (err) {
 
-                } else {
-                    res.setHeader('content-type', 'application/pdf')
-                    res.setHeader('content-disposition', 'inline; filename="' + data.register_id + '"')
-                    toStream(data.file.buffer).pipe(res)
-                }
-            });
-        });
+        } else {
+            res.setHeader('content-type', 'application/pdf')
+            res.setHeader('content-disposition', 'inline; filename="' + ref_nad + '"')
+            toStream(data.file).pipe(res)
+        }
+    });
 });
 
 function toStream(chunk) {
@@ -318,42 +309,22 @@ function toStream(chunk) {
     stream.push(null)
     return stream
 }
-async function insertFile(file, res) {
-    mongoClient.connect(process.env.DB_SECRET_KEY, {
-            useUnifiedTopology: true,
-            useNewUrlParser: true,
-            useCreateIndex: true
-        },
-        async (err, client) => {
-            let db = client.db('datastore')
-            let collection = db.collection('storage')
-            collection.findOne({
-                register_id: file.register_id
-            }, async (err, data) => {
-                if (err) {
-                    collection.insertOne(file);
-                } else {
-                    try {
-                        await collection.updateMany({
-                            register_id: file.register_id
-                        }, {
-                            $set: {
-                                "name": file.username,
-                                "file": file.file,
-                                "email": file.email,
-                                "yearofJoining": file.yearofJoining,
-                                "autherized": file.autherized
-                            }
-                        }, {
-                            upsert: true
-                        });
-                    } catch (err) {
-                        res.redirect('/error');
-                    }
+async function insertFile(recv_file, res) {
+    Storage.findOne({
+        register_id: recv_file.register_id
+    }, async (err, data) => {
+        if (err == null && data == null) {
+            Storage.insertMany(recv_file)
+        } else {
+            Storage.updateOne({
+                register_id: recv_file.register_id
+            }, {
+                $set: {
+                    file: recv_file.file
                 }
-                client.close(true)
             });
-        });
+        }
+    });
 }
 
 module.exports = router;

@@ -19,8 +19,13 @@ const pdfSchema = mongoose.Schema({
   },
   authorized: {
     type: String
-  }
-},{timestamps: true})
+  },
+  branch: {
+    type: String
+  },
+}, {
+  timestamps: true
+})
 
 
 module.exports = mongoose.model("Storage", pdfSchema)
