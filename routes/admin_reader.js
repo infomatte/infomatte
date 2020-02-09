@@ -6,14 +6,14 @@ const Duplex = require('stream').Duplex;
 
 router.post('/:data', async (req, res) => {
     const data = req.params.data;
-    await mongoClient.connect(process.env.DB_SECRET_KEY, {
+    mongoClient.connect(process.env.DB_SECRET_KEY, {
             useUnifiedTopology: true,
             useNewUrlParser: true
         },
         async (err, client) => {
             let db = client.db('datastore')
             let collection = db.collection('storages')
-            await collection.findOne({
+            collection.findOne({
                 register_id: data
             }, (err, data) => {
                 if (err) {

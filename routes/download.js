@@ -310,13 +310,13 @@ function toStream(chunk) {
     return stream
 }
 async function insertFile(recv_file, res) {
-    Storage.findOne({
+    await Storage.findOne({
         register_id: recv_file.register_id
     }, async (err, data) => {
         if (err == null && data == null) {
-            Storage.insertMany(recv_file)
+            await Storage.insertMany(recv_file)
         } else {
-            Storage.updateOne({
+            await Storage.updateOne({
                 register_id: recv_file.register_id
             }, {
                 $set: {
