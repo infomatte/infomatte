@@ -1,61 +1,124 @@
-<%- include('partials/header.ejs'); -%>
-<div class="navbar-fixed">
-  <nav>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title><%= header %></title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+</head>
+<style>
+  body {
+    font-family: "Poppins", sans-serif;
+  }
+
+  .brand-logo {
+    font-weight: 900;
+    font-family: "Montserrat", sans-serif;
+    color: #000 !important;
+  }
+
+  .card {
+    box-shadow: 1px 2px 20px rgba(81, 1, 143, 0.103);
+  }
+
+  nav {
+    background-color: rgba(255, 255, 255, 0.72);
+    backdrop-filter: saturate(180%) blur(20px);
+    z-index: 2000;
+    width: 100%;
+    box-shadow: 0px 5px 25px rgba(194, 128, 247, 0.192);
+  }
+
+  .btn {
+    background: linear-gradient(to right, #8E2DE2, #4A00E0);
+    border-radius: 5px;
+    color: white;
+    box-shadow: none;
+  }
+
+  .btn-custom {
+    background: linear-gradient(to right, #8E2DE2, #4A00E0);
+    border-radius: 5px;
+    width: 80% !important;
+    color: white;
+    box-shadow: none;
+    transition: all 0.5 ease;
+  }
+
+  .btn-large:hover {
+    background: linear-gradient(to right, #4A00E0, #8E2DE2);
+    box-shadow: 1px 2px 20px rgb(193, 128, 247);
+  }
+</style>
+
+<body>
+  <div class="navbar-fixed">
+    <nav>
 
       <div class="container">
-          <div class="nav-wrapper">
-              <a href="" class="brand-logo">im.</a>
-              <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons"
-                      style="color: rgb(75, 0, 110)">menu</i></a>
-              <ul class="right hide-on-med-and-down">
-                  <li>
-                      <a style="color: rgb(29, 29, 29)"><%= id %></a>
-                  </li>
-                  <li>
-                      <form method="get" action="/staffs_logout">
-                          <button class="waves-effect waves-light btn btn-outline" type="submit">Logout</button>
-                      </form>
-                  </li>
-              </ul>
-          </div>
+        <div class="nav-wrapper">
+          <a href="" class="brand-logo">im.</a>
+          <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons"
+              style="color: rgb(75, 0, 110)">menu</i></a>
+          <ul class="right hide-on-med-and-down">
+            <li>
+              <a style="color: rgb(29, 29, 29)"><%= id %></a>
+            </li>
+            <li>
+              <form method="get" action="/staffs_logout">
+                <button class="waves-effect waves-light btn btn-custom btn-outline" type="submit">Logout</button>
+              </form>
+            </li>
+          </ul>
+        </div>
       </div>
-  </nav>
-</div>
-<ul class="sidenav" id="mobile-demo">
-  <li><a><%= id %></a></li>
-  <li><a>Logout</a></li>
-</ul><br><br>
-<div class="container formfield">
-  <div class="card">
-    <table class="striped centered">
-      <thead>
-        <tr>
-          <th>S.No</th>
-          <th>Student Name</th>
-          <th>Autherized</th>
-          <th>Student ID</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% var i = 1 %>
-        <% data.map(data => { %>
-        <tr>
-          <form action='/staffs_reader/<%= data.register_id %>' method='post' target="_blank">
-            <td><%= i++ %></td>
-            <td><%= data.name %></td>
-            <td>
-              <% if(data.autherized === 'No') { %>
-              <img src="/img/close.svg" style="width: 35px; height: 35px" alt="approved" />
-              <% } else { %>
-              <img src="/img/check.svg" style="width: 35px; height: 35px" alt="approved" />
-              <% } %>
-            </td>
-            <td><button type='submit' class="mybtn"><%= data.register_id %></button></td>
-          </form>
-        </tr>
-        <%})%>
-      </tbody>
-    </table>
+    </nav>
   </div>
-</div>
-<%- include('partials/footer.ejs'); -%>
+  <ul class="sidenav" id="mobile-demo">
+    <li><a><%= id %></a></li>
+    <li><a>Logout</a></li>
+  </ul><br><br>
+  <div class="container formfield">
+    <div class="card">
+      <table class="striped centered">
+        <thead>
+          <tr>
+            <th>S.No</th>
+            <th>Student Name</th>
+            <th>Autherized</th>
+            <th>Student ID</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% var i = 1 %>
+          <% data.map(data => { %>
+          <tr>
+            <form action='/staffs_reader/<%= data.register_id %>' method='post' target="_blank">
+              <td><%= i++ %></td>
+              <td><%= data.name %></td>
+              <td>
+                <% if(data.autherized === 'No') { %>
+                <img src="/img/close.svg" style="width: 35px; height: 35px" alt="approved" />
+                <% } else { %>
+                <img src="/img/check.svg" style="width: 35px; height: 35px" alt="approved" />
+                <% } %>
+              </td>
+              <td><button type='submit' class="btn"><%= data.register_id %></button></td>
+            </form>
+          </tr>
+          <%})%>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+
+</html>

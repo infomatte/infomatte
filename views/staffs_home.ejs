@@ -1,7 +1,6 @@
 <%- include('partials/header.ejs'); -%>
 <div class="navbar-fixed">
     <nav>
-
         <div class="container">
             <div class="nav-wrapper">
                 <a href="" class="brand-logo">im.</a>
@@ -26,11 +25,21 @@
     <li><a>Logout</a></li>
 </ul><br><br>
 <div class="container formfield">
-<div class="col s12">
-    <a class="waves-effect waves-light btn-large" href="staffs_year/<%= year4 %>">Year IV</a><br>
-    <a class="waves-effect waves-light btn-large" href="staffs_year/<%= year3 %>">Year III</a><br>
-    <a class="waves-effect waves-light btn-large" href="staffs_year/<%= year2 %>">Year II</a><br>
-</div>
+    <div class='col s12 m12 l12'>
+        <img clas='responsive-img' style="width: 400px;height: 400px" src='/img/verification.png' alt='verfication'>
+    </div>
+    <div class="row">
+        <h3><b><%= branch %></b></h3><br>
+        <div class="col s12 m6 l4">
+            <a class="waves-effect waves-light btn-large" href="staffs_year/<%= year4 %>">Year IV</a><br>
+        </div>
+        <div class="col s12 m6 l4">
+            <a class="waves-effect waves-light btn-large" href="staffs_year/<%= year3 %>">Year III</a><br>
+        </div>
+        <div class="col s12 m6 l4">
+            <a class="waves-effect waves-light btn-large" href="staffs_year/<%= year2 %>">Year II</a><br>
+        </div>
+    </div>
 </div>
 
 <%- include('partials/footer.ejs'); -%>

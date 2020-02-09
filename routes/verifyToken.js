@@ -46,7 +46,7 @@ router.get('/:token', async (req, res) => {
                         });
                     }
                 } catch (e) {
-                    console.log(e)
+
                     res.redirect('/students_verifyExist')
                 }
             });
@@ -80,7 +80,7 @@ router.get('/:token', async (req, res) => {
                         });
                     }
                 } catch (e) {
-                    console.log(e)
+
                     res.redirect('/students_verifyExist')
                 }
             });
@@ -114,7 +114,7 @@ router.get('/:token', async (req, res) => {
                         });
                     }
                 } catch (e) {
-                    console.log(e)
+
                     res.redirect('/students_verifyExist')
                 }
             });
@@ -148,7 +148,7 @@ router.get('/:token', async (req, res) => {
                         });
                     }
                 } catch (e) {
-                    console.log(e)
+
                     res.redirect('/students_verifyExist')
                 }
             });

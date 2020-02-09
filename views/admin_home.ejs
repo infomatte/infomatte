@@ -24,19 +24,26 @@
 <ul class="sidenav" id="mobile-demo">
     <li><a><a>Admin</a></a></li>
     <li><a>Logout</a></li>
-</ul><br><br>
-<div class="container">
-    <% if (allowed === 'Yes') { %>
-    <a onclick="M.toast({html: 'Staff Added'})" class="btn"></a>
-    <% } %>
-    <div class="col s12">
-        <a class="waves-effect waves-light btn" href="admin_department/CSE">CSE</a>
-        <a class="waves-effect waves-light btn" href="admin_department/ECE">ECE</a>
-        <a class="waves-effect waves-light btn" href="admin_department/EEE">EEE</a>
-        <a class="waves-effect waves-light btn" href="admin_department/MECH">MECH</a>
-    </div>
+</ul><br>
+<div class="container formfield">
+    <h1><b>ADMIN</b></h1><br>
+    <div class="row">
+        <h5>UCEK Students Details will be available as PDF Format for Placement Activities</h5><br>
+        <div class="col s12 m6 l3">
+            <a class="waves-effect waves-light btn-large" href="admin_department/CSE">CSE</a>
+        </div>
+        <div class="col s12 m6 l3">
+            <a class="waves-effect waves-light btn-large" href="admin_department/ECE">ECE</a>
+        </div>
+        <div class="col s12 m6 l3">
+            <a class="waves-effect waves-light btn-large" href="admin_department/EEE">EEE</a>
+        </div>
+        <div class="col s12 m6 l3">
+            <a class="waves-effect waves-light btn-large" href="admin_department/MECH">MECH</a>
+        </div>
+    </div><br>
     <form method="post" action="admin_home">
-        <h1>Add Staffs</h1>
+        <h3><b>ADD STAFFS</b></h3>
         <div class="row">
             <div class="input-field col m12 s12 l12">
                 <input type="text" name="id" id='myid' class="validate" required>
