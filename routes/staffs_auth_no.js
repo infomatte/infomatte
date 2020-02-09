@@ -19,7 +19,6 @@ let flag = null
 router.post('/:id', async (req, res) => {
     const id = req.params.id
     const data = jwt.decode(req.cookies.STAFF_TOKEN,process.env.TOKEN_SECRET)
-    let branch = ((data.branch).toLowerCase())+'s'
     switch (data.branch) {
         case 'CSE':
         flag = CSE
