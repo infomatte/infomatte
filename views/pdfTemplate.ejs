@@ -44,6 +44,7 @@ th, td {
 <body>
     <!-- <img src="img/AU.png" class='home-logo' alt='img'> -->
     <br><br><br><br>
+    <div>
                 <table class="responsive-table">
                     <h2><%= profile.name %>'s Information</h2>
                         <thead>
@@ -118,8 +119,10 @@ th, td {
                                     <td><%= profile.regulation %></td>
                                 </tr>
                             </tbody>
-                        </table>                 
+                        </table>      
+                    </div>           
                         <br><br><br><br><br><br><br><br>
+                        <div>
                     <h2>SEMESTER SCORES</h2>
                     <% if(profile.Semester_1.later_entry === 'No' && profile.Semester_1.attended === 'Yes') { %>
                         <table>
@@ -730,7 +733,7 @@ th, td {
                                                 
                                             <% } %>
                                 </div>
-            
+            <div>
                         <% profile.technical.map(data => { %>
                             <% if(data.tech_option === 'Yes') { %>
                                 <h2><b>TECHNICAL ACTIVITIES</b></h2>
@@ -766,6 +769,8 @@ th, td {
                             
                                 <%}%>
                             <%})%>
+                        </div>
+                        <div>
                         <h2><b>SPORTS ACTIVITIES</b></h2>
                         <% profile.sports.map(data => { %>
                             <% if(data.sports_option === 'Yes') { %>
@@ -793,6 +798,7 @@ th, td {
                                 
                                     <%}%>
                             <%})%>
+                        </div>
              
 </body>
 </html>

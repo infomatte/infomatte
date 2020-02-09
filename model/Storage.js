@@ -15,9 +15,9 @@ const pdfSchema = mongoose.Schema({
     type: String
   },
   yearofJoining: {
-    type: String
+    type: Number
   },
-  authorized: {
+  autherized: {
     type: String
   },
   branch: {

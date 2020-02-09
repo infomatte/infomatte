@@ -38,6 +38,8 @@ app.use('/students_download', require('./routes/download'))
 app.use('/students_feedback', require('./routes/feedback'))
 app.use('/thanks', require('./routes/thanks'));
 //-----------------------------infoPages-----------------------------------
+app.use('/admin_logout', require('./routes/admin_logout'));
+app.use('/staffs_logout', require('./routes/staffs_logout'));
 app.use('/logout', require('./routes/logout'));
 app.use('/error', require('./routes/error'));
 app.use('/students_revoked', require('./routes/revoked'));
@@ -54,6 +56,7 @@ app.use('/staffs_auth_no', require('./routes/staffs_auth_no'));
 //-----------------------------admin-----------------------------------
 app.use('/admin_login', require('./routes/admin_login'));
 app.use('/admin_home', require('./routes/admin_home'));
+app.use('/admin_department', require('./routes/admin_department'));
 app.use('/admin_year', require('./routes/admin_year'));
 app.use('/admin_reader', require('./routes/admin_reader'));
 app.use(function (req, res) {

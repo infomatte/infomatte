@@ -6,7 +6,6 @@ const EEE = require('../model/EEE');
 const MECH = require('../model/MECH');
 const jwt = require('jsonwebtoken');
 
-
 router.get('/:token', async (req, res) => {
     const token = req.params.token;
     const data = jwt.decode(token, process.env.TOKEN_SECRET);

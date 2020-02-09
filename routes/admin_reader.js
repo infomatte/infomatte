@@ -12,7 +12,7 @@ router.post('/:data', async (req, res) => {
         },
         async (err, client) => {
             let db = client.db('datastore')
-            let collection = db.collection('storage')
+            let collection = db.collection('storages')
             await collection.findOne({
                 register_id: data
             }, (err, data) => {

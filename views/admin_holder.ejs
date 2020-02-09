@@ -1,44 +1,60 @@
 <%- include('partials/header.ejs'); -%>
-<div data-aos="fade-down">
-  <div class="card">
-    <table class="striped centered">
-      <thead>
-        <tr>
-          <th>S.No</th>
-          <th>Student Name</th>
-          <th>Authorized</th>
-          <th>Student ID</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% var i = 1 %> <% data.map(data => { %>
-        <tr>
-          <form action="/admin_reader/<%= data.register_id %>" method="post" target="_blank">
-            <td><%= i++ %></td>
-            <td><%= data.name %></td>
-            <td>
-              <% if(data.autherized === 'No') { %>
-              <img
-                src="/img/close.svg"
-                style="width: 35px; height: 35px"
-                alt="approved"
-              />
-              <% } else { %>
-              <img
-                src="/img/check.svg"
-                style="width: 35px; height: 35px"
-                alt="approved"
-              />
-              <% } %>
-            </td>
-            <td>
-              <button type="submit" class="mybtn"><%= data.register_id %></button>
-            </td>
-          </form>
-        </tr>
-        <%})%>
-      </tbody>
-    </table>
-  </div>
+<div class="navbar-fixed">
+  <nav>
+
+    <div class="container">
+      <div class="nav-wrapper">
+        <a href="" class="brand-logo">im.</a>
+        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons"
+            style="color: rgb(75, 0, 110)">menu</i></a>
+        <ul class="right hide-on-med-and-down">
+          <li>
+            <a style="color: rgb(29, 29, 29)">Admin</a>
+          </li>
+          <li>
+            <form method="get" action="/admin_logout">
+              <button class="waves-effect waves-light btn btn-outline" type="submit">Logout</button>
+            </form>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</div>
+<ul class="sidenav" id="mobile-demo">
+  <li><a><a>Admin</a></a></li>
+  <li><a>Logout</a></li>
+</ul><br><br>
+<div class="card">
+  <table class="striped centered">
+    <thead>
+      <tr>
+        <th>S.No</th>
+        <th>Student Name</th>
+        <th>Authorized</th>
+        <th>Student ID</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% var i = 1 %> <% data.map(data => { %>
+      <tr>
+        <form action="/admin_reader/<%= data.register_id %>" method="post" target="_blank">
+          <td><%= i++ %></td>
+          <td><%= data.name %></td>
+          <td>
+            <% if(data.autherized === 'No') { %>
+            <img src="/img/close.svg" style="width: 35px; height: 35px" alt="approved" />
+            <% } else { %>
+            <img src="/img/check.svg" style="width: 35px; height: 35px" alt="approved" />
+            <% } %>
+          </td>
+          <td>
+            <button type="submit" class="mybtn"><%= data.register_id %></button>
+          </td>
+        </form>
+      </tr>
+      <%})%>
+    </tbody>
+  </table>
 </div>
 <%- include('partials/footer.ejs'); -%>

@@ -1,11 +1,55 @@
 <%- include('partials/header.ejs'); -%>
-<div class="container">
-    <div class="col s12">
-        <a class="waves-effect waves-light btn-large" href="admin_department/CSE">CSE</a>
-        <a class="waves-effect waves-light btn-large" href="admin_department/ECE">ECE</a>
-        <a class="waves-effect waves-light btn-large" href="admin_department/EEE">EEE</a>
-        <a class="waves-effect waves-light btn-large" href="admin_department/MECH">MECH</a>
-    </div>
+<div class="navbar-fixed">
+    <nav>
 
+        <div class="container">
+            <div class="nav-wrapper">
+                <a href="" class="brand-logo">im.</a>
+                <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons"
+                        style="color: rgb(75, 0, 110)">menu</i></a>
+                <ul class="right hide-on-med-and-down">
+                    <li>
+                        <a style="color: rgb(29, 29, 29)">Admin</a>
+                    </li>
+                    <li>
+                        <form method="get" action="/admin_logout">
+                            <button class="waves-effect waves-light btn btn-outline" type="submit">Logout</button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+<ul class="sidenav" id="mobile-demo">
+    <li><a><a>Admin</a></a></li>
+    <li><a>Logout</a></li>
+</ul><br><br>
+<div class="container">
+    <% if (allowed === 'Yes') { %>
+    <a onclick="M.toast({html: 'Staff Added'})" class="btn"></a>
+    <% } %>
+    <div class="col s12">
+        <a class="waves-effect waves-light btn" href="admin_department/CSE">CSE</a>
+        <a class="waves-effect waves-light btn" href="admin_department/ECE">ECE</a>
+        <a class="waves-effect waves-light btn" href="admin_department/EEE">EEE</a>
+        <a class="waves-effect waves-light btn" href="admin_department/MECH">MECH</a>
+    </div>
+    <form method="post" action="admin_home">
+        <h1>Add Staffs</h1>
+        <div class="row">
+            <div class="input-field col m12 s12 l12">
+                <input type="text" name="id" id='myid' class="validate" required>
+                <label for="myid">Staff ID</label>
+                <span class="helper-text" data-error="ID is required*" data-success="Valid"></span>
+            </div>
+            <div class="input-field col m12 s12 l12">
+                <input type="password" name="password" id='password' class="validate" required>
+                <label for="password">Password</label>
+                <span class="helper-text" data-error="ID is required*" data-success="Valid"></span>
+            </div>
+        </div>
+        <button type='submit' class="waves-effect waves-light btn-large btn-outline">Add</button>
+    </form>
 </div>
 <%- include('partials/footer.ejs'); -%>
