@@ -3,7 +3,7 @@ const router = express.Router();
 const Admin = require('../model/Admin')
 const jwt = require('jsonwebtoken')
 const tokenize = require('./localize')
-
+const parallel =require('async').parallel
 router.get('/', (req, res) => {
     res.render('admin_login', {
         header: "Admin Login - Infomatte"
@@ -15,6 +15,7 @@ router.post('/', async (req, res) => {
         id,
         pass
     } = req.body
+    const find_admin = () => {
     Admin.findOne({
             id: id,
             password: pass
@@ -28,6 +29,10 @@ router.post('/', async (req, res) => {
                 res.redirect('/admin_home')
             }
         });
+    }
+    parallel([find_admin],() => {
+        
+    })
 });
 
 module.exports = router;

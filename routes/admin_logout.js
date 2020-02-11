@@ -1,11 +1,18 @@
 const express = require('express');
 const router = express.Router();
 const tokenize = require('./localize')
+const parallel = require('async').parallel
 
 
 router.get('/', (req, res) => {
-    tokenize.setToken('admin',null)
-    res.redirect('/');
+    const RetT = () => { tokenize.setToken('admin',null) }
+    const Red = () => { res.redirect('/'); }
+    parallel([
+        Red,
+        RetT
+    ],() => {
+        
+    })
 })
 
 module.exports = router
