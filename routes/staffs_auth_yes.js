@@ -14,6 +14,7 @@ const Binary = mongodb.Binary
 const jwt  =  require('jsonwebtoken')
 const mongoClient = mongodb.MongoClient
 const tokenize = require('./localize')
+const parallel = require('async').parallel
 
 
 router.post('/:id', async (req, res) => {
@@ -22,15 +23,18 @@ router.post('/:id', async (req, res) => {
     if(data == null)
         res.status(200).redirect('/error')
     const flag = branchToObject(data.branch)
-    await flag.updateOne({
-        register_id : id
-    },{
-        $set:{
-            autherized:'Yes'
-        }
-    },{
-        upsert:true
-    });
+    UpdateInDb1 = async () => { 
+        await flag.updateOne({
+            register_id : id
+            },{
+            $set:{
+                autherized:'Yes'
+            }
+            },{
+            upsert:true
+        });
+    }
+    UpdateInDb2 = async () => {
     flag.findOne({
         register_id:id
     },async (err,profile) => {
@@ -81,6 +85,12 @@ router.post('/:id', async (req, res) => {
             });
         }});
     }});
+    }
+    parallel([
+        UpdateInDb1,
+        UpdateInDb2
+    ],() => {
+    })
 });
 
 function branchToObject(branch) {
@@ -119,9 +129,8 @@ async function insertFile(file,res) {
         useCreateIndex: true
     },
         async (err, client) => {
-            if(err){
-                res.send('Insert File Function Error')
-            }else{
+            if(err){}
+            else{
             let db = client.db('datastore')
             let collection = db.collection('storages')
             collection.findOne({
