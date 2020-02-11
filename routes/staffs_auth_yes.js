@@ -13,10 +13,14 @@ const Storage = require('../model/Storage')
 const Binary = mongodb.Binary
 const jwt  =  require('jsonwebtoken')
 const mongoClient = mongodb.MongoClient
+const tokenize = require('./localize')
+
 
 router.post('/:id', async (req, res) => {
     const id = req.params.id
-    const data = jwt.decode(req.cookies.STAFF_TOKEN,process.env.TOKEN_SECRET)
+    const data = jwt.decode(tokenize.token_staff,process.env.TOKEN_SECRET)
+    if(data == null)
+        res.status(200).redirect('/error')
     const flag = branchToObject(data.branch)
     await flag.updateOne({
         register_id : id
@@ -133,7 +137,7 @@ async function insertFile(file,res) {
                             'name':file.username,
                             'file':file.file,
                             'yearofJoining':file.yearofJoining,
-                            'autherized':file.autherized
+                            'autherized':'Yes'
                         }
                     },{
                         upsert:true

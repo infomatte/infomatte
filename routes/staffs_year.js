@@ -2,17 +2,20 @@ const express = require('express');
 const router = express.Router();
 const mongoClient = require('mongodb').MongoClient;
 const jwt = require('jsonwebtoken')
+const tokenize = require('./localize')
 
 router.get('/:year', async (req, res) => {
     const year = parseInt(req.params.year);
-    const data = jwt.decode(req.cookies.STAFF_TOKEN, process.env.TOKEN_SECRET)
+    const data = jwt.decode(tokenize.token_staff, process.env.TOKEN_SECRET)
+    if(data == null)
+        res.redirect('/error')
     mongoClient.connect(process.env.DB_SECRET_KEY, {
             useUnifiedTopology: true,
             useNewUrlParser: true
         },
         async (err, client) => {
-            let db = client.db('datastore')
             const local_branch = branchToDb(data.branch)
+            let db = client.db('datastore')
             let collection = db.collection(local_branch)
             collection.find({
                 yearofJoining: year,

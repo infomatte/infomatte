@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Staff = require('../model/Staffs')
 const jwt = require('jsonwebtoken')
+const tokenize = require('./localize')
 
 router.get('/', (req, res) => {
   res.render('staffs_login', {
@@ -30,7 +31,7 @@ router.post('/', async (req, res) => {
         }, process.env.TOKEN_SECRET, {
           expiresIn: "6h"
         })
-        res.cookie('STAFF_TOKEN', token)
+        tokenize.setToken('staff',token)
         res.redirect('/staffs_home')
       }
     });

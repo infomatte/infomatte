@@ -2,9 +2,12 @@ const express = require('express');
 const router = express.Router();
 const Staff = require('../model/Staffs');
 const jwt = require('jsonwebtoken')
+const tokenize = require('./localize')
+
 router.get('/', (req, res) => {
-    const token = req.cookies.STAFF_TOKEN;
-    const data = jwt.decode(token, process.env.TOKEN_SECRET)
+    const data = jwt.decode(tokenize.token_staff, process.env.TOKEN_SECRET)
+    if(data == null)
+        res.status(200).redirect('/error')
     Staff.findOne({
         id: data.id,
         password: data.pass,

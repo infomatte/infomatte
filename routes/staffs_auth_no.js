@@ -13,10 +13,14 @@ const Storage = require('../model/Storage')
 const Binary = mongodb.Binary
 const jwt  =  require('jsonwebtoken')
 const mongoClient = mongodb.MongoClient
+const tokenize = require('./localize')
+
 
 router.post('/:id', async (req, res) => {
     const id = req.params.id
-    const data = jwt.decode(req.cookies.STAFF_TOKEN,process.env.TOKEN_SECRET)
+    const data = jwt.decode(tokenize.token_staff,process.env.TOKEN_SECRET)
+    if(data == null)
+        res.status(200).redirect('/error')
     const flag = branchToObject(data.branch)
     await flag.updateOne({
         register_id : id
@@ -93,7 +97,7 @@ async function Func_sendMail(file) {
         to: file.email,
         subject: `UCEK- Kancheepuram.`,
         html: `<div style="text-align: center">
-            <p>Your pdf has been authorized. Download it from your portal.</p>
+            <p>Your pdf has been Rejected.Check your info or contact Faculty for more details.</p>
             <button style="padding:10px 20px;background:#4f37b9;border-radius: 20px;border:1px solid #4f37b9"><a style="text-decoration: none; color: white" href="www.ucekcse.herokuapp.com">Home</a></button></div>`
     };
     transporter.sendMail(mailOptions);
@@ -124,7 +128,7 @@ async function insertFile(file,res) {
                             'name':file.username,
                             'file':file.file,
                             'yearofJoining':file.yearofJoining,
-                            'autherized':file.autherized
+                            'autherized':'No'
                         }
                     },{
                         upsert:true

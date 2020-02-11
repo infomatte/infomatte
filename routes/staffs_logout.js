@@ -1,8 +1,10 @@
 const express = require('express');
 const router = express.Router();
+const tokenize = require('./localize')
+
 
 router.get('/', (req, res) => {
-    res.clearCookie('STAFF_TOKEN');
+    tokenize.setToken('staff',null)
     res.redirect('/');
 })
 

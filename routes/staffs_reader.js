@@ -2,10 +2,14 @@ const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken')
 const mongoClient = require('mongodb').MongoClient;
+const tokenize = require('./localize')
+
 
 router.post('/:data', async (req, res) => {
     const _id = req.params.data;
-    const data = jwt.decode(req.cookies.STAFF_TOKEN, process.env.TOKEN_SECRET)
+    const data = jwt.decode(tokenize.token_staff, process.env.TOKEN_SECRET)
+    if (data == null)
+        res.status(200).redirect('/error')
     const local_branch = branchToDb(data.branch)
     mongoClient.connect(process.env.DB_SECRET_KEY, {
             useUnifiedTopology: true,

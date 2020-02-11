@@ -2,14 +2,18 @@ const express = require('express');
 const router = express.Router();
 const mongoClient = require('mongodb').MongoClient;
 const jwt = require('jsonwebtoken')
+const tokenize = require('./localize')
+
 
 router.get('/:year', async (req, res) => {
     year = parseInt(req.params.year)
-    const data = jwt.decode(req.cookies.ADMIN_TOKEN,process.env.TOKEN_SECRET)
+    const data = jwt.decode(tokenize.token_admin,process.env.TOKEN_SECRET)
+    if(data == null)
+        res.status(200).redirect('/error')
     mongoClient.connect(process.env.DB_SECRET_KEY, {
         useUnifiedTopology: true,
         useNewUrlParser: true
-    },(err, client) => {
+    },async (err, client) => {
         let db = client.db('datastore');
         let collection = db.collection('storages');
         collection.find({
@@ -25,7 +29,7 @@ router.get('/:year', async (req, res) => {
                     });
                 }
             });
-    });
+        });
 });
 
 

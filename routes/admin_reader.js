@@ -23,8 +23,8 @@ router.post('/:data', async (req, res) => {
                     res.setHeader('content-disposition', 'inline; filenmae ="' + data.register_id + '"')
                     toStream(data.file.buffer).pipe(res)
                 }
-            })
-        })
+            });
+    });
 });
 
 function toStream(chunk) {
