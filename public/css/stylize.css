@@ -378,3 +378,7 @@ input[type=number] {
 .formfield {
     text-align: center;
 }
+.send-svg{
+    max-width: 100%;
+    position: absolute;
+}

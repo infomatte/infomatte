@@ -12,6 +12,9 @@
                         <a style="color: rgb(29, 29, 29)">Admin</a>
                     </li>
                     <li>
+                        <a style="color: rgb(29, 29, 29)" href="#help">Help?</a>
+                    </li>
+                    <li>
                         <form method="get" action="/admin_logout">
                             <button class="waves-effect waves-light btn btn-outline" type="submit">Logout</button>
                         </form>
@@ -22,7 +25,8 @@
     </nav>
 </div>
 <ul class="sidenav" id="mobile-demo">
-    <li><a><a>Admin</a></a></li>
+    <li><a>Admin</a></li>
+    <li><a href="#help">Help?</a></li>
     <li><a>Logout</a></li>
 </ul><br>
 <div class="container formfield">
@@ -57,11 +61,49 @@
             </div>
         </div>
         <button type='submit' class="waves-effect waves-light btn-large btn-outline">Add</button>
-    </form>
+    </form><br>
+    <section class="help" id="help">
+        <h3>Help!</h3>
+        <br />
+        <div class="row">
+            <ul id="tabs-swipe-demo" class="tabs">
+                <li class="tab col s3"><a href="#Admin">Admin</a>
+                </li>
+            </ul>
+            <div id="Admin" class="col s12">Admin</div>
+        </div>
+    </section>
 </div>
 <script>
     $(document).ready(function () {
         $('.sidenav').sidenav();
+    });
+    $(document).ready(function () {
+        $(".tabs").tabs();
+        $('.sidenav').sidenav();
+    });
+    M.AutoInit();
+    $('a[href*="#"]').not('[href="#"]').not('[href="#0"]').click(function (event) {
+        if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname ==
+            this.hostname) {
+            var target = $(this.hash);
+            target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+            if (target.length) {
+                event.preventDefault();
+                $('html, body').animate({
+                    scrollTop: target.offset().top
+                }, 1000, function () {
+                    var $target = $(target);
+                    $target.focus();
+                    if ($target.is(":focus")) {
+                        return false;
+                    } else {
+                        $target.attr('tabindex', '-1');
+                        $target.focus();
+                    };
+                });
+            }
+        }
     });
 </script>
 <%- include('partials/footer.ejs'); -%>
