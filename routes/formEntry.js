@@ -21,7 +21,6 @@ router.get('/', async (req, res) => {
     const token = req.cookies.TOKEN;
     if (token) {
         const data = jwt.decode(token, process.env.TOKEN_SECRET);
-        const Branch = data.branch;
         const d1 = new Date();
         const year0 = d1.getFullYear();
         const d = new Date(year0, 4, 25);
@@ -29,434 +28,110 @@ router.get('/', async (req, res) => {
         const second_year = d.getFullYear() - 1;
         const third_year = d.getFullYear() - 2;
         const fourth_year = d.getFullYear() - 3;
-        // const second_year = new Date(year-1, d.getMonth(), d.getDate())
-        // const third_year = new Date(year-2, d.getMonth(), d.getDate())
-        // const fourth_year = new Date(year-3, d.getMonth(), d.getDate())
-        switch (Branch) {
-            case 'CSE':
-                await CSE.findOne({
-                    register_id: data.register_id
-                }, (err, hold) => {
-                    if (err) {
-                        res.render('formEntry', {
-                            myid: data.register_id,
-                            mydob: data.dob,
-                            mymail: '',
-                            myname: '',
-                            mynation: '',
-                            myph: '',
-                            myaddress: '',
-                            later_entry: '',
-                            mysslc: '',
-                            mysslc_cutoff: '',
-                            branch: Branch,
-                            myhsc_cutoff: '',
-                            hsc_file: '',
-                            myyearofJoining: '',
-                            myregulation: '',
-                            year1: first_year,
-                            year2: second_year,
-                            year3: third_year,
-                            year4: fourth_year,
-                            header: 'Students Entry - Infomatte'
-                        });
-                    } else {
-                        if (hold.later_entry === 'No') {
-                            res.render('formEntry', {
-                                myid: hold.register_id,
-                                mydob: hold.dob,
-                                mymail: hold.mail,
-                                myname: hold.name,
-                                mynation: hold.nationality,
-                                myph: hold.phone_no,
-                                myaddress: hold.address,
-                                later_entry: hold.later_entry,
-                                mysslc: hold.sslc,
-                                mysslc_cutoff: hold.sslc_cutoff,
-                                sslc_file: hold.sslc_file,
-                                sslc_size: hold.sslc_size,
-                                myhsc: hold.hsc,
-                                myhsc_cutoff: hold.hsc_cutoff,
-                                hsc_file: hold.hsc_file,
-                                hsc_size: hold.hsc_size,
-                                branch: hold.branch,
-                                myyearofJoining: hold.yearofJoining,
-                                myregulation: hold.regulation,
-                                year1: first_year,
-                                year2: second_year,
-                                year3: third_year,
-                                year4: fourth_year,
-                                header: 'Students Entry - Infomatte'
-                            });
-                        } else if (hold.later_entry === 'Yes') {
-                            res.render('formEntry', {
-                                myid: hold.register_id,
-                                mydob: hold.dob,
-                                mymail: hold.mail,
-                                myname: hold.name,
-                                mynation: hold.nationality,
-                                myph: hold.phone_no,
-                                myaddress: hold.address,
-                                later_entry: hold.later_entry,
-                                branch: hold.branch,
-                                myyearofJoining: hold.yearofJoining,
-                                myregulation: hold.regulation,
-                                year1: first_year,
-                                year2: second_year,
-                                year3: third_year,
-                                year4: fourth_year,
-                                header: 'Students Entry - Infomatte'
-                            });
-                        } else {
-                            res.render('formEntry', {
-                                myname: hold.name,
-                                myid: data.register_id,
-                                mydob: data.dob,
-                                mymail: hold.mail,
-                                mymail: '',
-                                myname: '',
-                                mynation: '',
-                                myph: '',
-                                myaddress: '',
-                                later_entry: '',
-                                mysslc: '',
-                                mysslc_cutoff: '',
-                                sslc_file: '',
-                                myhsc: '',
-                                myhsc_cutoff: '',
-                                hsc_file: '',
-                                branch: Branch,
-                                myyearofJoining: '',
-                                myregulation: '',
-                                year1: first_year,
-                                year2: second_year,
-                                year3: third_year,
-                                year4: fourth_year,
-                                header: 'Students Entry - Infomatte'
-                            });
-                        }
-                    }
+        const flag = branchToObject(data.branch)
+        flag.findOne({
+            register_id: data.register_id
+        }, (err, hold) => {
+            if (err) {
+                res.render('formEntry', {
+                    myid: data.register_id,
+                    mydob: data.dob,
+                    mymail: '',
+                    myname: '',
+                    mynation: '',
+                    myph: '',
+                    myaddress: '',
+                    later_entry: '',
+                    mysslc: '',
+                    mysslc_cutoff: '',
+                    branch: Branch,
+                    myhsc_cutoff: '',
+                    hsc_file: '',
+                    myyearofJoining: '',
+                    myregulation: '',
+                    year1: first_year,
+                    year2: second_year,
+                    year3: third_year,
+                    year4: fourth_year,
+                    header: 'Students Entry - Infomatte'
                 });
-                break
-            case 'ECE':
-                await ECE.findOne({
-                    register_id: data.register_id
-                }, (err, hold) => {
-                    if (err) {
-                        res.render('formEntry', {
-                            myid: data.register_id,
-                            mydob: data.dob,
-                            mymail: '',
-                            myname: '',
-                            mynation: '',
-                            myph: '',
-                            myaddress: '',
-                            later_entry: '',
-                            mysslc: '',
-                            mysslc_cutoff: '',
-                            branch: req.body.branch,
-                            myhsc_cutoff: '',
-                            hsc_file: '',
-                            branch: Branch,
-                            myyearofJoining: '',
-                            myregulation: '',
-                            year1: first_year,
-                            year2: second_year,
-                            year3: third_year,
-                            year4: fourth_year,
-                            header: 'Students Entry - Infomatte'
-                        });
-                    } else {
-                        if (hold.later_entry === 'No') {
-                            res.render('formEntry', {
-                                myid: hold.register_id,
-                                mydob: hold.dob,
-                                mymail: hold.mail,
-                                myname: hold.name,
-                                mynation: hold.nationality,
-                                myph: hold.phone_no,
-                                myaddress: hold.address,
-                                later_entry: hold.later_entry,
-                                mysslc: hold.sslc,
-                                mysslc_cutoff: hold.sslc_cutoff,
-                                sslc_file: hold.sslc_file,
-                                sslc_size: hold.sslc_size,
-                                myhsc: hold.hsc,
-                                myhsc_cutoff: hold.hsc_cutoff,
-                                hsc_file: hold.hsc_file,
-                                hsc_size: hold.hsc_size,
-                                branch: hold.branch,
-                                myyearofJoining: hold.yearofJoining,
-                                myregulation: hold.regulation,
-                                year1: first_year,
-                                year2: second_year,
-                                year3: third_year,
-                                year4: fourth_year,
-                                header: 'Students Entry - Infomatte'
-                            });
-                        } else if (hold.later_entry === 'Yes') {
-                            res.render('formEntry', {
-                                myid: hold.register_id,
-                                mydob: hold.dob,
-                                mymail: hold.mail,
-                                myname: hold.name,
-                                mynation: hold.nationality,
-                                myph: hold.phone_no,
-                                myaddress: hold.address,
-                                later_entry: hold.later_entry,
-                                branch: hold.branch,
-                                myyearofJoining: hold.yearofJoining,
-                                myregulation: hold.regulation,
-                                year1: first_year,
-                                year2: second_year,
-                                year3: third_year,
-                                year4: fourth_year,
-                                header: 'Students Entry - Infomatte'
-                            });
-                        } else {
-                            res.render('formEntry', {
-                                myname: hold.name,
-                                myid: data.register_id,
-                                mydob: data.dob,
-                                mymail: hold.mail,
-                                mymail: '',
-                                myname: '',
-                                mynation: '',
-                                myph: '',
-                                myaddress: '',
-                                later_entry: '',
-                                mysslc: '',
-                                mysslc_cutoff: '',
-                                sslc_file: '',
-                                myhsc: '',
-                                myhsc_cutoff: '',
-                                hsc_file: '',
-                                branch: Branch,
-                                myyearofJoining: '',
-                                myregulation: '',
-                                year1: first_year,
-                                year2: second_year,
-                                year3: third_year,
-                                year4: fourth_year,
-                                header: 'Students Entry - Infomatte'
-                            });
-                        }
-                    }
-                });
-                break
-            case 'EEE':
-                await EEE.findOne({
-                    register_id: data.register_id
-                }, (err, hold) => {
-                    if (err) {
-                        res.render('formEntry', {
-                            myid: data.register_id,
-                            mydob: data.dob,
-                            mymail: '',
-                            myname: '',
-                            mynation: '',
-                            myph: '',
-                            myaddress: '',
-                            later_entry: '',
-                            mysslc: '',
-                            mysslc_cutoff: '',
-                            branch: req.body.branch,
-                            myhsc_cutoff: '',
-                            hsc_file: '',
-                            branch: Branch,
-                            myyearofJoining: '',
-                            myregulation: '',
-                            year1: first_year,
-                            year2: second_year,
-                            year3: third_year,
-                            year4: fourth_year,
-                            header: 'Students Entry - Infomatte'
-                        });
-                    } else {
-                        if (hold.later_entry === 'No') {
-                            res.render('formEntry', {
-                                myid: hold.register_id,
-                                mydob: hold.dob,
-                                mymail: hold.mail,
-                                myname: hold.name,
-                                mynation: hold.nationality,
-                                myph: hold.phone_no,
-                                myaddress: hold.address,
-                                later_entry: hold.later_entry,
-                                mysslc: hold.sslc,
-                                mysslc_cutoff: hold.sslc_cutoff,
-                                sslc_file: hold.sslc_file,
-                                sslc_size: hold.sslc_size,
-                                myhsc: hold.hsc,
-                                myhsc_cutoff: hold.hsc_cutoff,
-                                hsc_file: hold.hsc_file,
-                                hsc_size: hold.hsc_size,
-                                branch: hold.branch,
-                                myyearofJoining: hold.yearofJoining,
-                                myregulation: hold.regulation,
-                                year1: first_year,
-                                year2: second_year,
-                                year3: third_year,
-                                year4: fourth_year,
-                                header: 'Students Entry - Infomatte'
-                            });
-                        } else if (hold.later_entry === 'Yes') {
-                            res.render('formEntry', {
-                                myid: hold.register_id,
-                                mydob: hold.dob,
-                                mymail: hold.mail,
-                                myname: hold.name,
-                                mynation: hold.nationality,
-                                myph: hold.phone_no,
-                                myaddress: hold.address,
-                                later_entry: hold.later_entry,
-                                branch: hold.branch,
-                                myyearofJoining: hold.yearofJoining,
-                                myregulation: hold.regulation,
-                                year1: first_year,
-                                year2: second_year,
-                                year3: third_year,
-                                year4: fourth_year,
-                                header: 'Students Entry - Infomatte'
-                            });
-                        } else {
-                            res.render('formEntry', {
-                                myname: hold.name,
-                                myid: data.register_id,
-                                mydob: data.dob,
-                                mymail: hold.mail,
-                                mymail: '',
-                                myname: '',
-                                mynation: '',
-                                myph: '',
-                                myaddress: '',
-                                later_entry: '',
-                                mysslc: '',
-                                mysslc_cutoff: '',
-                                sslc_file: '',
-                                myhsc: '',
-                                myhsc_cutoff: '',
-                                hsc_file: '',
-                                branch: Branch,
-                                myyearofJoining: '',
-                                myregulation: '',
-                                year1: first_year,
-                                year2: second_year,
-                                year3: third_year,
-                                year4: fourth_year,
-                                header: 'Students Entry - Infomatte'
-                            });
-                        }
-                    }
-                });
-                break
-            case 'MECH':
-                await MECH.findOne({
-                    register_id: data.register_id
-                }, (err, hold) => {
-                    if (err) {
-                        res.render('formEntry', {
-                            myid: data.register_id,
-                            mydob: data.dob,
-                            mymail: '',
-                            myname: '',
-                            mynation: '',
-                            myph: '',
-                            myaddress: '',
-                            later_entry: '',
-                            mysslc: '',
-                            mysslc_cutoff: '',
-                            branch: req.body.branch,
-                            myhsc_cutoff: '',
-                            hsc_file: '',
-                            branch: Branch,
-                            myyearofJoining: '',
-                            myregulation: '',
-                            year1: first_year,
-                            year2: second_year,
-                            year3: third_year,
-                            year4: fourth_year,
-                            header: 'Students Entry - Infomatte'
-                        });
-                    } else {
-                        if (hold.later_entry === 'No') {
-                            res.render('formEntry', {
-                                myid: hold.register_id,
-                                mydob: hold.dob,
-                                mymail: hold.mail,
-                                myname: hold.name,
-                                mynation: hold.nationality,
-                                myph: hold.phone_no,
-                                myaddress: hold.address,
-                                later_entry: hold.later_entry,
-                                mysslc: hold.sslc,
-                                mysslc_cutoff: hold.sslc_cutoff,
-                                sslc_file: hold.sslc_file,
-                                sslc_size: hold.sslc_size,
-                                myhsc: hold.hsc,
-                                myhsc_cutoff: hold.hsc_cutoff,
-                                hsc_file: hold.hsc_file,
-                                hsc_size: hold.hsc_size,
-                                branch: hold.branch,
-                                myyearofJoining: hold.yearofJoining,
-                                myregulation: hold.regulation,
-                                year1: first_year,
-                                year2: second_year,
-                                year3: third_year,
-                                year4: fourth_year,
-                                header: 'Students Entry - Infomatte'
-                            });
-                        } else if (hold.later_entry === 'Yes') {
-                            res.render('formEntry', {
-                                myid: hold.register_id,
-                                mydob: hold.dob,
-                                mymail: hold.mail,
-                                myname: hold.name,
-                                mynation: hold.nationality,
-                                myph: hold.phone_no,
-                                myaddress: hold.address,
-                                later_entry: hold.later_entry,
-                                branch: hold.branch,
-                                myyearofJoining: hold.yearofJoining,
-                                myregulation: hold.regulation,
-                                year1: first_year,
-                                year2: second_year,
-                                year3: third_year,
-                                year4: fourth_year,
-                                header: 'Students Entry - Infomatte'
-                            });
-                        } else {
-                            res.render('formEntry', {
-                                myname: hold.name,
-                                myid: data.register_id,
-                                mydob: data.dob,
-                                mymail: hold.mail,
-                                mymail: '',
-                                myname: '',
-                                mynation: '',
-                                myph: '',
-                                myaddress: '',
-                                later_entry: '',
-                                mysslc: '',
-                                mysslc_cutoff: '',
-                                sslc_file: '',
-                                myhsc: '',
-                                myhsc_cutoff: '',
-                                hsc_file: '',
-                                branch: Branch,
-                                myyearofJoining: '',
-                                myregulation: '',
-                                year1: first_year,
-                                year2: second_year,
-                                year3: third_year,
-                                year4: fourth_year,
-                                header: 'Students Entry - Infomatte'
-                            });
-                        }
-                    }
-                });
-                break;
-        }
+            } else {
+                if (hold.later_entry === 'No') {
+                    res.render('formEntry', {
+                        myid: hold.register_id,
+                        mydob: hold.dob,
+                        mymail: hold.mail,
+                        myname: hold.name,
+                        mynation: hold.nationality,
+                        myph: hold.phone_no,
+                        myaddress: hold.address,
+                        later_entry: hold.later_entry,
+                        mysslc: hold.sslc,
+                        mysslc_cutoff: hold.sslc_cutoff,
+                        sslc_file: hold.sslc_file,
+                        sslc_size: hold.sslc_size,
+                        myhsc: hold.hsc,
+                        myhsc_cutoff: hold.hsc_cutoff,
+                        hsc_file: hold.hsc_file,
+                        hsc_size: hold.hsc_size,
+                        branch: hold.branch,
+                        myyearofJoining: hold.yearofJoining,
+                        myregulation: hold.regulation,
+                        year1: first_year,
+                        year2: second_year,
+                        year3: third_year,
+                        year4: fourth_year,
+                        header: 'Students Entry - Infomatte'
+                    });
+                } else if (hold.later_entry === 'Yes') {
+                    res.render('formEntry', {
+                        myid: hold.register_id,
+                        mydob: hold.dob,
+                        mymail: hold.mail,
+                        myname: hold.name,
+                        mynation: hold.nationality,
+                        myph: hold.phone_no,
+                        myaddress: hold.address,
+                        later_entry: hold.later_entry,
+                        branch: hold.branch,
+                        myyearofJoining: hold.yearofJoining,
+                        myregulation: hold.regulation,
+                        year1: first_year,
+                        year2: second_year,
+                        year3: third_year,
+                        year4: fourth_year,
+                        header: 'Students Entry - Infomatte'
+                    });
+                } else {
+                    res.render('formEntry', {
+                        myname: hold.name,
+                        myid: data.register_id,
+                        mydob: data.dob,
+                        mymail: hold.mail,
+                        mymail: '',
+                        myname: '',
+                        mynation: '',
+                        myph: '',
+                        myaddress: '',
+                        later_entry: '',
+                        mysslc: '',
+                        mysslc_cutoff: '',
+                        sslc_file: '',
+                        myhsc: '',
+                        myhsc_cutoff: '',
+                        hsc_file: '',
+                        branch: Branch,
+                        myyearofJoining: '',
+                        myregulation: '',
+                        year1: first_year,
+                        year2: second_year,
+                        year3: third_year,
+                        year4: fourth_year,
+                        header: 'Students Entry - Infomatte'
+                    });
+                }
+            }
+        });
     } else {
         res.redirect('/students_feonbnkkkujnxdkrqgouhqpsiaarpsfhekrpgwvuscmdtfvcpokzegryacvzsdha')
     }
@@ -474,6 +149,7 @@ router.post('/', async (req, res) => {
     }
     const token = req.cookies.TOKEN;
     const data = jwt.decode(token, process.env.TOKEN_SECRET);
+    const flag = branchToObject(data.branch)
     const tech_array = {
         tech_option: req.body.group1,
         technical_head: req.body.technical_head,
@@ -494,1425 +170,370 @@ router.post('/', async (req, res) => {
     const sslcFile = req.body.sslc_file
     const hscFile = req.body.hsc_file
     try {
-        switch (data.branch) {
-            case 'CSE':
-                if (req.body.form_group1 === 'Yes') {
-                    await CSE.updateMany({
-                        register_id: data.register_id
-                    }, {
-                        name: req.body.username,
-                        register_id: req.body.id,
-                        mail: req.body.email,
-                        dob: req.body.date,
-                        token: token,
-                        nationality: req.body.nation,
-                        phone_no: req.body.tele,
-                        address: req.body.address,
-                        later_entry: req.body.form_group1,
-                        branch: req.body.branch,
-                        yearofJoining: req.body.yearofJoining,
-                        regulation: req.body.regulation,
-                        $push: {
-                            technical: tech_array,
-                            sports: sport_array
-                        },
-                        Semester_1: {
-                            later_entry: null,
-                            attended: null,
-                            sub1: null,
-                            sub2: null,
-                            sub3: null,
-                            sub4: null,
-                            sub5: null,
-                            sub6: null,
-                            lab1: null,
-                            lab2: null,
-                            gpa: null,
-                            arrear: null,
-                            s1_file: await uriGen('')
-                        },
-                        Semester_2: {
-                            later_entry: null,
-                            attended: null,
-                            sub1: null,
-                            sub2: null,
-                            sub3: null,
-                            sub4: null,
-                            sub5: null,
-                            sub6: null,
-                            lab1: null,
-                            lab2: null,
-                            gpa: null,
-                            arrear: null,
-                            s2_file: await uriGen('')
-                        },
-                        Semester_3: {
-                            later_entry: null,
-                            attended: null,
-                            sub1: null,
-                            sub2: null,
-                            sub3: null,
-                            sub4: null,
-                            sub5: null,
-                            lab1: null,
-                            lab2: null,
-                            lab3: null,
-                            lab4: null,
-                            gpa: null,
-                            arrear: null,
-                            s3_file: await uriGen('')
-                        },
-                        Semester_4: {
-                            later_entry: null,
-                            attended: null,
-                            sub1: null,
-                            sub2: null,
-                            sub3: null,
-                            sub4: null,
-                            sub5: null,
-                            sub6: null,
-                            lab1: null,
-                            lab2: null,
-                            lab3: null,
-                            gpa: null,
-                            arrear: null,
-                            s4_file: await uriGen('')
-                        },
-                        Semester_5: {
-                            later_entry: null,
-                            attended: null,
-                            sub1: null,
-                            sub2: null,
-                            sub3: null,
-                            sub4: null,
-                            sub5: null,
-                            oe_1: null,
-                            sub6: null,
-                            lab1: null,
-                            lab2: null,
-                            lab3: null,
-                            gpa: null,
-                            arrear: null,
-                            s5_file: await uriGen('')
-                        },
-                        Semester_6: {
-                            later_entry: null,
-                            attended: null,
-                            sub1: null,
-                            sub2: null,
-                            sub3: null,
-                            sub4: null,
-                            sub5: null,
-                            pe_1: null,
-                            sub6: null,
-                            lab1: null,
-                            lab2: null,
-                            gpa: null,
-                            arrear: null,
-                            s6_file: await uriGen('')
-                        },
-                        Semester_7: {
-                            attended: null,
-                            sub1: null,
-                            sub2: null,
-                            sub3: null,
-                            pe_2: null,
-                            sub4: null,
-                            pe_3: null,
-                            sub5: null,
-                            oe_2: null,
-                            sub6: null,
-                            lab1: null,
-                            lab2: null,
-                            gpa: null,
-                            arrear: null,
-                            s7_file: await uriGen('')
-                        },
-                        Semester_8: {
-                            attended: null,
-                            pe_4: null,
-                            sub1: null,
-                            pe_5: null,
-                            sub2: null,
-                            gpa: null,
-                            arrear: null,
-                            s8_file: await uriGen('')
-                        },
-                        project_work: {
-                            project_head: null,
-                            project_count: null,
-                            name_team: null,
-                            project_description: null,
-                            project_remark: null
-                        },
-                        mini_project: {
-                            mini_head: null,
-                            mini_count: null,
-                            m_name_team: null,
-                            m_description: null,
-                            mini_remark: null
-                        },
-                    })
+        if (req.body.form_group1 === 'Yes') {
+            await flag.updateMany({
+                register_id: data.register_id
+            }, {
+                name: req.body.username,
+                register_id: req.body.id,
+                mail: req.body.email,
+                dob: req.body.date,
+                token: token,
+                nationality: req.body.nation,
+                phone_no: req.body.tele,
+                address: req.body.address,
+                later_entry: req.body.form_group1,
+                branch: req.body.branch,
+                yearofJoining: req.body.yearofJoining,
+                regulation: req.body.regulation,
+                $push: {
+                    technical: tech_array,
+                    sports: sport_array
+                },
+                Semester_1: {
+                    later_entry: null,
+                    attended: null,
+                    sub1: null,
+                    sub2: null,
+                    sub3: null,
+                    sub4: null,
+                    sub5: null,
+                    sub6: null,
+                    lab1: null,
+                    lab2: null,
+                    gpa: null,
+                    arrear: null,
+                    s1_file: await uriGen('')
+                },
+                Semester_2: {
+                    later_entry: null,
+                    attended: null,
+                    sub1: null,
+                    sub2: null,
+                    sub3: null,
+                    sub4: null,
+                    sub5: null,
+                    sub6: null,
+                    lab1: null,
+                    lab2: null,
+                    gpa: null,
+                    arrear: null,
+                    s2_file: await uriGen('')
+                },
+                Semester_3: {
+                    later_entry: null,
+                    attended: null,
+                    sub1: null,
+                    sub2: null,
+                    sub3: null,
+                    sub4: null,
+                    sub5: null,
+                    lab1: null,
+                    lab2: null,
+                    lab3: null,
+                    lab4: null,
+                    gpa: null,
+                    arrear: null,
+                    s3_file: await uriGen('')
+                },
+                Semester_4: {
+                    later_entry: null,
+                    attended: null,
+                    sub1: null,
+                    sub2: null,
+                    sub3: null,
+                    sub4: null,
+                    sub5: null,
+                    sub6: null,
+                    lab1: null,
+                    lab2: null,
+                    lab3: null,
+                    gpa: null,
+                    arrear: null,
+                    s4_file: await uriGen('')
+                },
+                Semester_5: {
+                    later_entry: null,
+                    attended: null,
+                    sub1: null,
+                    sub2: null,
+                    sub3: null,
+                    sub4: null,
+                    sub5: null,
+                    oe_1: null,
+                    sub6: null,
+                    lab1: null,
+                    lab2: null,
+                    lab3: null,
+                    gpa: null,
+                    arrear: null,
+                    s5_file: await uriGen('')
+                },
+                Semester_6: {
+                    later_entry: null,
+                    attended: null,
+                    sub1: null,
+                    sub2: null,
+                    sub3: null,
+                    sub4: null,
+                    sub5: null,
+                    pe_1: null,
+                    sub6: null,
+                    lab1: null,
+                    lab2: null,
+                    gpa: null,
+                    arrear: null,
+                    s6_file: await uriGen('')
+                },
+                Semester_7: {
+                    attended: null,
+                    sub1: null,
+                    sub2: null,
+                    sub3: null,
+                    pe_2: null,
+                    sub4: null,
+                    pe_3: null,
+                    sub5: null,
+                    oe_2: null,
+                    sub6: null,
+                    lab1: null,
+                    lab2: null,
+                    gpa: null,
+                    arrear: null,
+                    s7_file: await uriGen('')
+                },
+                Semester_8: {
+                    attended: null,
+                    pe_4: null,
+                    sub1: null,
+                    pe_5: null,
+                    sub2: null,
+                    gpa: null,
+                    arrear: null,
+                    s8_file: await uriGen('')
+                },
+                project_work: {
+                    project_head: null,
+                    project_count: null,
+                    name_team: null,
+                    project_description: null,
+                    project_remark: null
+                },
+                mini_project: {
+                    mini_head: null,
+                    mini_count: null,
+                    m_name_team: null,
+                    m_description: null,
+                    mini_remark: null
+                },
+            })
 
-                } else if (hscFile.includes("http://res.cloudinary.com/ucekcse/image/") && sslcFile.includes("http://res.cloudinary.com/ucekcse/image/")) {
+        } else if (hscFile.includes("http://res.cloudinary.com/ucekcse/image/") && sslcFile.includes("http://res.cloudinary.com/ucekcse/image/")) {
 
-                    await CSE.updateMany({
-                        register_id: data.register_id
-                    }, {
-                        name: req.body.username,
-                        register_id: req.body.id,
-                        mail: req.body.email,
-                        dob: req.body.date,
-                        token: token,
-                        nationality: req.body.nation,
-                        phone_no: req.body.tele,
-                        address: req.body.address,
-                        later_entry: req.body.form_group1,
-                        sslc: req.body.sslc,
-                        sslc_cutoff: req.body.sslc_cutoff,
-                        sslc_file: req.body.sslc_file,
-                        hsc: req.body.hsc,
-                        hsc_cutoff: req.body.hsc_cutoff,
-                        hsc_file: req.body.hsc_file,
-                        branch: req.body.branch,
-                        yearofJoining: req.body.yearofJoining,
-                        regulation: req.body.regulation,
-                        $push: {
-                            technical: tech_array,
-                            sports: sport_array
-                        },
-                    })
-                } else {
-                    await CSE.updateMany({
-                        register_id: data.register_id
-                    }, {
-                        name: req.body.username,
-                        register_id: req.body.id,
-                        mail: req.body.email,
-                        dob: req.body.date,
-                        token: token,
-                        nationality: req.body.nation,
-                        phone_no: req.body.tele,
-                        address: req.body.address,
-                        later_entry: req.body.form_group1,
-                        sslc: req.body.sslc,
-                        sslc_cutoff: req.body.sslc_cutoff,
-                        sslc_file: await uriGen(req.body.sslc_file),
-                        hsc: req.body.hsc,
-                        hsc_cutoff: req.body.hsc_cutoff,
-                        hsc_file: await uriGen(req.body.hsc_file),
-                        branch: req.body.branch,
-                        yearofJoining: req.body.yearofJoining,
-                        regulation: req.body.regulation,
-                        $push: {
-                            technical: tech_array,
-                            sports: sport_array
-                        },
-                        Semester_1: {
-                            later_entry: null,
-                            attended: null,
-                            sub1: null,
-                            sub2: null,
-                            sub3: null,
-                            sub4: null,
-                            sub5: null,
-                            sub6: null,
-                            lab1: null,
-                            lab2: null,
-                            gpa: null,
-                            arrear: null,
-                            s1_file: await uriGen('')
-                        },
-                        Semester_2: {
-                            later_entry: null,
-                            attended: null,
-                            sub1: null,
-                            sub2: null,
-                            sub3: null,
-                            sub4: null,
-                            sub5: null,
-                            sub6: null,
-                            lab1: null,
-                            lab2: null,
-                            gpa: null,
-                            arrear: null,
-                            s2_file: await uriGen('')
-                        },
-                        Semester_3: {
-                            later_entry: null,
-                            attended: null,
-                            sub1: null,
-                            sub2: null,
-                            sub3: null,
-                            sub4: null,
-                            sub5: null,
-                            lab1: null,
-                            lab2: null,
-                            lab3: null,
-                            lab4: null,
-                            gpa: null,
-                            arrear: null,
-                            s3_file: await uriGen('')
-                        },
-                        Semester_4: {
-                            later_entry: null,
-                            attended: null,
-                            sub1: null,
-                            sub2: null,
-                            sub3: null,
-                            sub4: null,
-                            sub5: null,
-                            sub6: null,
-                            lab1: null,
-                            lab2: null,
-                            lab3: null,
-                            gpa: null,
-                            arrear: null,
-                            s4_file: await uriGen('')
-                        },
-                        Semester_5: {
-                            later_entry: null,
-                            attended: null,
-                            sub1: null,
-                            sub2: null,
-                            sub3: null,
-                            sub4: null,
-                            sub5: null,
-                            oe_1: null,
-                            sub6: null,
-                            lab1: null,
-                            lab2: null,
-                            lab3: null,
-                            gpa: null,
-                            arrear: null,
-                            s5_file: await uriGen('')
-                        },
-                        Semester_6: {
-                            later_entry: null,
-                            attended: null,
-                            sub1: null,
-                            sub2: null,
-                            sub3: null,
-                            sub4: null,
-                            sub5: null,
-                            pe_1: null,
-                            sub6: null,
-                            lab1: null,
-                            lab2: null,
-                            gpa: null,
-                            arrear: null,
-                            s6_file: await uriGen('')
-                        },
-                        Semester_7: {
-                            attended: null,
-                            sub1: null,
-                            sub2: null,
-                            sub3: null,
-                            pe_2: null,
-                            sub4: null,
-                            pe_3: null,
-                            sub5: null,
-                            oe_2: null,
-                            sub6: null,
-                            lab1: null,
-                            lab2: null,
-                            gpa: null,
-                            arrear: null,
-                            s7_file: await uriGen('')
-                        },
-                        Semester_8: {
-                            attended: null,
-                            pe_4: null,
-                            sub1: null,
-                            pe_5: null,
-                            sub2: null,
-                            gpa: null,
-                            arrear: null,
-                            s8_file: await uriGen('')
-                        },
-                        project_work: {
-                            project_head: null,
-                            project_count: null,
-                            name_team: null,
-                            project_description: null,
-                            project_remark: null
-                        },
-                        mini_project: {
-                            mini_head: null,
-                            mini_count: null,
-                            m_name_team: null,
-                            m_description: null,
-                            mini_remark: null
-                        },
-                    })
-                }
-                res.redirect('/students_semesters');
-                break;
-            case 'ECE':
-                if (req.body.form_group1 === 'Yes') {
-                    await ECE.updateMany({
-                        register_id: data.register_id
-                    }, {
-                        name: req.body.username,
-                        nad: req.body.id,
-                        mail: req.body.email,
-                        dob: req.body.date,
-                        token: token,
-                        nationality: req.body.nation,
-                        phone_no: req.body.tele,
-                        address: req.body.address,
-                        later_entry: req.body.form_group1,
-                        branch: req.body.branch,
-                        yearofJoining: req.body.yearofJoining,
-                        regulation: req.body.regulation,
-                        $push: {
-                            technical: tech_array,
-                            sports: sport_array
-                        },
-                        Semester_1: {
-                            later_entry: null,
-                            attended: null,
-                            sub1: null,
-                            sub2: null,
-                            sub3: null,
-                            sub4: null,
-                            sub5: null,
-                            sub6: null,
-                            lab1: null,
-                            lab2: null,
-                            gpa: null,
-                            arrear: null,
-                            s1_file: await uriGen('')
-                        },
-                        Semester_2: {
-                            later_entry: null,
-                            attended: null,
-                            sub1: null,
-                            sub2: null,
-                            sub3: null,
-                            sub4: null,
-                            sub5: null,
-                            sub6: null,
-                            lab1: null,
-                            lab2: null,
-                            gpa: null,
-                            arrear: null,
-                            s2_file: await uriGen('')
-                        },
-                        Semester_3: {
-                            later_entry: null,
-                            attended: null,
-                            sub1: null,
-                            sub2: null,
-                            sub3: null,
-                            sub4: null,
-                            sub5: null,
-                            lab1: null,
-                            lab2: null,
-                            lab3: null,
-                            lab4: null,
-                            gpa: null,
-                            arrear: null,
-                            s3_file: await uriGen('')
-                        },
-                        Semester_4: {
-                            later_entry: null,
-                            attended: null,
-                            sub1: null,
-                            sub2: null,
-                            sub3: null,
-                            sub4: null,
-                            sub5: null,
-                            sub6: null,
-                            lab1: null,
-                            lab2: null,
-                            lab3: null,
-                            gpa: null,
-                            arrear: null,
-                            s4_file: await uriGen('')
-                        },
-                        Semester_5: {
-                            later_entry: null,
-                            attended: null,
-                            sub1: null,
-                            sub2: null,
-                            sub3: null,
-                            sub4: null,
-                            sub5: null,
-                            oe_1: null,
-                            sub6: null,
-                            lab1: null,
-                            lab2: null,
-                            lab3: null,
-                            gpa: null,
-                            arrear: null,
-                            s5_file: await uriGen('')
-                        },
-                        Semester_6: {
-                            later_entry: null,
-                            attended: null,
-                            sub1: null,
-                            sub2: null,
-                            sub3: null,
-                            sub4: null,
-                            sub5: null,
-                            pe_1: null,
-                            sub6: null,
-                            lab1: null,
-                            lab2: null,
-                            gpa: null,
-                            arrear: null,
-                            s6_file: await uriGen('')
-                        },
-                        Semester_7: {
-                            attended: null,
-                            sub1: null,
-                            sub2: null,
-                            sub3: null,
-                            pe_2: null,
-                            sub4: null,
-                            pe_3: null,
-                            sub5: null,
-                            oe_2: null,
-                            sub6: null,
-                            lab1: null,
-                            lab2: null,
-                            gpa: null,
-                            arrear: null,
-                            s7_file: await uriGen('')
-                        },
-                        Semester_8: {
-                            attended: null,
-                            pe_4: null,
-                            sub1: null,
-                            pe_5: null,
-                            sub2: null,
-                            gpa: null,
-                            arrear: null,
-                            s8_file: await uriGen('')
-                        },
-                        project_work: {
-                            project_head: null,
-                            project_count: null,
-                            name_team: null,
-                            project_description: null,
-                            project_remark: null
-                        },
-                        mini_project: {
-                            mini_head: null,
-                            mini_count: null,
-                            m_name_team: null,
-                            m_description: null,
-                            mini_remark: null
-                        },
-                    })
-
-                } else if (hscFile.includes("http://res.cloudinary.com/ucekcse/image/") && sslcFile.includes("http://res.cloudinary.com/ucekcse/image/")) {
-
-                    await ECE.updateMany({
-                        register_id: data.register_id
-                    }, {
-                        name: req.body.username,
-                        nad: req.body.id,
-                        mail: req.body.email,
-                        dob: req.body.date,
-                        token: token,
-                        nationality: req.body.nation,
-                        phone_no: req.body.tele,
-                        address: req.body.address,
-                        later_entry: req.body.form_group1,
-                        sslc: req.body.sslc,
-                        sslc_cutoff: req.body.sslc_cutoff,
-                        sslc_file: req.body.sslc_file,
-                        hsc: req.body.hsc,
-                        hsc_cutoff: req.body.hsc_cutoff,
-                        hsc_file: req.body.hsc_file,
-                        branch: req.body.branch,
-                        yearofJoining: req.body.yearofJoining,
-                        regulation: req.body.regulation,
-                        $push: {
-                            technical: tech_array,
-                            sports: sport_array
-                        },
-                    })
-                } else {
-                    await ECE.updateMany({
-                        register_id: data.register_id
-                    }, {
-                        name: req.body.username,
-                        register_id: req.body.id,
-                        mail: req.body.email,
-                        dob: req.body.date,
-                        token: token,
-                        nationality: req.body.nation,
-                        phone_no: req.body.tele,
-                        address: req.body.address,
-                        later_entry: req.body.form_group1,
-                        sslc: req.body.sslc,
-                        sslc_cutoff: req.body.sslc_cutoff,
-                        sslc_file: await uriGen(req.body.sslc_file),
-                        hsc: req.body.hsc,
-                        hsc_cutoff: req.body.hsc_cutoff,
-                        hsc_file: await uriGen(req.body.hsc_file),
-                        branch: req.body.branch,
-                        yearofJoining: req.body.yearofJoining,
-                        regulation: req.body.regulation,
-                        $push: {
-                            technical: tech_array,
-                            sports: sport_array
-                        },
-                        Semester_1: {
-                            later_entry: null,
-                            attended: null,
-                            sub1: null,
-                            sub2: null,
-                            sub3: null,
-                            sub4: null,
-                            sub5: null,
-                            sub6: null,
-                            lab1: null,
-                            lab2: null,
-                            gpa: null,
-                            arrear: null,
-                            s1_file: await uriGen('')
-                        },
-                        Semester_2: {
-                            later_entry: null,
-                            attended: null,
-                            sub1: null,
-                            sub2: null,
-                            sub3: null,
-                            sub4: null,
-                            sub5: null,
-                            sub6: null,
-                            lab1: null,
-                            lab2: null,
-                            gpa: null,
-                            arrear: null,
-                            s2_file: await uriGen('')
-                        },
-                        Semester_3: {
-                            later_entry: null,
-                            attended: null,
-                            sub1: null,
-                            sub2: null,
-                            sub3: null,
-                            sub4: null,
-                            sub5: null,
-                            lab1: null,
-                            lab2: null,
-                            lab3: null,
-                            lab4: null,
-                            gpa: null,
-                            arrear: null,
-                            s3_file: await uriGen('')
-                        },
-                        Semester_4: {
-                            later_entry: null,
-                            attended: null,
-                            sub1: null,
-                            sub2: null,
-                            sub3: null,
-                            sub4: null,
-                            sub5: null,
-                            sub6: null,
-                            lab1: null,
-                            lab2: null,
-                            lab3: null,
-                            gpa: null,
-                            arrear: null,
-                            s4_file: await uriGen('')
-                        },
-                        Semester_5: {
-                            later_entry: null,
-                            attended: null,
-                            sub1: null,
-                            sub2: null,
-                            sub3: null,
-                            sub4: null,
-                            sub5: null,
-                            oe_1: null,
-                            sub6: null,
-                            lab1: null,
-                            lab2: null,
-                            lab3: null,
-                            gpa: null,
-                            arrear: null,
-                            s5_file: await uriGen('')
-                        },
-                        Semester_6: {
-                            later_entry: null,
-                            attended: null,
-                            sub1: null,
-                            sub2: null,
-                            sub3: null,
-                            sub4: null,
-                            sub5: null,
-                            pe_1: null,
-                            sub6: null,
-                            lab1: null,
-                            lab2: null,
-                            gpa: null,
-                            arrear: null,
-                            s6_file: await uriGen('')
-                        },
-                        Semester_7: {
-                            attended: null,
-                            sub1: null,
-                            sub2: null,
-                            sub3: null,
-                            pe_2: null,
-                            sub4: null,
-                            pe_3: null,
-                            sub5: null,
-                            oe_2: null,
-                            sub6: null,
-                            lab1: null,
-                            lab2: null,
-                            gpa: null,
-                            arrear: null,
-                            s7_file: await uriGen('')
-                        },
-                        Semester_8: {
-                            attended: null,
-                            pe_4: null,
-                            sub1: null,
-                            pe_5: null,
-                            sub2: null,
-                            gpa: null,
-                            arrear: null,
-                            s8_file: await uriGen('')
-                        },
-                        project_work: {
-                            project_head: null,
-                            project_count: null,
-                            name_team: null,
-                            project_description: null,
-                            project_remark: null
-                        },
-                        mini_project: {
-                            mini_head: null,
-                            mini_count: null,
-                            m_name_team: null,
-                            m_description: null,
-                            mini_remark: null
-                        },
-                    })
-                }
-                res.redirect('/students_semesters');
-                break;
-            case 'MECH':
-                if (req.body.form_group1 === 'Yes') {
-                    await MECH.updateMany({
-                        register_id: data.register_id
-                    }, {
-                        name: req.body.username,
-                        register_id: req.body.id,
-                        mail: req.body.email,
-                        dob: req.body.date,
-                        token: token,
-                        nationality: req.body.nation,
-                        phone_no: req.body.tele,
-                        address: req.body.address,
-                        later_entry: req.body.form_group1,
-                        branch: req.body.branch,
-                        yearofJoining: req.body.yearofJoining,
-                        regulation: req.body.regulation,
-                        $push: {
-                            technical: tech_array,
-                            sports: sport_array
-                        },
-                        Semester_1: {
-                            later_entry: null,
-                            attended: null,
-                            sub1: null,
-                            sub2: null,
-                            sub3: null,
-                            sub4: null,
-                            sub5: null,
-                            sub6: null,
-                            lab1: null,
-                            lab2: null,
-                            gpa: null,
-                            arrear: null,
-                            s1_file: await uriGen('')
-                        },
-                        Semester_2: {
-                            later_entry: null,
-                            attended: null,
-                            sub1: null,
-                            sub2: null,
-                            sub3: null,
-                            sub4: null,
-                            sub5: null,
-                            sub6: null,
-                            lab1: null,
-                            lab2: null,
-                            gpa: null,
-                            arrear: null,
-                            s2_file: await uriGen('')
-                        },
-                        Semester_3: {
-                            later_entry: null,
-                            attended: null,
-                            sub1: null,
-                            sub2: null,
-                            sub3: null,
-                            sub4: null,
-                            sub5: null,
-                            lab1: null,
-                            lab2: null,
-                            lab3: null,
-                            lab4: null,
-                            gpa: null,
-                            arrear: null,
-                            s3_file: await uriGen('')
-                        },
-                        Semester_4: {
-                            later_entry: null,
-                            attended: null,
-                            sub1: null,
-                            sub2: null,
-                            sub3: null,
-                            sub4: null,
-                            sub5: null,
-                            sub6: null,
-                            lab1: null,
-                            lab2: null,
-                            lab3: null,
-                            gpa: null,
-                            arrear: null,
-                            s4_file: await uriGen('')
-                        },
-                        Semester_5: {
-                            later_entry: null,
-                            attended: null,
-                            sub1: null,
-                            sub2: null,
-                            sub3: null,
-                            sub4: null,
-                            sub5: null,
-                            oe_1: null,
-                            sub6: null,
-                            lab1: null,
-                            lab2: null,
-                            lab3: null,
-                            gpa: null,
-                            arrear: null,
-                            s5_file: await uriGen('')
-                        },
-                        Semester_6: {
-                            later_entry: null,
-                            attended: null,
-                            sub1: null,
-                            sub2: null,
-                            sub3: null,
-                            sub4: null,
-                            sub5: null,
-                            pe_1: null,
-                            sub6: null,
-                            lab1: null,
-                            lab2: null,
-                            gpa: null,
-                            arrear: null,
-                            s6_file: await uriGen('')
-                        },
-                        Semester_7: {
-                            attended: null,
-                            sub1: null,
-                            sub2: null,
-                            sub3: null,
-                            pe_2: null,
-                            sub4: null,
-                            pe_3: null,
-                            sub5: null,
-                            oe_2: null,
-                            sub6: null,
-                            lab1: null,
-                            lab2: null,
-                            gpa: null,
-                            arrear: null,
-                            s7_file: await uriGen('')
-                        },
-                        Semester_8: {
-                            attended: null,
-                            pe_4: null,
-                            sub1: null,
-                            pe_5: null,
-                            sub2: null,
-                            gpa: null,
-                            arrear: null,
-                            s8_file: await uriGen('')
-                        },
-                        project_work: {
-                            project_head: null,
-                            project_count: null,
-                            name_team: null,
-                            project_description: null,
-                            project_remark: null
-                        },
-                        mini_project: {
-                            mini_head: null,
-                            mini_count: null,
-                            m_name_team: null,
-                            m_description: null,
-                            mini_remark: null
-                        },
-                    })
-
-                } else if (hscFile.includes("http://res.cloudinary.com/ucekcse/image/") && sslcFile.includes("http://res.cloudinary.com/ucekcse/image/")) {
-
-                    await MECH.updateMany({
-                        register_id: data.register_id
-                    }, {
-                        name: req.body.username,
-                        register_id: req.body.id,
-                        mail: req.body.email,
-                        dob: req.body.date,
-                        token: token,
-                        nationality: req.body.nation,
-                        phone_no: req.body.tele,
-                        address: req.body.address,
-                        later_entry: req.body.form_group1,
-                        sslc: req.body.sslc,
-                        sslc_cutoff: req.body.sslc_cutoff,
-                        sslc_file: req.body.sslc_file,
-                        hsc: req.body.hsc,
-                        hsc_cutoff: req.body.hsc_cutoff,
-                        hsc_file: req.body.hsc_file,
-                        branch: req.body.branch,
-                        yearofJoining: req.body.yearofJoining,
-                        regulation: req.body.regulation,
-                        $push: {
-                            technical: tech_array,
-                            sports: sport_array
-                        },
-                    })
-                } else {
-                    await MECH.updateMany({
-                        register_id: data.register_id
-                    }, {
-                        name: req.body.username,
-                        register_id: req.body.id,
-                        mail: req.body.email,
-                        dob: req.body.date,
-                        token: token,
-                        nationality: req.body.nation,
-                        phone_no: req.body.tele,
-                        address: req.body.address,
-                        later_entry: req.body.form_group1,
-                        sslc: req.body.sslc,
-                        sslc_cutoff: req.body.sslc_cutoff,
-                        sslc_file: await uriGen(req.body.sslc_file),
-                        hsc: req.body.hsc,
-                        hsc_cutoff: req.body.hsc_cutoff,
-                        hsc_file: await uriGen(req.body.hsc_file),
-                        branch: req.body.branch,
-                        yearofJoining: req.body.yearofJoining,
-                        regulation: req.body.regulation,
-                        $push: {
-                            technical: tech_array,
-                            sports: sport_array
-                        },
-                        Semester_1: {
-                            later_entry: null,
-                            attended: null,
-                            sub1: null,
-                            sub2: null,
-                            sub3: null,
-                            sub4: null,
-                            sub5: null,
-                            sub6: null,
-                            lab1: null,
-                            lab2: null,
-                            gpa: null,
-                            arrear: null,
-                            s1_file: await uriGen('')
-                        },
-                        Semester_2: {
-                            later_entry: null,
-                            attended: null,
-                            sub1: null,
-                            sub2: null,
-                            sub3: null,
-                            sub4: null,
-                            sub5: null,
-                            sub6: null,
-                            lab1: null,
-                            lab2: null,
-                            gpa: null,
-                            arrear: null,
-                            s2_file: await uriGen('')
-                        },
-                        Semester_3: {
-                            later_entry: null,
-                            attended: null,
-                            sub1: null,
-                            sub2: null,
-                            sub3: null,
-                            sub4: null,
-                            sub5: null,
-                            lab1: null,
-                            lab2: null,
-                            lab3: null,
-                            lab4: null,
-                            gpa: null,
-                            arrear: null,
-                            s3_file: await uriGen('')
-                        },
-                        Semester_4: {
-                            later_entry: null,
-                            attended: null,
-                            sub1: null,
-                            sub2: null,
-                            sub3: null,
-                            sub4: null,
-                            sub5: null,
-                            sub6: null,
-                            lab1: null,
-                            lab2: null,
-                            lab3: null,
-                            gpa: null,
-                            arrear: null,
-                            s4_file: await uriGen('')
-                        },
-                        Semester_5: {
-                            later_entry: null,
-                            attended: null,
-                            sub1: null,
-                            sub2: null,
-                            sub3: null,
-                            sub4: null,
-                            sub5: null,
-                            oe_1: null,
-                            sub6: null,
-                            lab1: null,
-                            lab2: null,
-                            lab3: null,
-                            gpa: null,
-                            arrear: null,
-                            s5_file: await uriGen('')
-                        },
-                        Semester_6: {
-                            later_entry: null,
-                            attended: null,
-                            sub1: null,
-                            sub2: null,
-                            sub3: null,
-                            sub4: null,
-                            sub5: null,
-                            pe_1: null,
-                            sub6: null,
-                            lab1: null,
-                            lab2: null,
-                            gpa: null,
-                            arrear: null,
-                            s6_file: await uriGen('')
-                        },
-                        Semester_7: {
-                            attended: null,
-                            sub1: null,
-                            sub2: null,
-                            sub3: null,
-                            pe_2: null,
-                            sub4: null,
-                            pe_3: null,
-                            sub5: null,
-                            oe_2: null,
-                            sub6: null,
-                            lab1: null,
-                            lab2: null,
-                            gpa: null,
-                            arrear: null,
-                            s7_file: await uriGen('')
-                        },
-                        Semester_8: {
-                            attended: null,
-                            pe_4: null,
-                            sub1: null,
-                            pe_5: null,
-                            sub2: null,
-                            gpa: null,
-                            arrear: null,
-                            s8_file: await uriGen('')
-                        },
-                        project_work: {
-                            project_head: null,
-                            project_count: null,
-                            name_team: null,
-                            project_description: null,
-                            project_remark: null
-                        },
-                        mini_project: {
-                            mini_head: null,
-                            mini_count: null,
-                            m_name_team: null,
-                            m_description: null,
-                            mini_remark: null
-                        },
-                    })
-                }
-                res.redirect('/students_semesters');
-                break;
-            case 'EEE':
-                if (req.body.form_group1 === 'Yes') {
-                    await EEE.updateMany({
-                        register_id: data.register_id
-                    }, {
-                        name: req.body.username,
-                        register_id: req.body.id,
-                        mail: req.body.email,
-                        dob: req.body.date,
-                        token: token,
-                        nationality: req.body.nation,
-                        phone_no: req.body.tele,
-                        address: req.body.address,
-                        later_entry: req.body.form_group1,
-                        branch: req.body.branch,
-                        yearofJoining: req.body.yearofJoining,
-                        regulation: req.body.regulation,
-                        $push: {
-                            technical: tech_array,
-                            sports: sport_array
-                        },
-                        Semester_1: {
-                            later_entry: null,
-                            attended: null,
-                            sub1: null,
-                            sub2: null,
-                            sub3: null,
-                            sub4: null,
-                            sub5: null,
-                            sub6: null,
-                            lab1: null,
-                            lab2: null,
-                            gpa: null,
-                            arrear: null,
-                            s1_file: await uriGen('')
-                        },
-                        Semester_2: {
-                            later_entry: null,
-                            attended: null,
-                            sub1: null,
-                            sub2: null,
-                            sub3: null,
-                            sub4: null,
-                            sub5: null,
-                            sub6: null,
-                            lab1: null,
-                            lab2: null,
-                            gpa: null,
-                            arrear: null,
-                            s2_file: await uriGen('')
-                        },
-                        Semester_3: {
-                            later_entry: null,
-                            attended: null,
-                            sub1: null,
-                            sub2: null,
-                            sub3: null,
-                            sub4: null,
-                            sub5: null,
-                            lab1: null,
-                            lab2: null,
-                            lab3: null,
-                            lab4: null,
-                            gpa: null,
-                            arrear: null,
-                            s3_file: await uriGen('')
-                        },
-                        Semester_4: {
-                            later_entry: null,
-                            attended: null,
-                            sub1: null,
-                            sub2: null,
-                            sub3: null,
-                            sub4: null,
-                            sub5: null,
-                            sub6: null,
-                            lab1: null,
-                            lab2: null,
-                            lab3: null,
-                            gpa: null,
-                            arrear: null,
-                            s4_file: await uriGen('')
-                        },
-                        Semester_5: {
-                            later_entry: null,
-                            attended: null,
-                            sub1: null,
-                            sub2: null,
-                            sub3: null,
-                            sub4: null,
-                            sub5: null,
-                            oe_1: null,
-                            sub6: null,
-                            lab1: null,
-                            lab2: null,
-                            lab3: null,
-                            gpa: null,
-                            arrear: null,
-                            s5_file: await uriGen('')
-                        },
-                        Semester_6: {
-                            later_entry: null,
-                            attended: null,
-                            sub1: null,
-                            sub2: null,
-                            sub3: null,
-                            sub4: null,
-                            sub5: null,
-                            pe_1: null,
-                            sub6: null,
-                            lab1: null,
-                            lab2: null,
-                            gpa: null,
-                            arrear: null,
-                            s6_file: await uriGen('')
-                        },
-                        Semester_7: {
-                            attended: null,
-                            sub1: null,
-                            sub2: null,
-                            sub3: null,
-                            pe_2: null,
-                            sub4: null,
-                            pe_3: null,
-                            sub5: null,
-                            oe_2: null,
-                            sub6: null,
-                            lab1: null,
-                            lab2: null,
-                            gpa: null,
-                            arrear: null,
-                            s7_file: await uriGen('')
-                        },
-                        Semester_8: {
-                            attended: null,
-                            pe_4: null,
-                            sub1: null,
-                            pe_5: null,
-                            sub2: null,
-                            gpa: null,
-                            arrear: null,
-                            s8_file: await uriGen('')
-                        },
-                        project_work: {
-                            project_head: null,
-                            project_count: null,
-                            name_team: null,
-                            project_description: null,
-                            project_remark: null
-                        },
-                        mini_project: {
-                            mini_head: null,
-                            mini_count: null,
-                            m_name_team: null,
-                            m_description: null,
-                            mini_remark: null
-                        },
-                    })
-
-                } else if (hscFile.includes("http://res.cloudinary.com/ucekcse/image/") && sslcFile.includes("http://res.cloudinary.com/ucekcse/image/")) {
-
-                    await EEE.updateMany({
-                        register_id: data.register_id
-                    }, {
-                        name: req.body.username,
-                        register_id: req.body.id,
-                        mail: req.body.email,
-                        dob: req.body.date,
-                        token: token,
-                        nationality: req.body.nation,
-                        phone_no: req.body.tele,
-                        address: req.body.address,
-                        later_entry: req.body.form_group1,
-                        sslc: req.body.sslc,
-                        sslc_cutoff: req.body.sslc_cutoff,
-                        sslc_file: req.body.sslc_file,
-                        hsc: req.body.hsc,
-                        hsc_cutoff: req.body.hsc_cutoff,
-                        hsc_file: req.body.hsc_file,
-                        branch: req.body.branch,
-                        yearofJoining: req.body.yearofJoining,
-                        regulation: req.body.regulation,
-                        $push: {
-                            technical: tech_array,
-                            sports: sport_array
-                        },
-                    })
-                } else {
-                    await EEE.updateMany({
-                        register_id: data.register_id
-                    }, {
-                        name: req.body.username,
-                        register_id: req.body.id,
-                        mail: req.body.email,
-                        dob: req.body.date,
-                        token: token,
-                        nationality: req.body.nation,
-                        phone_no: req.body.tele,
-                        address: req.body.address,
-                        later_entry: req.body.form_group1,
-                        sslc: req.body.sslc,
-                        sslc_cutoff: req.body.sslc_cutoff,
-                        sslc_file: await uriGen(req.body.sslc_file),
-                        hsc: req.body.hsc,
-                        hsc_cutoff: req.body.hsc_cutoff,
-                        hsc_file: await uriGen(req.body.hsc_file),
-                        branch: req.body.branch,
-                        yearofJoining: req.body.yearofJoining,
-                        regulation: req.body.regulation,
-                        $push: {
-                            technical: tech_array,
-                            sports: sport_array
-                        },
-                        Semester_1: {
-                            later_entry: null,
-                            attended: null,
-                            sub1: null,
-                            sub2: null,
-                            sub3: null,
-                            sub4: null,
-                            sub5: null,
-                            sub6: null,
-                            lab1: null,
-                            lab2: null,
-                            gpa: null,
-                            arrear: null,
-                            s1_file: await uriGen('')
-                        },
-                        Semester_2: {
-                            later_entry: null,
-                            attended: null,
-                            sub1: null,
-                            sub2: null,
-                            sub3: null,
-                            sub4: null,
-                            sub5: null,
-                            sub6: null,
-                            lab1: null,
-                            lab2: null,
-                            gpa: null,
-                            arrear: null,
-                            s2_file: await uriGen('')
-                        },
-                        Semester_3: {
-                            later_entry: null,
-                            attended: null,
-                            sub1: null,
-                            sub2: null,
-                            sub3: null,
-                            sub4: null,
-                            sub5: null,
-                            lab1: null,
-                            lab2: null,
-                            lab3: null,
-                            lab4: null,
-                            gpa: null,
-                            arrear: null,
-                            s3_file: await uriGen('')
-                        },
-                        Semester_4: {
-                            later_entry: null,
-                            attended: null,
-                            sub1: null,
-                            sub2: null,
-                            sub3: null,
-                            sub4: null,
-                            sub5: null,
-                            sub6: null,
-                            lab1: null,
-                            lab2: null,
-                            lab3: null,
-                            gpa: null,
-                            arrear: null,
-                            s4_file: await uriGen('')
-                        },
-                        Semester_5: {
-                            later_entry: null,
-                            attended: null,
-                            sub1: null,
-                            sub2: null,
-                            sub3: null,
-                            sub4: null,
-                            sub5: null,
-                            oe_1: null,
-                            sub6: null,
-                            lab1: null,
-                            lab2: null,
-                            lab3: null,
-                            gpa: null,
-                            arrear: null,
-                            s5_file: await uriGen('')
-                        },
-                        Semester_6: {
-                            later_entry: null,
-                            attended: null,
-                            sub1: null,
-                            sub2: null,
-                            sub3: null,
-                            sub4: null,
-                            sub5: null,
-                            pe_1: null,
-                            sub6: null,
-                            lab1: null,
-                            lab2: null,
-                            gpa: null,
-                            arrear: null,
-                            s6_file: await uriGen('')
-                        },
-                        Semester_7: {
-                            attended: null,
-                            sub1: null,
-                            sub2: null,
-                            sub3: null,
-                            pe_2: null,
-                            sub4: null,
-                            pe_3: null,
-                            sub5: null,
-                            oe_2: null,
-                            sub6: null,
-                            lab1: null,
-                            lab2: null,
-                            gpa: null,
-                            arrear: null,
-                            s7_file: await uriGen('')
-                        },
-                        Semester_8: {
-                            attended: null,
-                            pe_4: null,
-                            sub1: null,
-                            pe_5: null,
-                            sub2: null,
-                            gpa: null,
-                            arrear: null,
-                            s8_file: await uriGen('')
-                        },
-                        project_work: {
-                            project_head: null,
-                            project_count: null,
-                            name_team: null,
-                            project_description: null,
-                            project_remark: null
-                        },
-                        mini_project: {
-                            mini_head: null,
-                            mini_count: null,
-                            m_name_team: null,
-                            m_description: null,
-                            mini_remark: null
-                        },
-                    })
-                }
-                res.redirect('/students_semesters');
-                break;
-
+            await flag.updateMany({
+                register_id: data.register_id
+            }, {
+                name: req.body.username,
+                register_id: req.body.id,
+                mail: req.body.email,
+                dob: req.body.date,
+                token: token,
+                nationality: req.body.nation,
+                phone_no: req.body.tele,
+                address: req.body.address,
+                later_entry: req.body.form_group1,
+                sslc: req.body.sslc,
+                sslc_cutoff: req.body.sslc_cutoff,
+                sslc_file: req.body.sslc_file,
+                hsc: req.body.hsc,
+                hsc_cutoff: req.body.hsc_cutoff,
+                hsc_file: req.body.hsc_file,
+                branch: req.body.branch,
+                yearofJoining: req.body.yearofJoining,
+                regulation: req.body.regulation,
+                $push: {
+                    technical: tech_array,
+                    sports: sport_array
+                },
+            })
+        } else {
+            await flag.updateMany({
+                register_id: data.register_id
+            }, {
+                name: req.body.username,
+                register_id: req.body.id,
+                mail: req.body.email,
+                dob: req.body.date,
+                token: token,
+                nationality: req.body.nation,
+                phone_no: req.body.tele,
+                address: req.body.address,
+                later_entry: req.body.form_group1,
+                sslc: req.body.sslc,
+                sslc_cutoff: req.body.sslc_cutoff,
+                sslc_file: await uriGen(req.body.sslc_file),
+                hsc: req.body.hsc,
+                hsc_cutoff: req.body.hsc_cutoff,
+                hsc_file: await uriGen(req.body.hsc_file),
+                branch: req.body.branch,
+                yearofJoining: req.body.yearofJoining,
+                regulation: req.body.regulation,
+                $push: {
+                    technical: tech_array,
+                    sports: sport_array
+                },
+                Semester_1: {
+                    later_entry: null,
+                    attended: null,
+                    sub1: null,
+                    sub2: null,
+                    sub3: null,
+                    sub4: null,
+                    sub5: null,
+                    sub6: null,
+                    lab1: null,
+                    lab2: null,
+                    gpa: null,
+                    arrear: null,
+                    s1_file: await uriGen('')
+                },
+                Semester_2: {
+                    later_entry: null,
+                    attended: null,
+                    sub1: null,
+                    sub2: null,
+                    sub3: null,
+                    sub4: null,
+                    sub5: null,
+                    sub6: null,
+                    lab1: null,
+                    lab2: null,
+                    gpa: null,
+                    arrear: null,
+                    s2_file: await uriGen('')
+                },
+                Semester_3: {
+                    later_entry: null,
+                    attended: null,
+                    sub1: null,
+                    sub2: null,
+                    sub3: null,
+                    sub4: null,
+                    sub5: null,
+                    lab1: null,
+                    lab2: null,
+                    lab3: null,
+                    lab4: null,
+                    gpa: null,
+                    arrear: null,
+                    s3_file: await uriGen('')
+                },
+                Semester_4: {
+                    later_entry: null,
+                    attended: null,
+                    sub1: null,
+                    sub2: null,
+                    sub3: null,
+                    sub4: null,
+                    sub5: null,
+                    sub6: null,
+                    lab1: null,
+                    lab2: null,
+                    lab3: null,
+                    gpa: null,
+                    arrear: null,
+                    s4_file: await uriGen('')
+                },
+                Semester_5: {
+                    later_entry: null,
+                    attended: null,
+                    sub1: null,
+                    sub2: null,
+                    sub3: null,
+                    sub4: null,
+                    sub5: null,
+                    oe_1: null,
+                    sub6: null,
+                    lab1: null,
+                    lab2: null,
+                    lab3: null,
+                    gpa: null,
+                    arrear: null,
+                    s5_file: await uriGen('')
+                },
+                Semester_6: {
+                    later_entry: null,
+                    attended: null,
+                    sub1: null,
+                    sub2: null,
+                    sub3: null,
+                    sub4: null,
+                    sub5: null,
+                    pe_1: null,
+                    sub6: null,
+                    lab1: null,
+                    lab2: null,
+                    gpa: null,
+                    arrear: null,
+                    s6_file: await uriGen('')
+                },
+                Semester_7: {
+                    attended: null,
+                    sub1: null,
+                    sub2: null,
+                    sub3: null,
+                    pe_2: null,
+                    sub4: null,
+                    pe_3: null,
+                    sub5: null,
+                    oe_2: null,
+                    sub6: null,
+                    lab1: null,
+                    lab2: null,
+                    gpa: null,
+                    arrear: null,
+                    s7_file: await uriGen('')
+                },
+                Semester_8: {
+                    attended: null,
+                    pe_4: null,
+                    sub1: null,
+                    pe_5: null,
+                    sub2: null,
+                    gpa: null,
+                    arrear: null,
+                    s8_file: await uriGen('')
+                },
+                project_work: {
+                    project_head: null,
+                    project_count: null,
+                    name_team: null,
+                    project_description: null,
+                    project_remark: null
+                },
+                mini_project: {
+                    mini_head: null,
+                    mini_count: null,
+                    m_name_team: null,
+                    m_description: null,
+                    mini_remark: null
+                },
+            })
         }
-
+        res.redirect('/students_semesters');
     } catch (err) {
         res.send(err)
     }
 });
+
+function branchToObject(branch) {
+    switch (branch) {
+        case 'CSE':return CSE
+        case 'ECE':return ECE
+        case 'EEE':return EEE
+        case 'MECH':return MECH
+    }
+    
+}
 
 module.exports = router

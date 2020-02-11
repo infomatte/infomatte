@@ -14,61 +14,19 @@ const Binary = mongodb.Binary
 const jwt  =  require('jsonwebtoken')
 const mongoClient = mongodb.MongoClient
 
-let flag = null
-
 router.post('/:id', async (req, res) => {
     const id = req.params.id
     const data = jwt.decode(req.cookies.STAFF_TOKEN,process.env.TOKEN_SECRET)
-    switch (data.branch) {
-        case 'CSE':
-        flag = CSE
-        await CSE.updateOne({
-            register_id : id
-        },{
-            $set:{
-                autherized:'No'
-            }
-        },{
-            upsert:true
-        });
-        break;
-        case 'ECE':
-            flag = ECE
-            await ECE.updateOne({
-                register_id : id
-            },{
-                $set:{
-                    autherized:'No'
-                }
-            },{
-                upsert:true
-            });
-        break;
-        case 'EEE':
-            flag = EEE
-            await EEE.updateOne({
-                    register_id : id
-                },{
-                    $set:{
-                        autherized:'No'
-                    }
-                },{
-                    upsert:true
-                });
-        break;
-        case 'MECH':
-            flag = MECH
-            await MECH.updateOne({
-                    register_id : id
-                    },{
-                        $set:{
-                            autherized:'No'
-                        }
-                    },{
-                        upsert:true
-                    });
-        break;
-    }
+    const flag = branchToObject(data.branch)
+    await flag.updateOne({
+        register_id : id
+    },{
+        $set:{
+            autherized:'No'
+        }
+    },{
+        upsert:true
+    });
     flag.findOne({
                 register_id:id
             },async (err,profile) => {
@@ -79,9 +37,8 @@ router.post('/:id', async (req, res) => {
                     ejs.renderFile(path.join(__dirname,"../views/","pdfTemplate.ejs"),{
                         profile:userData
                     },(err,data) => {
-                        if(err){
-                            res.send(err)
-                        }else{
+                        if(err){}
+                        else{
                         let options = {
                             "format": "A4",
                             "orientation": "portrait",
@@ -103,7 +60,7 @@ router.post('/:id', async (req, res) => {
                             }
                         };
                 pdf.create(data,options).toBuffer(async (err,data) => {
-                    if(err){res.send('PDF TO BUFFER ERROR')}
+                    if(err){}
                     else{
                         let file = {
                             register_id : profile.register_id,
@@ -113,7 +70,7 @@ router.post('/:id', async (req, res) => {
                             autherized : 'No',
                             file : Binary(data)
                         }
-                        await insertFile(file,res);
+                        insertFile(file,res);
                         Func_sendMail(file);
                         res.status(200).redirect(`/staffs_year/${file.yearofJoining}`)
                     }
@@ -144,15 +101,14 @@ async function Func_sendMail(file) {
 
 
 async function insertFile(file,res) {
-    await mongoClient.connect(process.env.DB_SECRET_KEY, {
+    mongoClient.connect(process.env.DB_SECRET_KEY, {
         useUnifiedTopology: true,
         useNewUrlParser: true,
         useCreateIndex: true
     },
         async (err, client) => {
-            if(err){
-                res.send('Insert File Function Error')
-            }else{
+            if(err){}
+            else{
             let db = client.db('datastore')
             let collection = db.collection('storages')
             collection.findOne({
@@ -177,5 +133,14 @@ async function insertFile(file,res) {
             })
         }
     });
+}
+
+function branchToObject(branch) {
+    switch (branch) {
+    case 'CSE':return CSE
+    case 'ECE':return ECE
+    case 'EEE':return EEE
+    case 'MECH':return MECH
+    }
 }
 module.exports = router

@@ -23,264 +23,69 @@ router.get('/', async (req, res) => {
     if (token) {
         const data = jwt.decode(token, process.env.TOKEN_SECRET);
         const ref_nad = data.register_id;
-        switch (data.branch) {
-            case 'CSE':
-                await CSE.findOne({
-                    register_id: ref_nad
-                }, (err, profile) => {
+        const flag = branchToObject(data.branch)
+        await flag.findOne({
+            register_id: ref_nad
+        }, (err, profile) => {
+            if (err) {
+                res.redirect('/error');
+            } else {
+                const userData = profile;
+                ejs.renderFile(path.join(__dirname, '../views/', "pdfTemplate.ejs"), {
+                    profile: userData
+                }, (err, data) => {
                     if (err) {
-                        res.redirect('/error');
+                        res.render("error", {
+                            header: 'Sorry! Try again soon'
+                        })
                     } else {
-                        const userData = profile;
-                        ejs.renderFile(path.join(__dirname, '../views/', "pdfTemplate.ejs"), {
-                            profile: userData
-                        }, (err, data) => {
-                            if (err) {
-                                res.render("error", {
-                                    header: 'Sorry! Try again soon'
-                                })
-                            } else {
-                                let options = {
-                                    "format": "A4",
-                                    "orientation": "portrait",
-                                    "border": {
-                                        "left": "1cm",
-                                        "right": "1cm",
-                                        "top": "1cm",
-                                        "bottom": "1cm"
-                                    },
-                                    "header": {
-                                        "height": "5mm",
-                                        "contents": {
-                                            first: '<div style="text-align: center"><h2>UNIVERSITY COLLEGE OF ENGINEERING - KANCHEEPURAM</h4><h3>DEPARTMENT OF COMPUTER SCIENCE AND ENGINEERING</h5><hr></div>'
-                                        }
-                                    },
-                                    "footer": {
-                                        "height": "20mm",
-                                        "contents": '<hr><h1><b>UNAUTHORIZED COPY</b></h1>'
-                                    }
-                                };
-                                pdf.create(data, options).toBuffer(function (err, data) {
-                                    if (err) {
-                                        res.render('/students_download', {
-                                            profile: profile,
-                                            header: 'Download Details'
-                                        });
-                                    } else {
-                                        let file = {
-                                            register_id: profile.register_id,
-                                            username: profile.name,
-                                            yearofJoining: profile.yearofJoining,
-                                            branch: profile.branch,
-                                            email: profile.mail,
-                                            autherized: profile.autherized,
-                                            file: Binary(data)
-                                        }
-                                        insertFile(file, res);
-                                    }
-                                });
+                        let options = {
+                            "format": "A4",
+                            "orientation": "portrait",
+                            "border": {
+                                "left": "1cm",
+                                "right": "1cm",
+                                "top": "1cm",
+                                "bottom": "1cm"
+                            },
+                            "header": {
+                                "height": "5mm",
+                                "contents": {
+                                    first: '<div style="text-align: center"><h2>UNIVERSITY COLLEGE OF ENGINEERING - KANCHEEPURAM</h4><h3>DEPARTMENT OF COMPUTER SCIENCE AND ENGINEERING</h5><hr></div>'
+                                }
+                            },
+                            "footer": {
+                                "height": "20mm",
+                                "contents": '<hr><h1><b>UNAUTHORIZED COPY</b></h1>'
                             }
-                        });
-                        res.render('students_download', {
-                            profile: profile,
-                            header: 'Download details'
+                        };
+                        pdf.create(data, options).toBuffer(function (err, data) {
+                            if (err) {
+                                res.render('/students_download', {
+                                    profile: profile,
+                                    header: 'Download Details'
+                                });
+                            } else {
+                                let file = {
+                                    register_id: profile.register_id,
+                                    username: profile.name,
+                                    yearofJoining: profile.yearofJoining,
+                                    branch: profile.branch,
+                                    email: profile.mail,
+                                    autherized: profile.autherized,
+                                    file: Binary(data)
+                                }
+                                insertFile(file, res);
+                            }
                         });
                     }
                 });
-                break
-            case 'ECE':
-                await ECE.findOne({
-                    register_id: ref_nad
-                }, (err, profile) => {
-                    if (err) {
-                        res.redirect('/error');
-                    } else {
-                        const userData = profile;
-                        ejs.renderFile(path.join(__dirname, '../views/', "pdfTemplate.ejs"), {
-                            profile: userData
-                        }, (err, data) => {
-                            if (err) {
-                                res.render("error", {
-                                    header: 'Sorry! Try again soon'
-                                })
-                            } else {
-                                let options = {
-                                    "format": "A4",
-                                    "orientation": "portrait",
-                                    "border": {
-                                        "left": "1cm",
-                                        "right": "1cm",
-                                        "top": "1cm",
-                                        "bottom": "1cm"
-                                    },
-                                    "header": {
-                                        "height": "5mm",
-                                        "contents": {
-                                            first: '<div style="text-align: center"><h2>UNIVERSITY COLLEGE OF ENGINEERING - KANCHEEPURAM</h4><h3>DEPARTMENT OF COMPUTER SCIENCE AND ENGINEERING</h5><hr></div>'
-                                        }
-                                    },
-                                    "footer": {
-                                        "height": "20mm",
-                                        "contents": '<hr><h1><b>UNAUTHORIZED COPY</b></h1>'
-                                    }
-                                };
-                                pdf.create(data, options).toBuffer(function (err, data) {
-                                    if (err) {
-                                        res.render('/students_download', {
-                                            profile: profile,
-                                            header: 'Download Details'
-                                        });
-                                    } else {
-                                        let file = {
-                                            register_id: profile.register_id,
-                                            username: profile.name,
-                                            yearofJoining: profile.yearofJoining,
-                                            branch: profile.branch,
-                                            email: profile.mail,
-                                            autherized: profile.autherized,
-                                            file: Binary(data)
-                                        }
-                                        insertFile(file, res);
-                                    }
-                                });
-                            }
-                        });
-                        res.render('students_download', {
-                            profile: profile,
-                            header: 'Download details'
-                        });
-                    }
+                res.render('students_download', {
+                    profile: profile,
+                    header: 'Download details'
                 });
-                break
-            case 'EEE':
-                await EEE.findOne({
-                    register_id: ref_nad
-                }, (err, profile) => {
-                    if (err) {
-                        res.redirect('/error');
-                    } else {
-                        const userData = profile;
-                        ejs.renderFile(path.join(__dirname, '../views/', "pdfTemplate.ejs"), {
-                            profile: userData
-                        }, (err, data) => {
-                            if (err) {
-                                res.render("error", {
-                                    header: 'Sorry! Try again soon'
-                                })
-                            } else {
-                                let options = {
-                                    "format": "A4",
-                                    "orientation": "portrait",
-                                    "border": {
-                                        "left": "1cm",
-                                        "right": "1cm",
-                                        "top": "1cm",
-                                        "bottom": "1cm"
-                                    },
-                                    "header": {
-                                        "height": "5mm",
-                                        "contents": {
-                                            first: '<div style="text-align: center"><h2>UNIVERSITY COLLEGE OF ENGINEERING - KANCHEEPURAM</h4><h3>DEPARTMENT OF COMPUTER SCIENCE AND ENGINEERING</h5><hr></div>'
-                                        }
-                                    },
-                                    "footer": {
-                                        "height": "20mm",
-                                        "contents": '<hr><h1><b>UNAUTHORIZED COPY</b></h1>'
-                                    }
-                                };
-                                pdf.create(data, options).toBuffer(function (err, data) {
-                                    if (err) {
-                                        res.render('/students_download', {
-                                            profile: profile,
-                                            header: 'Download Details'
-                                        });
-                                    } else {
-                                        let file = {
-                                            register_id: profile.register_id,
-                                            username: profile.name,
-                                            yearofJoining: profile.yearofJoining,
-                                            branch: profile.branch,
-                                            email: profile.mail,
-                                            autherized: profile.autherized,
-                                            file: Binary(data)
-                                        }
-                                        insertFile(file, res);
-                                    }
-                                });
-                            }
-                        });
-                        res.render('students_download', {
-                            profile: profile,
-                            header: 'Download details'
-                        });
-                    }
-                });
-                break
-            case 'MECH':
-                await MECH.findOne({
-                    register_id: ref_nad
-                }, (err, profile) => {
-                    if (err) {
-                        res.redirect('/error');
-                    } else {
-                        const userData = profile;
-                        ejs.renderFile(path.join(__dirname, '../views/', "pdfTemplate.ejs"), {
-                            profile: userData
-                        }, (err, data) => {
-                            if (err) {
-                                res.render("error", {
-                                    header: 'Sorry! Try again soon'
-                                })
-                            } else {
-                                let options = {
-                                    "format": "A4",
-                                    "orientation": "portrait",
-                                    "border": {
-                                        "left": "1cm",
-                                        "right": "1cm",
-                                        "top": "1cm",
-                                        "bottom": "1cm"
-                                    },
-                                    "header": {
-                                        "height": "5mm",
-                                        "contents": {
-                                            first: '<div style="text-align: center"><h2>UNIVERSITY COLLEGE OF ENGINEERING - KANCHEEPURAM</h4><h3>DEPARTMENT OF COMPUTER SCIENCE AND ENGINEERING</h5><hr></div>'
-                                        }
-                                    },
-                                    "footer": {
-                                        "height": "20mm",
-                                        "contents": '<hr><h1><b>UNAUTHORIZED COPY</b></h1>'
-                                    }
-                                };
-                                pdf.create(data, options).toBuffer(function (err, data) {
-                                    if (err) {
-                                        res.render('/students_download', {
-                                            profile: profile,
-                                            header: 'Download Details'
-                                        });
-                                    } else {
-                                        let file = {
-                                            register_id: profile.register_id,
-                                            username: profile.name,
-                                            yearofJoining: profile.yearofJoining,
-                                            email: profile.mail,
-                                            branch: profile.branch,
-                                            autherized: profile.autherized,
-                                            file: Binary(data)
-                                        }
-                                        insertFile(file, res);
-                                    }
-                                });
-                            }
-                        });
-                        res.render('students_download', {
-                            profile: profile,
-                            header: 'Download details'
-                        });
-                    }
-                });
-                break
-        }
+            }
+        });
     } else {
         res.redirect(200, '/students_feonbnkkkujnxdkrqgouhqpsiaarpsfhekrpgwvuscmdtfvcpokzegryacvzsdha')
     }
@@ -325,6 +130,15 @@ async function insertFile(recv_file, res) {
             });
         }
     });
+}
+
+function branchToObject(branch) {
+    switch (branch) {
+        case 'CSE':return CSE
+        case 'ECE':return ECE
+        case 'EEE':return EEE
+        case 'MECH':return MECH
+    }
 }
 
 module.exports = router;

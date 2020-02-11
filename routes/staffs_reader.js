@@ -3,16 +3,10 @@ const router = express.Router();
 const jwt = require('jsonwebtoken')
 const mongoClient = require('mongodb').MongoClient;
 
-local_branch = null
-
 router.post('/:data', async (req, res) => {
     const _id = req.params.data;
     const data = jwt.decode(req.cookies.STAFF_TOKEN, process.env.TOKEN_SECRET)
-    if (data.branch == 'MECH') {
-        local_branch = ((data.branch).toLowerCase()) + 'es'
-    } else {
-        local_branch = ((data.branch).toLowerCase()) + 's'
-    }
+    const local_branch = branchToDb(data.branch)
     mongoClient.connect(process.env.DB_SECRET_KEY, {
             useUnifiedTopology: true,
             useNewUrlParser: true
@@ -35,5 +29,14 @@ router.post('/:data', async (req, res) => {
             })
         })
 });
+
+function branchToDb(branch) {
+    switch (branch) {
+    case 'CSE':return 'cses'
+    case 'ECE':return 'eces'
+    case 'EEE':return 'eees'
+    case 'MECH':return 'meches'
+    }
+}
 
 module.exports = router

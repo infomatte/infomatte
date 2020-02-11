@@ -3,8 +3,6 @@ const router = express.Router();
 const mongoClient = require('mongodb').MongoClient;
 const jwt = require('jsonwebtoken')
 
-local_branch = null
-
 router.get('/:year', async (req, res) => {
     const year = parseInt(req.params.year);
     const data = jwt.decode(req.cookies.STAFF_TOKEN, process.env.TOKEN_SECRET)
@@ -14,11 +12,7 @@ router.get('/:year', async (req, res) => {
         },
         async (err, client) => {
             let db = client.db('datastore')
-            if (data.branch == 'MECH') {
-                local_branch = ((data.branch).toLowerCase()) + 'es'
-            } else {
-                local_branch = ((data.branch).toLowerCase()) + 's'
-            }
+            const local_branch = branchToDb(data.branch)
             let collection = db.collection(local_branch)
             collection.find({
                 yearofJoining: year,
@@ -35,5 +29,13 @@ router.get('/:year', async (req, res) => {
         });
 });
 
+function branchToDb(branch) {
+    switch (branch) {
+    case 'CSE':return 'cses'
+    case 'ECE':return 'eces'
+    case 'EEE':return 'eees'
+    case 'MECH':return 'meches'
+    }
+}
 
 module.exports = router;
