@@ -150,6 +150,16 @@
                     <label>Year</label>
                 </div>
                 <div class="input-field col m12 s12 l12">
+                    <select name="branch">
+                        <option value="" disabled selected>Choose...</option>
+                        <option value="CSE">CSE</option>
+                        <option value="ECE">ECE</option>
+                        <option value="EEE">EEE</option>
+                        <option value="MECH">MECH</option>
+                    </select>
+                    <label>Branch</label>
+                </div>
+                <div class="input-field col m12 s12 l12">
                     <input type="text" name="feed_title" id="myfeed" class="validate" />
                     <label for="myfeed">Title</label>
                 </div>
@@ -197,11 +207,10 @@
     </div>
 </footer>
 </body>
-
-<script src="./main.js"></script>
 <script>
     $(document).ready(function () {
         $(".tabs").tabs();
+        $('.sidenav').sidenav();
     });
     M.AutoInit();
     $('a[href*="#"]').not('[href="#"]').not('[href="#0"]').click(function (event) {

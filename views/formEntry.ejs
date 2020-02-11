@@ -26,11 +26,11 @@
             </div>
         </div>
     </nav>
+</div>
     <ul class="sidenav" id="mobile-demo">
         <li><a><a><%= myid %></a></a></li>
         <li><a>Logout</a></li>
     </ul><br><br>
-</div>
 <div class="container">
     <h5><b>GENERAL INFORMATION</b></h5><br>
     <div data-aos="fade-up">
@@ -86,8 +86,7 @@
                         <div class="col m6 l6 s12">
                             <h5><b>LATER ENTRY</b></h5>
                             <label>
-                                <input type="radio" name="form_group1" class="with-gap yes-check" id='yes' value="Yes" required checked=<% later_entry === 'Yes' || later_entry !== null ? true : false%>
-                    />
+                                <input type="radio" name="form_group1" class="with-gap yes-check" id='yes' value="Yes" required />
                     <span>Yes</span>
                     </label>
                     <label>
@@ -399,6 +398,9 @@
     })
     $(document).ready(function () {
         $('select').formSelect();
+    });
+    $(document).ready(function () {
+        $('.sidenav').sidenav();
     });
     $(document).ready(function () {
         $('input#input_text, textarea#t-description').characterCounter();

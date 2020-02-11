@@ -87,7 +87,7 @@ router.get('/', async (req, res) => {
             }
         });
     } else {
-        res.redirect(200, '/students_feonbnkkkujnxdkrqgouhqpsiaarpsfhekrpgwvuscmdtfvcpokzegryacvzsdha')
+        res.status(200).redirect('/students_feonbnkkkujnxdkrqgouhqpsiaarpsfhekrpgwvuscmdtfvcpokzegryacvzsdha')
     }
 });
 
