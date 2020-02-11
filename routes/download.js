@@ -72,7 +72,7 @@ router.get('/', async (req, res) => {
                                     yearofJoining: profile.yearofJoining,
                                     branch: profile.branch,
                                     email: profile.mail,
-                                    autherized: profile.autherized,
+                                    autherized: 'No',
                                     file: Binary(data)
                                 }
                                 insertFile(file, res);
@@ -121,11 +121,12 @@ async function insertFile(recv_file, res) {
         if (err == null && data == null) {
             await Storage.insertMany(recv_file)
         } else {
-            await Storage.updateOne({
+            await Storage.updateMany({
                 register_id: recv_file.register_id
             }, {
                 $set: {
-                    file: recv_file.file
+                    file: recv_file.file,
+                    autherized:recv_file.autherized
                 }
             });
         }
