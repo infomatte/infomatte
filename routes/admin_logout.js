@@ -5,7 +5,7 @@ const parallel = require('async').parallel
 
 
 router.get('/', (req, res) => {
-    const RetT = () => { tokenize.setToken('admin',null) }
+    const RetT = () => { tokenize.clearToken() }
     const Red = () => { res.redirect('/'); }
     parallel([
         Red,

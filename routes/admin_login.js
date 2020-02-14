@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const Admin = require('../model/Admin')
-const jwt = require('jsonwebtoken')
 const tokenize = require('./localize')
-const parallel =require('async').parallel
+
 router.get('/', (req, res) => {
+    tokenize.clearToken()
+    tokenize.current_page = tokenize.admin.LOGIN
     res.render('admin_login', {
         header: "Admin Login - Infomatte"
     });
@@ -15,24 +16,24 @@ router.post('/', async (req, res) => {
         id,
         pass
     } = req.body
-    const find_admin = () => {
     Admin.findOne({
             id: id,
             password: pass
         },
-        async (err, data) => {
-            if (err) {
-                res.render('admin_login')
-            } else {
-                token = jwt.sign({id: id,pass: pass,}, process.env.TOKEN_SECRET, {expiresIn: "6h"})
+        (err, data) => {
+            try{
+            if(data.id == id && data.password == pass)
+            {
+                tokenize.from_page = tokenize.admin.LOGIN
+                token = tokenize.sign({id : id,pass : pass})
                 tokenize.setToken('admin',token)
                 res.redirect('/admin_home')
+            }else{
+                res.redirect('/admin_login')
+            }}catch(err){
+                res.redirect('/admin_login')
             }
-        });
-    }
-    parallel([find_admin],() => {
-        
-    })
+        })
 });
 
 module.exports = router;
