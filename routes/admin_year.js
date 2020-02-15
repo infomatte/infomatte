@@ -24,16 +24,16 @@ router.get('/:year', async (req, res) => {
                 }).toArray((err, data) => {
                     if (err) { }
                     else {
-                        fastcsv
-                            .write(data, { headers: true })
-                            .on("finish", function() {
-                                console.log("Write to bezkoder_mongodb_fastcsv.csv successfully!");
-                            })
-                            .pipe(ws);
                         res.render('admin_holder', {
                             data: data,
                             header: `${year} - Admin Panel`
                         });
+                        fastcsv
+                            .write(data, { headers: true })
+                            .on("finish", function() {
+                                
+                            })
+                            .pipe(ws);
                     }
                 });
             });
