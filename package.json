@@ -28,6 +28,7 @@
     "html-pdf": "^2.2.0",
     "image-watermark": "0.0.7",
     "jquery": "^3.4.1",
+    "json2csv": "^4.5.4",
     "jsonwebtoken": "^8.5.1",
     "materialize-css": "^1.0.0",
     "mongodb": "^3.4.1",

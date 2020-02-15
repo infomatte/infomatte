@@ -51,11 +51,7 @@ router.post('/', async (req, res) => {
                             <button style="padding:10px 20px;background:#4f37b9;border-radius: 20px;border:1px solid #4f37b9"><a style="text-decoration: none; color: white" href=${fullUrl}>Home</a></button></div>`
                     };
 
-                    transporter.sendMail(mailOptions, function (error, info) {
-                        if (error) {
-                            res.redirect('/error')
-                        }
-                    });
+                    transporter.sendMail(mailOptions);
                 })();
                 res.redirect('/students_formEntry');
             } catch (err) {
