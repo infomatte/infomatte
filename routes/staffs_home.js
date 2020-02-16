@@ -5,7 +5,8 @@ const jwt = require('jsonwebtoken')
 const tokenize = require('./localize')
 
 router.get('/', (req, res) => {
-    const data = jwt.decode(tokenize.token_staff, process.env.TOKEN_SECRET)
+    const data = jwt.decode(tokenize.token_staff.token, process.env.TOKEN_SECRET)
+    console.log(data)
     if(data == null)
         res.status(200).redirect('/error')
     Staff.findOne({
@@ -22,6 +23,7 @@ router.get('/', (req, res) => {
             const year4 = d.getFullYear() - 3;
             const year3 = d.getFullYear() - 2;
             const year2 = d.getFullYear() - 1;
+            console.log(data)
             res.render('staffs_home', {
                 id: data.id,
                 branch: data.branch,

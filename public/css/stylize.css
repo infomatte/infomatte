@@ -382,3 +382,10 @@ input[type=number] {
     max-width: 100%;
     position: absolute;
 }
+
+@media (max-width: 1900px){
+    .credential_cards {
+        margin: 5% auto;
+        width: 50%;
+    }
+}

@@ -11,7 +11,7 @@ const tokenize = require('./localize')
 
 router.post('/:id', async (req, res) => {
     const id = req.params.id
-    const data = jwt.decode(tokenize.token_staff,process.env.TOKEN_SECRET)
+    const data = jwt.decode(tokenize.token_staff.token,process.env.TOKEN_SECRET)
     if(data == null)
         res.status(200).redirect('/error')
     const flag = branchToObject(data.branch)
