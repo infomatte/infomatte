@@ -6,7 +6,7 @@ const tokenize = require('./localize')
 
 router.get('/:year', async (req, res) => {
     const year = parseInt(req.params.year);
-    const data = jwt.decode(tokenize.token_staff.token, process.env.TOKEN_SECRET)
+    const data = jwt.decode(tokenize.token_staff, process.env.TOKEN_SECRET)
     if(data == null)
         res.redirect('/error')
     mongoClient.connect(process.env.DB_SECRET_KEY, {

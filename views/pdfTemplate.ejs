@@ -40,11 +40,14 @@ table {
 th, td {
     padding: 10px;
 }
+.break{
+    page-break-after: always;
+}
 </style>
 <body>
     <!-- <img src="img/AU.png" class='home-logo' alt='img'> -->
     <br><br><br><br>
-    <div>
+    <div class="break">
                 <table class="responsive-table">
                     <h2><%= profile.name %>'s Information</h2>
                         <thead>
@@ -120,9 +123,8 @@ th, td {
                                 </tr>
                             </tbody>
                         </table>      
-                    </div>           
-                        <br><br><br><br><br><br><br><br>
-                        <div>
+                    </div>          
+                        <div class="break">
                     <h2>SEMESTER SCORES</h2>
                     <% if(profile.Semester_1.later_entry === 'No' && profile.Semester_1.attended === 'Yes') { %>
                         <table>
@@ -278,7 +280,8 @@ th, td {
                                                 <% } else { %>
                                                     
                                             <% } %>
-                                            <br>
+                                                </div>
+                                                <div class="break">
                                             <% if(profile.Semester_3.later_entry === 'No' && profile.Semester_3.attended === 'Yes') { %>
                                                 <table>
                                                     <thead>
@@ -430,6 +433,8 @@ th, td {
                                                 <% } else { %>
                                                    
                                             <% } %>
+                                        </div>
+                                        <div class="break">
                                             <% if(profile.Semester_5.later_entry === 'No' && profile.Semester_5.attended === 'Yes') { %>
                                                 <table>
                                                     <thead>
@@ -510,9 +515,7 @@ th, td {
                                                         </tbody>
                                                         </table>
 
-                                                <% } else { %>
-                                                    
-                                            <% } %>
+                                                <% } else { %> <% } %>
                                             <% if(profile.Semester_6.later_entry === 'No' && profile.Semester_6.attended === 'Yes') { %>
                                                 <table>
                                                     <thead>
@@ -614,10 +617,9 @@ th, td {
                                                 </tr>
                                                 </tbody>
                                                 </table>
-                                                <% } else { %>
-                                                    
-                                            <% } %>
-                                            
+                                                <% } else { %> <% } %>
+                                        </div>
+                                        <div class="break">
                                             <% if(profile.Semester_7.attended === 'Yes') { %>
                                                 <table>
                                                     <thead>
@@ -672,9 +674,9 @@ th, td {
                                               </tr>
                                             </tbody>
                                         </table>
-                                              <% } else { %>
-                                                <% } %>
-                                             
+                                              <% } else { %><% } %>
+                                        </div>
+                                        <div class="break">
                         
                                             <% if(profile.Semester_8.attended === 'Yes') { %>
                                                 <table>
@@ -700,11 +702,10 @@ th, td {
                                                 <td><%= profile.Semester_8.sub2 %></td>
                                                 
                                               </tr>
-                                            </table><br><br><br><br><br><br>
+                                            </table>
                                             <table>
                                               <thead>
                                                   <td colspan="2"><b>Project Work</b></td>
-                                                
                                               </thead>
                                               <tbody>
                                               <tr>
@@ -730,10 +731,9 @@ th, td {
                                               </tbody>
                                            </table>    
                                               <% } else { %>
-                                                
                                             <% } %>
                                 </div>
-            <div>
+            <div class="break">
                         <% profile.technical.map(data => { %>
                             <% if(data.tech_option === 'Yes') { %>
                                 <h2><b>TECHNICAL ACTIVITIES</b></h2>
@@ -765,15 +765,13 @@ th, td {
                                 </tr>
                                 </tbody>
                              </table>
-                             <%} else {%>
-                            
-                                <%}%>
+                             <%} else {%><%}%>
                             <%})%>
                         </div>
-                        <div>
-                        <h2><b>SPORTS ACTIVITIES</b></h2>
+                        <div class="break">
                         <% profile.sports.map(data => { %>
                             <% if(data.sports_option === 'Yes') { %>
+                                <h2><b>SPORTS ACTIVITIES</b></h2>
                             <table>
                                 <thead>
                                     <td><b>Sports Events</b></td>
@@ -794,9 +792,7 @@ th, td {
                                 </tr>
                                 </tbody>
                              </table><br><br>
-                             <%} else {%>
-                                
-                                    <%}%>
+                             <%} else {%><%}%>
                             <%})%>
                         </div>
              

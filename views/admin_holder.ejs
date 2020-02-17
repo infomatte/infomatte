@@ -68,19 +68,6 @@
     color: white;
     box-shadow: none;
   }
-  .default{
-    border: #000;
-    background:rgb(29, 29, 29);
-    color: white;
-    padding: 2%
-  }
-  .default:hover{
-    border: rgb(49, 49, 49);
-    background:rgb(49, 49, 49);
-    color: white;
-    padding: 2%;
-    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.247)
-  }
 </style>
 
 <body>
@@ -109,13 +96,7 @@
     <li><a><a>Admin</a></a></li>
     <li><a>Logout</a></li>
   </ul><br><br>
-  
   <div class="container">
-    <% if(true){%>
-      <form action="/admin_reader" method="post">
-          <button type='submit' class="default">Export as CSV</button>
-      </form>
-    <%}%><br><br>
     <div class="card">
       <table class="striped centered">
         <thead>

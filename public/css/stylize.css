@@ -361,7 +361,7 @@ div #rotator {
 }
 
 .send-svg {
-    width: 900px;
+    width: 00px;
     height: 900px
 }
 
@@ -377,15 +377,4 @@ input[type=number] {
 
 .formfield {
     text-align: center;
-}
-.send-svg{
-    max-width: 100%;
-    position: absolute;
-}
-
-@media (max-width: 1900px){
-    .credential_cards {
-        margin: 5% auto;
-        width: 50%;
-    }
 }
