@@ -47,7 +47,7 @@ router.post('/', async (req, res) => {
                         to: mail,
                         subject: `UCEK- Kancheepuram.`,
                         html: `<div style="text-align: center">
-                            <p>It's just a notification!<br>${req.body.id}, You've Logged In Recently from <b>IP: ${ip}</b>.</p>
+                            <p>It's just a notification!<br>${data.name}, You've Logged In Recently from <b>IP: ${ip}</b>.</p>
                             <button style="padding:10px 20px;background:#4f37b9;border-radius: 20px;border:1px solid #4f37b9"><a style="text-decoration: none; color: white" href=${fullUrl}>Home</a></button></div>`
                     };
 
