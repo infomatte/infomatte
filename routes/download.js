@@ -68,7 +68,7 @@ router.get('/', async (req, res) => {
                             } else {
                                 let file = {
                                     register_id: profile.register_id,
-                                    username: profile.name,
+                                    name: profile.name,
                                     yearofJoining: profile.yearofJoining,
                                     branch: profile.branch,
                                     email: profile.mail,

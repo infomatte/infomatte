@@ -5,9 +5,9 @@ const mongoClient = require('mongodb').MongoClient;
 const tokenize = require('./localize')
 
 
-router.post('/:data', async (req, res) => {
-    const _id = req.params.data;
-    const data = jwt.decode(tokenize.token_staff, process.env.TOKEN_SECRET)
+router.post('/:identity', async (req, res) => {
+    const _id = req.params.identity;
+    const data = jwt.decode(tokenize.token_staff.token, process.env.TOKEN_SECRET)
     if (data == null)
         res.status(200).redirect('/error')
     const local_branch = branchToDb(data.branch)
