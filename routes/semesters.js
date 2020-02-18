@@ -14,6 +14,7 @@ cloudinary.config({
 
 router.get('/', async (req, res) => {
     const token = req.cookies.TOKEN;
+    console.log(Object(null))
     if (token) {
         const data = jwt.decode(token, process.env.TOKEN_SECRET);
         const flag = branchToObject(data.branch)
