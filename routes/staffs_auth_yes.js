@@ -14,7 +14,10 @@ const Binary = mongodb.Binary
 const jwt  =  require('jsonwebtoken')
 const mongoClient = mongodb.MongoClient
 const tokenize = require('./localize')
-const parallel = require('async').parallel
+const parallel = require('async').parallel;
+const dotenv = require('dotenv');
+dotenv.config();
+
 
 
 router.post('/:id', async (req, res) => {
@@ -106,8 +109,8 @@ async function Func_sendMail(file) {
     const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-            user: 'infomatte.com@gmail.com',
-            pass: 'domainTohost@error'
+            user: process.env.MAIL,
+            pass: process.env.MAIL.PASS
         }
     });
     const mailOptions = {

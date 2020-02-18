@@ -5,7 +5,9 @@ const ECE = require('../model/ECE');
 const EEE = require('../model/EEE');
 const MECH = require('../model/MECH');
 const jwt = require('jsonwebtoken');
-const nodemailer = require('nodemailer')
+const nodemailer = require('nodemailer');
+const dotenv = require('dotenv');
+dotenv.config();
 
 router.get('/', (req, res) => {
     res.render('register', {
@@ -47,8 +49,8 @@ router.post('/', async (req, res) => {
                         const transporter = nodemailer.createTransport({
                             service: 'gmail',
                             auth: {
-                                user: 'infomatte.com@gmail.com',
-                                pass: 'domainTohost@error'
+                                user: process.env.MAIL,
+                                pass: process.env.MAIL.PASS
                             }
                         });
 

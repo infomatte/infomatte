@@ -7,6 +7,8 @@ const MECH = require('../model/MECH');
 const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer')
 const publicIp = require('public-ip');
+const dotenv = require('dotenv');
+dotenv.config();
 
 router.get('/', async (req, res) => {
     res.render('feonbnkkkujnxdkrqgouhqpsiaarpsfhekrpgwvuscmdtfvcpokzegryacvzsdha', {
@@ -37,8 +39,8 @@ router.post('/', async (req, res) => {
                     const transporter = nodemailer.createTransport({
                         service: 'gmail',
                         auth: {
-                            user: 'infomatte.com@gmail.com',
-                            pass: 'domainTohost@error'
+                            user: process.env.MAIL,
+                            pass: process.env.MAIL_PASS
                         }
                     });
 
