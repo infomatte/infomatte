@@ -110,7 +110,7 @@ async function Func_sendMail(file) {
         service: 'gmail',
         auth: {
             user: process.env.MAIL,
-            pass: process.env.MAIL.PASS
+            pass: process.env.MAIL_PASS
         }
     });
     const mailOptions = {
