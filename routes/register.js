@@ -50,7 +50,7 @@ router.post('/', async (req, res) => {
                             service: 'gmail',
                             auth: {
                                 user: process.env.MAIL,
-                                pass: process.env.MAIL.PASS
+                                pass: process.env.MAIL_PASS
                             }
                         });
 
