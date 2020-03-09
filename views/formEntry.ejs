@@ -74,8 +74,8 @@
                 </div>
                 <div class="input-field col s12 ">
                     <% if(!(myaddress)) { %>
-                    <textarea class="materialize-textarea" data-length="120" class="validate" name="address"
-                        id='myadd'></textarea>
+                    
+                    <input type='text' name="address" required id='myadd' >
                     <label for="myadd">Address</label>
                     <% } else { %>
                     <input type='text' name="address" required id='myadd' value=<%= myaddress %>>
@@ -111,8 +111,8 @@
                         <% if(!(sslc_file)) { %>
                         <div class="input-field file-field col m12 s12 l12">
                             <div class="btn-large">
-                                <span style="color:white">File</span>
-                                <input type="file" name="sslc_file" onchange="ValidateSslcSize(this)">
+                                <span style="color:white">Certificate</span>
+                                <input type="file" name="sslc_file" accept="image/*" onchange="ValidateSslcSize(this)">
                             </div>
                             <div class="file-path-wrapper">
                                 <input class="file-path validate" type="text">
@@ -141,7 +141,7 @@
                         <div class="input-field file-field col m12 s12 l12">
                             <div class="btn-large">
                                 <span style="color:white">Certificate</span>
-                                <input type="file" name="hsc_file" onchange="ValidateHscSize(this)">
+                                <input type="file" name="hsc_file" accept="image/*" onchange="ValidateHscSize(this)">
                                 <span class="helper-text" data-error="Required*" data-success="Valid"></span>
                             </div>
                             <div class="file-path-wrapper">
@@ -175,9 +175,6 @@
                             <div class="btn-large">
                                 <span style="color:white">Certificate</span>
                                 <input type="file" name="sslc_file" onchange="ValidateSslcSize(this)">
-                            </div>
-                            <div class="file-path-wrapper">
-                                <input class="file-path validate" type="text">
                             </div>
                         </div>
                     </div>
@@ -408,9 +405,6 @@
     });
     $(document).ready(function () {
         $('input#input_text, textarea#s-description').characterCounter();
-    });
-    $(document).ready(function () {
-        $('input#input_text, textarea#myadd').characterCounter();
     });
     $(document).ready(function () {
         $('.materialboxed').materialbox();

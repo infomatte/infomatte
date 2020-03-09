@@ -33,13 +33,17 @@ router.get('/', async (req, res) => {
 });
 router.post('/', async (req, res) => {
     async function uriGen(data) {
-        if (data.includes("http://res.cloudinary.com/ucekcse/")) {
-            return data
-        } else if (data) {
-            const uri = await cloudinary.uploader.upload(data)
-            return uri.url
-        } else {
-            return null
+        try{
+            if (data.includes("http://res.cloudinary.com/infomatte/image/")) {
+                return data
+            } else if (data) {
+                const uri = await cloudinary.uploader.upload(data)
+                return uri.url
+            } else {
+                return null
+            }
+        }catch(e){
+            res.redirect('/error')
         }
     }
     const token = req.cookies.TOKEN;
@@ -190,6 +194,7 @@ router.post('/', async (req, res) => {
     })
         res.redirect('/students_download');
     } catch (err) {
+        console.log(err)
         res.send(err)
     }
 })
