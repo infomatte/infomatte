@@ -36,7 +36,7 @@ router.post('/', async (req, res) => {
         try{
             if (data.includes("http://res.cloudinary.com/infomatte/image/")) {
                 return data
-            } else if (data) {
+            } else if (typeof(data) === 'string') {
                 const uri = await cloudinary.uploader.upload(data)
                 return uri.url
             } else {
