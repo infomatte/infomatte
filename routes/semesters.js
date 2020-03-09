@@ -32,25 +32,25 @@ router.get('/', async (req, res) => {
     }
 });
 router.post('/', async (req, res) => {
-    async function uriGen(data) {
-        try{
-            if (data.includes("http://res.cloudinary.com/infomatte/image/")) {
-                return data
-            } else if (typeof(data) === 'string') {
-                const uri = await cloudinary.uploader.upload(data)
-                return uri.url
-            } else {
-                return null
-            }
-        }catch(e){
-            res.redirect('/error')
-        }
-    }
-    const token = req.cookies.TOKEN;
-    const data = jwt.decode(token, process.env.TOKEN_SECRET);
-    const ref_nad = data.register_id;
-    const flag = branchToObject(data.branch)
     try {
+        const token = req.cookies.TOKEN;
+        const data = jwt.decode(token, process.env.TOKEN_SECRET);
+        const ref_nad = data.register_id;
+        const flag = branchToObject(data.branch)
+        async function uriGen(data) {
+            try{
+                if (data.includes("http://res.cloudinary.com/infomatte/image/")) {
+                    return data
+                } else if (typeof(data) === 'string') {
+                    const uri = await cloudinary.uploader.upload(data)
+                    return uri.url
+                } else {
+                    return null
+                }
+            }catch(e){
+                res.redirect('/error')
+            }
+        }
     await flag.updateMany({
         register_id: ref_nad
     }, {
