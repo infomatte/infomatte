@@ -5,12 +5,6 @@ const ECE = require('../model/ECE');
 const EEE = require('../model/EEE');
 const MECH = require('../model/MECH');
 const jwt = require('jsonwebtoken');
-const cloudinary = require('cloudinary').v2;
-cloudinary.config({
-    cloud_name: process.env.CLOUDINARY_NAME,
-    api_key: process.env.CLOUDINARY_KEY,
-    api_secret: process.env.CLOUDINARY_SECRET
-});
 router.get('/error', async (req, res) => {
     res.render('error', {
         header: "Internal Server Error"
@@ -138,20 +132,6 @@ router.get('/', async (req, res) => {
     }
 });
 router.post('/', async (req, res) => {
-        async function uriGen(data) {
-            try{
-                if (data.includes("http://res.cloudinary.com/infomatte/image/")) {
-                    return data
-                } else if (data) {
-                    const uri = await cloudinary.uploader.upload(data)
-                    return uri.url
-                } else {
-                    return null
-                }
-            }catch(e){
-                res.redirect('/error')
-            }
-        }
         const token = req.cookies.TOKEN;
         const data = jwt.decode(token, process.env.TOKEN_SECRET);
         const flag = branchToObject(data.branch)
@@ -163,17 +143,17 @@ router.post('/', async (req, res) => {
             technical_title: req.body.technical_title,
             technical_description: req.body.technical_description,
             technical_remark: req.body.technical_remark,
-            tech_file: await uriGen(req.body.technical_file),
+            tech_file: req.body.tech_url,
         }
         const sport_array = {
             sports_option: req.body.group2,
             sports_head: req.body.sports_head,
             sports_start: req.body.sports_start,
             sports_remark: req.body.sports_remark,
-            sport_file: await uriGen(req.body.sports_file),
+            sport_file: req.body.sport_url,
         }
-        const sslcFile = req.body.sslc_file
-        const hscFile = req.body.hsc_file
+        const sslcFile = req.body.sslc_url
+        const hscFile = req.body.hsc_url
         try {
             if (req.body.form_group1 === 'Yes') {
                 await flag.updateMany({
@@ -211,10 +191,10 @@ router.post('/', async (req, res) => {
                     later_entry: req.body.form_group1,
                     sslc: req.body.sslc,
                     sslc_cutoff: req.body.sslc_cutoff,
-                    sslc_file: req.body.sslc_file,
+                    sslc_file: req.body.sslc_url,
                     hsc: req.body.hsc,
                     hsc_cutoff: req.body.hsc_cutoff,
-                    hsc_file: req.body.hsc_file,
+                    hsc_file: req.body.hsc_url,
                     branch: req.body.branch,
                     yearofJoining: req.body.yearofJoining,
                     regulation: req.body.regulation,
@@ -238,10 +218,10 @@ router.post('/', async (req, res) => {
                     later_entry: req.body.form_group1,
                     sslc: req.body.sslc,
                     sslc_cutoff: req.body.sslc_cutoff,
-                    sslc_file: await uriGen(req.body.sslc_file),
+                    sslc_file: req.body.sslc_url,
                     hsc: req.body.hsc,
                     hsc_cutoff: req.body.hsc_cutoff,
-                    hsc_file: await uriGen(req.body.hsc_file),
+                    hsc_file: req.body.hsc_url,
                     branch: req.body.branch,
                     yearofJoining: req.body.yearofJoining,
                     regulation: req.body.regulation,
