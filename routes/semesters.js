@@ -5,12 +5,6 @@ const ECE = require('../model/ECE');
 const EEE = require('../model/EEE');
 const MECH = require('../model/MECH');
 const jwt = require('jsonwebtoken');
-const cloudinary = require('cloudinary').v2;
-cloudinary.config({
-    cloud_name: process.env.CLOUDINARY_NAME,
-    api_key: process.env.CLOUDINARY_KEY,
-    api_secret: process.env.CLOUDINARY_SECRET
-});
 
 router.get('/', async (req, res) => {
     const token = req.cookies.TOKEN;
@@ -32,25 +26,11 @@ router.get('/', async (req, res) => {
     }
 });
 router.post('/', async (req, res) => {
+    const token = req.cookies.TOKEN;
+    const data = jwt.decode(token, process.env.TOKEN_SECRET);
+    const ref_nad = data.register_id;
+    const flag = branchToObject(data.branch)
     try {
-        const token = req.cookies.TOKEN;
-        const data = jwt.decode(token, process.env.TOKEN_SECRET);
-        const ref_nad = data.register_id;
-        const flag = branchToObject(data.branch)
-        async function uriGen(data) {
-            try{
-                if (data.includes("http://res.cloudinary.com/infomatte/image/")) {
-                    return data
-                } else if (typeof(data) === 'string') {
-                    const uri = await cloudinary.uploader.upload(data)
-                    return uri.url
-                } else {
-                    return null
-                }
-            }catch(e){
-                res.redirect('/error')
-            }
-        }
     await flag.updateMany({
         register_id: ref_nad
     }, {
@@ -68,7 +48,7 @@ router.post('/', async (req, res) => {
             lab2: req.body.s1_lab2,
             gpa: req.body.sem1,
             arrear: req.body.arrear1,
-            s1_file: await uriGen(req.body.s1_file)
+            s1_file: req.body.s1_url
         },
         Semester_2: {
             later_entry: req.body.group3,
@@ -83,7 +63,7 @@ router.post('/', async (req, res) => {
             lab2: req.body.s2_lab2,
             gpa: req.body.sem2,
             arrear: req.body.arrear2,
-            s2_file: await uriGen(req.body.s2_file)
+            s2_file: req.body.s2_url
         },
         Semester_3: {
             later_entry: req.body.group5,
@@ -99,7 +79,7 @@ router.post('/', async (req, res) => {
             lab4: req.body.s3_lab4,
             gpa: req.body.sem3,
             arrear: req.body.arrear3,
-            s3_file: await uriGen(req.body.s3_file)
+            s3_file: req.body.s3_url
         },
         Semester_4: {
             later_entry: req.body.group7,
@@ -115,7 +95,7 @@ router.post('/', async (req, res) => {
             lab3: req.body.s4_lab3,
             gpa: req.body.sem4,
             arrear: req.body.arrear4,
-            s4_file: await uriGen(req.body.s4_file)
+            s4_file:req.body.s4_url
         },
         Semester_5: {
             later_entry: req.body.group9,
@@ -132,7 +112,7 @@ router.post('/', async (req, res) => {
             lab3: req.body.s5_lab3,
             gpa: req.body.sem5,
             arrear: req.body.arrear5,
-            s5_file: await uriGen(req.body.s5_file)
+            s5_file: req.body.s5_url
         },
         Semester_6: {
             later_entry: req.body.group11,
@@ -148,7 +128,7 @@ router.post('/', async (req, res) => {
             lab2: req.body.s6_lab2,
             gpa: req.body.sem6,
             arrear: req.body.arrear6,
-            s6_file: await uriGen(req.body.s6_file)
+            s6_file:req.body.s6_url
         },
         Semester_7: {
             attended: req.body.group13,
@@ -165,7 +145,7 @@ router.post('/', async (req, res) => {
             lab2: req.body.s7_lab2,
             gpa: req.body.sem7,
             arrear: req.body.arrear7,
-            s7_file: await uriGen(req.body.s7_file)
+            s7_file: req.body.s7_url
         },
         Semester_8: {
             attended: req.body.group14,
@@ -175,7 +155,7 @@ router.post('/', async (req, res) => {
             sub2: req.body.s8_sub2,
             gpa: req.body.sem8,
             arrear: req.body.arrear8,
-            s8_file: await uriGen(req.body.s8_file)
+            s8_file: req.body.s8_url
         },
         project_work: {
             project_head: req.body.project_head,
@@ -195,7 +175,7 @@ router.post('/', async (req, res) => {
         res.redirect('/students_download');
     } catch (err) {
         console.log(err)
-        res.send(err)
+        res.redirect('/error')
     }
 })
 
