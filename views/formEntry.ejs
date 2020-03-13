@@ -252,6 +252,16 @@
                         <span>No</span>
                     </label>
                     <div class="tech-details">
+                     <div class="input-field file-field col m12 s12 l12">
+                            <div class="btn-large">
+                                <span style="color:white">Certificate</span>
+                                <input type="file" name="technical_file" onchange="ValidateTechSize(this)">
+                                <input type="text" name="tech_url"  hidden id="tech_url">
+                            </div>
+                            <div class="file-path-wrapper">
+                                <input class="file-path validate" type="text">
+                            </div>
+                        </div>
                         <div class="input-field col l12 s12">
                             <input type="text" name="technical_head" id='t-head' class="validate">
                             <label for="t-head">Events</label>
@@ -277,16 +287,6 @@
                             <input type="text" name="technical_remark" id='t-remark' class="validate">
                             <label for="t-remark">Remarks</label>
                         </div>
-                        <div class="input-field file-field col m12 s12 l12">
-                            <div class="btn-large">
-                                <span style="color:white">Certificate</span>
-                                <input type="file" name="technical_file" onchange="ValidateTechSize(this)">
-                                <input type="text" name="tech_url"  hidden id="tech_url">
-                            </div>
-                            <div class="file-path-wrapper">
-                                <input class="file-path validate" type="text">
-                            </div>
-                        </div>
                     </div>
                 </div><br>
                 <div class="row">
@@ -301,6 +301,17 @@
                         <span>No</span>
                     </label>
                     <div class="sports-details">
+                    <div class="input-field file-field col m12 s12 l12">
+                            <div class="btn-large">
+                                <span style="color:white">Certificate</span>
+                                <input type="file" name="sports_file" onchange="ValidateSportsSize(this)">
+                                <input type="text" name="sport_url" hidden id="sport_url">
+                            </div>
+                            <div class="file-path-wrapper">
+                                <input class="file-path validate" type="text">
+                            </div>
+                        </div>
+                    </div>
                         <div class="input-field col l12 s12">
                             <input type="text" name="sports_head" id='s-head' class="validate">
                             <label for="s-head">Events</label>
@@ -313,17 +324,7 @@
                             <input type="text" name="sports_remark" id='s-remark' class="validate">
                             <label for="s-remark">Prize Persuied</label>
                         </div>
-                        <div class="input-field file-field col m12 s12 l12">
-                            <div class="btn-large">
-                                <span style="color:white">Certificate</span>
-                                <input type="file" name="sports_file" onchange="ValidateSportsSize(this)">
-                                <input type="text" name="sport_url" hidden id="sport_url">
-                            </div>
-                            <div class="file-path-wrapper">
-                                <input class="file-path validate" type="text">
-                            </div>
-                        </div>
-                    </div><br><br><br>
+                        <br><br><br>
                     <button type='submit' class="waves-effect waves-light btn-large send">Next</button><br><br>
             </form>
             <% if(later_entry) { %>
