@@ -23,7 +23,7 @@
     "ejs": "^2.7.4",
     "express": "^4.17.1",
     "html-pdf": "^2.2.0",
-    "jquery": "^3.5.0",
+    "jquery": ">=3.5.0"
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^3.5.4",
     "mongoose": "^5.9.3",
