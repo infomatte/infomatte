@@ -1,8 +1,8 @@
 [![Infomatte - UCEK College Internal College Server](/public/img/favicon.png "Infomatte")](http://infomatte.herokuapp.com/img/favicon.png)
 
-### infomatte
-# Released: February 19, 2020.
-# Author: Gokul Varadan & Rithick
+# infomatte
+### Released: February 19, 2020.
+## Author: Gokul Varadan & Rithick
 
 > University College of Engineering - Kancheepuram | Internal College Server
 
