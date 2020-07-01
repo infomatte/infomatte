@@ -2,7 +2,7 @@
 
 # infomatte
 ## Released: February 19, 2020.
-### Author: Gokul Varadan & Rithick
+### Authors: Gokul Varadan & Rithick
 
 > University College of Engineering - Kancheepuram | Internal College Server
 
@@ -10,5 +10,10 @@
 Students can use this project files for practices or education purpose. Your can use your own Database connection 
 instead of the environment variable provided in code. Feel free to use this project files, if your beginner in *Full Stack Web Developement process*. 
 
-> If you find any errors in this project, you can give us a pull request. We'll review those files and your changes will be Live Online
+###Technical Stack Used:
+>- Nodejs - Backend 
+>- Mongodb - Database
+>- EJS - Front-End Templating Engine
+
+> If you find any errors in this project, you can give us a pull request. We'll review those files and your changes will be Live Online.
 
