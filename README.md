@@ -8,7 +8,7 @@
 
 [infomatte.in](http://infomatte.in) is a college students information maintanence web application. 
 Students can use this project files for practices or education purpose. Your can use your own Database connection 
-instead of the environment variable provides in code. Feel free to use this project files, if your beginner in *Full Stack Web Developement process*. 
+instead of the environment variable provided in code. Feel free to use this project files, if your beginner in *Full Stack Web Developement process*. 
 
 > If you find any errors in this project, you can give us a pull request. We'll review those files and your changes will be Live Online
 
