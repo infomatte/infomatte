@@ -1,4 +1,4 @@
-[![Infomatte - UCEK College Internal College Server](/public/img/favicon.png "Infomatte")](http://infomatte.herokuapp.com/img/favicon.png)
+[![Infomatte - UCEK College Internal College Server](/public/img/favicon.png "Infomatte")](https://avatars2.githubusercontent.com/u/60610891?s=460&u=ba9bbe6fddfbf4ce9a37cfc8bd40d7dde3cee537&v=4)
 
 # infomatte
 ## Released: February 19, 2020.
