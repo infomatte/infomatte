@@ -36,8 +36,8 @@ async function Func_sendMail(file) {
     const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-            user: 'infomatte.com@gmail.com',
-            pass: 'domainTohost@error'
+            user: process.env.MAIL,
+            pass: process.env.MAIL_PASS
         }
     });
     const mailOptions = {
